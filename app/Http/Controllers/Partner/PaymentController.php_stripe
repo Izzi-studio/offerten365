@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Http\Controllers\Partner;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Stripe;
+use  App\Models\Payment;
+
+class PaymentController extends Controller
+{
+    public function index(){
+		return view('front.partner.payment');
+	}
+
+    public function makePayment(){
+	
+		Stripe\Stripe::setApiKey('sk_test_51JZEfaFnVJuGIOlSWm6usowLOxCWo0ZUdoVLcIdUZnk80YGQIHL7PDAxPaoEV3k0c3eIBytPr2JddHmdWHA9z8ic004w4Tb4zD');
+		$token = request()->stripeToken;
+		$amount = request()->amount;
+		if($amount){
+			$charge = Stripe\Charge::create(
+				array(
+					'amount' => $amount*100,
+					'currency' => 'usd',
+					'metadata' => ['email'=>auth()->user()->email,'customer_id'=>auth()->user()->id],
+					'source' => $token
+				)
+			); 
+			
+			if($charge->metadata->customer_id){
+				$user = auth()->user();
+				$user->coins = $user->coins + $amount;
+				$user->save();
+			}
+			
+			Payment::create([
+			'json_data_payment'=>json_encode($charge),
+			'customer_id'=>isset($charge->metadata->customer_id) ? $charge->metadata->customer_id : 0,
+			'amount'=>$amount,
+			]);
+		}
+		return redirect(route('partner.payment'));
+	}
+	
+} 

@@ -1,0 +1,100 @@
+@extends('layouts.app')
+@section('content')
+
+    <div class="page__content">
+        <section class="account headerHeightMarginTop">
+            <div class="container">
+                @include('front.partner.top')
+                <div class="row">
+                    <div class="col-lg-4">
+                        @include('front.partner.leftmenu')
+                        @include('front.partner.prices')
+                    </div>
+                    <div class="col-lg-8">
+						<div class="account-content" id="section-account">
+							<div class="account-content__inner acc-billing">
+								<form id="payment-form" class="acc-billing__form" method="POST" action="{{route('partner.payment.make-payment')}}">
+									<input class="acc-billing__form-field" name="amount" type="text" id="chf" placeholder="CHF">
+									<div id="card-element" class="acc-billing__form-field">
+									  <!-- a Stripe Element will be inserted here. -->
+									</div>
+										<div id="card-errors"></div>
+										@csrf
+									<input type="submit" value="SENDEN" class="btn" />
+								</form>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> 
+	
+	<!-- Stripe JS -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+// Stripe API Key
+var stripe = Stripe('pk_test_51JZEfaFnVJuGIOlStyR3q63j7GT072weFd9M5ck8tR6D8A6ZxIw6qHLOHUSNuwEoL2o1vRzHbd4r8CLcWtz3cOcZ00A8tb26qM');
+var elements = stripe.elements();
+// Custom Styling
+var style = {
+    base: {
+        color: '#32325d',
+        lineHeight: '24px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+            color: '#aab7c4'
+        }
+    },
+    invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+    }
+};
+// Create an instance of the card Element
+var card = elements.create('card', {style: style});
+// Add an instance of the card Element into the `card-element` <div>
+card.mount('#card-element');
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+if (event.error) {
+        displayError.textContent = event.error.message;
+    } else {
+        displayError.textContent = '';
+    }
+});
+// Handle form submission
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+stripe.createToken(card).then(function(result) {
+        if (result.error) {
+            // Inform the user if there was an error
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            stripeTokenHandler(result.token);
+        }
+    });
+});
+// Send Stripe Token to Server
+function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('payment-form');
+// Add Stripe Token to hidden input
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+// Submit form
+    form.submit();
+}
+
+</script>
+
+
+@endsection

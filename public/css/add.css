@@ -1,0 +1,40 @@
+.footer__sublist-item a,
+.header__sub-link {
+    white-space: nowrap;
+}
+
+.header__wrap-sub-menu {
+    width: auto;
+}
+
+.footer__wrap_lists {
+    max-width: 200px;
+    min-width: 190px;
+}
+
+.section-title,
+.form-login__become-partner,
+.advantages__item-title,
+html,
+body {
+    text-transform: none;
+}
+
+.formflex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* .acc-billing__inner .acc-billing-item__btn-info {
+    width: auto;
+    background-position: right center;
+    padding-right: 30px;
+    font-size: 18px;
+    top: 25px;
+} */
+
+.company-info__contact-item,
+.acc-offers-company__contact-item {
+    text-transform: none !important;
+}
