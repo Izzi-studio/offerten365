@@ -54,9 +54,9 @@ Route::group([
     Route::get('offerten_fuer_umzug_und_reinigung', [ClientController::class, 'tcRequests'])->name('client.getTCRequests');
     Route::get('offerten_fuer_reinigungs', [ClientController::class, 'cRequests'])->name('client.getCRequests');
     Route::get('maler_offerten', [ClientController::class, 'pwRequests'])->name('client.getPWRequests');
-	
-	
-    Route::get('offerten-maler', [ClientController::class, 'showFormPaintingWork'])->name('showFormPaintingWork'); 
+
+
+    Route::get('offerten-maler', [ClientController::class, 'showFormPaintingWork'])->name('showFormPaintingWork');
     Route::get('offerten-fuer-umzug', [ClientController::class, 'showFormTransfer'])->name('showFormTransfer');
     Route::get('offerten-fuer-reinigung', [ClientController::class, 'showFormСleaning'])->name('showFormСleaning');
     Route::get('offerten-fuer-umzug-und-reinigung', [ClientController::class, 'showFormTransferAndСleaning'])->name('showFormTransferAndСleaning');
@@ -67,13 +67,13 @@ Route::group([
 
     Route::post('add-request', [ProposalController::class, 'store'])->name('formStore');
     Route::get('delete-request/{proposal}', [ProposalController::class, 'delete'])->name('deleteRequest');
-	
+
 	Route::get('proposal/edit/{proposal}', [ProposalController::class, 'edit'])
         ->name('client.editProposals');
-		
+
 	Route::put('proposal/update/{proposal}', [ProposalController::class, 'update'])
-        ->name('client.updateProposals');	
-	
+        ->name('client.updateProposals');
+
 
 });
 
@@ -83,16 +83,16 @@ Route::group([
     'middleware'=> ['partner', 'localeSessionRedirect', 'localizationRedirect']
 ], function ($router) {
     Route::get('info', [PartnerController::class, 'myInfo'])->name('partner.myInfo');
-	 
+
     Route::post('payment', [PaymentControllerIdealPay::class, 'index'])->name('partner.payment-post');
     Route::get('payment', [PaymentControllerIdealPay::class, 'index'])->name('partner.payment');
     Route::get('payment/make-payment', [PaymentController::class, 'makePayment'])->name('partner.payment.make-payment-get');
     Route::post('payment/make-payment', [PaymentController::class, 'makePayment'])->name('partner.payment.make-payment');
     Route::post('payment/callback', [PaymentController::class, 'callback'])->name('partner.payment.callback');
     Route::get('payment/success', [PaymentController::class, 'success'])->name('partner.payment.success');
-	
-	
-	
+
+
+
     Route::post('info', [PartnerController::class, 'updateInfo'])->name('partner.updateMyInfo');
 
     Route::get('password', [PartnerController::class, 'showPasswordForm'])->name('partner.showPasswordForm');
@@ -156,14 +156,14 @@ Route::group([
 ], function ($router) {
 
     Auth::routes();
-	
+
 	Route::post('processed-payment', [PaymentControllerIdealPay::class, 'prosessedPayment'])->name('partner.processedPayment');
-	
+
 	Route::get('ss',function(){
 		$generator = app()->make(GenerateInvoices::class);
         $generator->generateAndSendInvoices();
-		
-	});  
+
+	});
 
     Route::get('partner-werden', [RegisterController::class,'registerPartnerView'])->name('partnerWerden');
     Route::post('register-partner', [RegisterController::class,'registerPartner'])->name('registerPartner');
@@ -187,11 +187,11 @@ Route::group([
 
     Route::get('blog/{blogCategory:slug}', [BlogController::class, 'showCategory'])->name('showCategory');
     Route::get('blog/{blogCategory:slug}/{post:slug}', [BlogController::class, 'showPost'])->name('showPost');
-	
+
 	Route::get('sitemap',[PageController::class,'sitemap'])->name('sitemap');
 	Route::get('sitemap.xml',[PageController::class,'sitemapXml'])->name('sitemapXml');
-	
-    Route::get('{type_work}/{customPage:slug}',[PageController::class,'customPage'])->name('cutstomPage');
+
+    Route::get('{type_work}/{custompage}',[PageController::class,'customPage'])->name('cutstomPage');
     Route::get('{staticPage:slug}',[PageController::class,'staticPage'])->name('staticPage');
 });
 
