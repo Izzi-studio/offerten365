@@ -18,7 +18,7 @@ class CustomPageController extends Controller
      */
     public function index()
     {
-       $customPages = CustomPage::orderBy('id','DESC')->get(); 
+       $customPages = CustomPage::orderBy('id','DESC')->get();
        return view('admin.custom_page.list',compact(['customPages']));
     }
 
@@ -51,14 +51,14 @@ class CustomPageController extends Controller
      */
     public function copyPage(CustomPage $customPage)
     {
-		
+
         $newPage  = $customPage->replicate();
 		$newPage->slug = $newPage->slug.'-copy';
 		$newPage->save();
-		
+
 		$descriptions = $customPage->getCustomPageDescriptionAll();
 		$seoTags = $customPage->getSeoMetaTagsAll();
-		
+
 		foreach($descriptions->get() as $description){
 			$newDecr = $description->replicate();
 			$newDecr->custom_page_id = $newPage->id;
@@ -70,7 +70,7 @@ class CustomPageController extends Controller
 			$newTag->item_id = $newPage->id;
 			$newTag->save();
 		}
-		
+
 		return redirect(route('custom-page.index'))->with('success', __('admin/admin.post_added'));
     }
 
@@ -95,30 +95,30 @@ class CustomPageController extends Controller
     public function update(Request $request, CustomPage $customPage)
     {
 	//dd($request->file('custom_page')['de']['b1_image']->getClientOriginalName());
-		
+
 		$descriptions = $customPage->getCustomPageDescriptionAll();
-		
-		
-        if (Str::slug($request->slug) != $customPage->slug) {
+
+
+        /*if (Str::slug($request->slug) != $customPage->slug) {
             $this->validate($request, [
                 'slug' => ['required', 'unique:custom_pages']
             ]);
-        }
-		
+        }*/
+
 		$customPage->name = $request->name;
 		$customPage->slug = Str::slug($request->slug);
 		$customPage->type_job_id = $request->type_job_id;
 		$customPage->show_front = $request->show_front;
 		$customPage->save();
-		
-		
+
+
 		 SeoMetaTags::where('type',$request->type)
             ->whereItemId($customPage->id)
             ->delete();
-			
+
 
 		$newInsertDescriptions = [];
-		
+
 		foreach($request->custom_page as $locale=>$data){
             $this->insertSeoMetaTags([
                 'locale'=>$locale,
@@ -127,10 +127,10 @@ class CustomPageController extends Controller
                 'type'=>$request->type,
                 'item_id'=>$customPage->id
             ]);
-			
+
 
 			$description = $descriptions->whereLocale($locale)->first();
-			
+
 			if (isset($request->file('custom_page')[$locale]['b1_image'])) {
 				$b1_image = $this->saveImage($request->file('custom_page')[$locale]['b1_image']);
 			}else{
@@ -160,7 +160,7 @@ class CustomPageController extends Controller
 			}else{
 				$b8_image = $description->b8_image;
 			}
-			
+
 
 			$descriprionInsert = $this->insertCustomPageDescription([
                 'locale'=>$locale,
@@ -180,21 +180,21 @@ class CustomPageController extends Controller
                 'b7_seo_text'=> $data['b7_seo_text'],
                 'b8_text'=> $data['b8_text'],
                 'b8_btn'=> $data['b8_btn'],
-				
+
                 'b1_image'=> $b1_image,
                 'b3_image'=> $b3_image,
                 'b4_image'=> $b4_image,
                 'b6_image'=> $b6_image,
                 'b8_image'=> $b8_image,
-				
+
 
             ]);
-			
+
 			$newInsertDescriptions[] = $descriprionInsert->id;
 		}
-		
-		 CustomPageDescription::whereCustomPageId($customPage->id)->whereNotIn('id',$newInsertDescriptions)->delete();	
-		
+
+		 CustomPageDescription::whereCustomPageId($customPage->id)->whereNotIn('id',$newInsertDescriptions)->delete();
+
 		 return redirect(route('custom-page.index'))->with('success', __('admin/admin.post_added'));
     }
 
@@ -211,15 +211,15 @@ class CustomPageController extends Controller
         $customPage->delete();
         return redirect(route('custom-page.index'))->with('success', __('admin/admin.post_deleted'));
     }
-	
+
 	private function insertSeoMetaTags(array $data){
        return SeoMetaTags::create($data);
     }
-	
+
 	private function insertCustomPageDescription(array $data){
         return CustomPageDescription::create($data);
     }
-	
+
 	private function saveImage($image){
 
         $name_file = $image->getClientOriginalName();
