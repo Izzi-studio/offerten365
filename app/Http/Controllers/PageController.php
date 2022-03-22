@@ -33,16 +33,26 @@ class PageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function customPage(Request $request, $type ,CustomPage $customPage)
+    public function customPage(Request $request, $type ,$customPage)
     {
-		
-		
-		if($type != $customPage->getTypeSlug()){
+
+        $types = [
+            1 => 'umzug',
+            2 => 'reinigung',
+            3 => 'umzug-und-reinigung',
+            4 => 'maler'
+        ];
+
+        $job_id = array_search($type,$types);
+
+        $customPage = CustomPage::whereTypeJobId($job_id)->whereSlug($customPage)->first();
+
+		if(is_null($customPage)){
 			return abort(404);
 		}
 
         app()->make(SeoMetaTags::class)->setMeta('custom_page',$customPage->id);
-		
+
 		//dd($customPage->getCustomPageDescription);
 
 		 switch ($customPage->type_job_id) {
@@ -62,19 +72,19 @@ class PageController extends Controller
                  $templ = 'malar';
 				 $faqs = Faq::malar()->get();
                 break;
-            default: 
+            default:
                 Log::info('Render error. Wrong Job Type: '.$customPage->type_job_id);
         }
-		
+
 		$zip = $request->zip;
         $regions = Regions::all();
         $action = Auth::user() ? route('formStore') : route('registerClient');
-		
+
 		$reviews = ReviewsOnMainPage::all();
 
-		
-		
-		
+
+
+
         return view('front.custom_pages.'.$templ,compact(['customPage','action','regions','zip','reviews','faqs']));
     }
 
@@ -85,7 +95,7 @@ class PageController extends Controller
      */
     public function index()
     {
-	
+
         app()->make(SeoMetaTags::class)->setMeta('system.main_page');
         $reviews = ReviewsOnMainPage::orderBy('id','DESC')->get();
 		$faqs = Faq::take(4)->get();
@@ -109,7 +119,7 @@ class PageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    
+
     public function sitemapXml()
     {
 		$slug[] = route('main').'@2022-01-03@1.0';
@@ -121,7 +131,7 @@ class PageController extends Controller
 		$slug[] = route('registerFormCleaning').'@2022-01-09@0.9';
 		$slug[] = route('registerFormPaintingWork').'@2022-01-10@0.9';
 		$slug[] = route('sitemap').'@2022-01-11@0.9';
-		
+
 		foreach(BlogCategories::all() as $blogCat){
 			$slug[] = route('showCategory',$blogCat->slug).'@'.$blogCat->created_at->format('Y-m-d').'@0.9';
 		};
@@ -145,11 +155,11 @@ class PageController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    
+
     public function sitemap()
     {
 		$pages = CustomPage::orderBy('type_job_id')->get();
-		
+
 		$result = [];
 		foreach($pages as $page){
 			$result[__('front.'.$page->getTypeSlug())][] = [
@@ -157,11 +167,11 @@ class PageController extends Controller
 				'url' =>route('cutstomPage',[$page->getTypeSlug(),$page->slug])
 			];
 		}
-		
+
         app()->make(SeoMetaTags::class)->setMeta('system.sitemap');
         return view('sitemap',compact(['result']));
     }
-    
+
     /**
      * Show contacts.
      *
