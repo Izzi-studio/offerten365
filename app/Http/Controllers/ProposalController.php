@@ -23,7 +23,7 @@ class ProposalController extends Controller
 
         $proposal = $request->only('proposal')['proposal'];
 
-        switch ($proposal['type_job_id']) {
+        /*switch ($proposal['type_job_id']) {
             case 1:
                 $route = route('client.getTRequests');
                 break;
@@ -39,14 +39,14 @@ class ProposalController extends Controller
             default:
                 Log::info('Add Request. Wrong Job Type: '.$proposal['type_job_id']);
                 return response()->json(['url'=> route('client.myInfo')]);
-        }
+        } */
 
         $proposal['user_id'] = auth()->user()->id;
         $proposal['additional_info'] = $request->only('additional_info')['additional_info'];
 
         event(new NewProposal(Proposal::create($proposal)));
 
-        return response()->json(['url'=> $route]);
+        return response()->json(['url'=> route('client.success.register')]);
     }
     /**
      * Process Proposal.
@@ -94,8 +94,8 @@ class ProposalController extends Controller
 					 }else{
 						return back()->withErrors(['no_coin'=>__('front.no_coin')]);
 					 }
-				} 
-				 
+				}
+
 				$proposalToPartner->status = $status;
                 $proposalToPartner->save();
 
@@ -125,7 +125,7 @@ class ProposalController extends Controller
 
     public function delete (Proposal $proposal){
 		event(new ProposalDelete($proposal));
-				
+
         $proposal->getReviews()->delete();
         $proposal->getReceivedInvitation()->forceDelete();
         $proposal->forceDelete();
@@ -165,7 +165,7 @@ class ProposalController extends Controller
         $generator->generateAndSendInvoices();
 
     }
-	
+
 	public function edit(Proposal $proposal){
 		 $authUser = auth()->user();
 		 if($proposal->user_id != $authUser->id ){
@@ -173,7 +173,7 @@ class ProposalController extends Controller
 		 }
 		//dd($proposal);
 		$regions = Regions::all();
-		
+
 		 switch ($proposal['type_job_id']) {
             case 1:
                 $view = 'transfer-form';
@@ -189,19 +189,19 @@ class ProposalController extends Controller
                 break;
             default:
                 Log::info('Edit Request. Wrong Job Type: '.$proposal['type_job_id']);
-        }	
-		
+        }
+
 		return view('front.client.edit.'.$view,compact(['proposal','regions']));
 	}
-	
+
 	public function update(Request $request,Proposal $proposal){
-		
+
 
         $proposalData = $request->only('proposal')['proposal'];
-        $proposalData['additional_info'] = $request->only('additional_info')['additional_info'];		
-		
+        $proposalData['additional_info'] = $request->only('additional_info')['additional_info'];
+
 		$proposal->update($proposalData);
-		
+
         switch ($proposal['type_job_id']) {
             case 1:
                 $route = route('client.getTRequests');
@@ -218,8 +218,8 @@ class ProposalController extends Controller
             default:
                 Log::info('Add Request. Wrong Job Type: '.$proposal['type_job_id']);
                 return response()->json(['url'=> route('client.myInfo')]);
-        }		
-		
+        }
+
 		 return response()->json(['url'=> $route]);
 	}
 

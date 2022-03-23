@@ -182,4 +182,15 @@ class PageController extends Controller
         app()->make(SeoMetaTags::class)->setMeta('system.contacts');
         return view('front.contacts');
     }
+
+    /**
+     * Show contacts.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function successRegisterClient()
+    {
+        app()->make(SeoMetaTags::class)->setMeta('system.success-register-client');
+        return view('front.client.thanks');
+    }
 }
