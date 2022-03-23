@@ -171,6 +171,8 @@ Route::group([
     Route::post('register-client', [RegisterController::class,'registerClient'])->name('registerClient');
     Route::post('check-email', [RegisterController::class,'checkEmail'])->name('checkEmail');
 
+    Route::get('anfrage-gesendet', [PageController::class,'successRegisterClient'])->name('client.success.register');
+
     Route::get('/',[PageController::class,'index'])->name('main');
 
 

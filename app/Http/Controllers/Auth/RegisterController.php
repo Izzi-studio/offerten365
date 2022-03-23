@@ -71,7 +71,7 @@ class RegisterController extends Controller
 
         if ($user->isClient() ) {
             Log::info('Registered Client Login: '.$user->email.' PWD: '.$this->password);
-            
+
 
             $proposal = $request->only('proposal')['proposal'];
             $proposal['user_id'] = $user->id;
@@ -80,20 +80,20 @@ class RegisterController extends Controller
             event(new NewProposal(Proposal::create($proposal)));
             Log::info('----DONE----');
             Log::info('');
-			
+
 			$arraySubjects = [
 				'1'=>'Umzugsanfrage',
 				'2'=>'Reinigungsanfrage',
 				'3'=>'Umzugs - und Reinigungsanfrage',
 				'4'=>'Maleranfrage'
 			];
-			
-			
+
+ 
 			$subject = $arraySubjects[$proposal['type_job_id']];
-			
+
 			event(new RegisterClient($user,$this->password,$subject));
-			
-            return  response()->json(['url'=>route('client.myInfo')], 200);
+
+            return  response()->json(['url'=>route('client.success.register')], 200);
 
         }
     }
