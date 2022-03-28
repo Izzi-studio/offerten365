@@ -10,11 +10,12 @@
                         <div class="col-lg-6 col-xl-5">
                             <a class="login__go-back" onclick="window.history.go(-1);"></a>
                             <h1 class="section-title login__section-title">Passwort vergessen?</h1>
-                            <p class="login__txt">Geben Sie Ihre E-Mail Adresse ein und wir senden Ihnen eine E-Mail zum Zurücksetzen des Passwortes.</p>
                             @if (session('status'))
                                 <div class="alert alert-success" role="alert">
-                                    {{ session('status') }}
+                                    <p class="login__txt">{{ session('status') }}</p>
                                 </div>
+                            @else
+                                <p class="login__txt">Geben Sie Ihre E-Mail Adresse ein und wir senden Ihnen eine E-Mail zum Zurücksetzen des Passwortes.</p>
                             @endif
                         </div>
                     </div>

@@ -489,10 +489,10 @@ function stepsForms() {
             }
         }
 
-        if (e.target.dataset.name === 'general-data' || "mailcheck" === e.target.dataset.name) {
+        if (e.target.dataset.name === 'general-data' || e.target.dataset.emailCheck) {
             let inputEmail = e.target.querySelector('input[type="email"]');
             let email = $(inputEmail).val();
-            let url = $(e.target).attr('email-check');
+            let url = $(e.target).attr('data-email-check');
             let mailcheck = true;
             jQuery.ajax({
                 type:"POST",
@@ -571,7 +571,7 @@ function stepsForms() {
         if (!indexStepReturned) {
             indexStepReturned = $(activeForm).index()
         }
-
+        
         if(!activeForm.previousElementSibling) return;
 
         let prevActiveForm = activeForm.previousElementSibling;

@@ -226,28 +226,22 @@
             </div>
         </div>
     </section>
-    <section class="steps-indicators steps-indicators_margin_top">
+    <section class="progress-bar steps-indicators_margin_top">
         <div class="container">
-            <div class="steps-indicators__wrap steps-indicators__wrap_3-steps">
-                <div class="steps-indicators__item steps-indicators__item_active">
-                    <p class="steps-indicators__counter"></p>
-                    <p class="steps-indicators__txt">Kontaktinformationen</p>
+            <div class="progress-bar__wrap">
+                <div class="progress-bar__scale">
+                    <div class="progress-bar__fullnely"></div>
                 </div>
-                <div class="steps-indicators__item">
-                    <p class="steps-indicators__counter"></p>
-                    <p class="steps-indicators__txt">Auftragsinformationen</p>
-                </div>
+                <h4 class="progress-bar__percent">0%</h4>
             </div>
         </div>
     </section>
     <section class="steps-forms steps-forms_margin_top steps-forms_margin_bottom">
         <div class="container">
-            <form email-check="{{route('checkEmail')}}" class="temp-form-steps temp-form-steps_active" action="#"
-                style="display: block;" @guest data-name="mailcheck" @endguest>
-                @csrf
-                <input type="hidden" name="proposal[type_job_id]" value="4" />
+            <!--  -->
+            @guest
+            <form class="temp-form-steps temp-form-steps_active" action="#" style="display: block;">
                 <div class="steps-forms__block steps-forms__wrap">
-                    @guest
                     <div class="form-field">
                         <p class="form-field__name">Anrede*</p>
                         <select name="client[gender]" required>
@@ -263,6 +257,11 @@
                         <p class="form-field__name">Nachname*</p>
                         <input type="text" placeholder="Nachname*" name="client[lastname]" required>
                     </div>
+                </div>
+                <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+            </form>
+            <form class="temp-form-steps" data-email-check="{{route('checkEmail')}}" style="display: none;">
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Telefon*</p>
                         <input type="number" placeholder="Telefon*" name="client[phone]" required>
@@ -278,7 +277,20 @@
                         <p class="form-field__name">Erreichbarkeit *</p>
                         <input type="text" placeholder="Erreichbarkeit *" name="client[availability]" required>
                     </div>
-                    @endguest
+                </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                </div>
+            </form>
+            <form class="temp-form-steps" action="#" style="display: none;">
+            @else
+            <form class="temp-form-steps temp-form-steps_active" action="#" style="display: block;">
+            @endguest
+                @csrf
+                <input type="hidden" name="proposal[type_job_id]" value="4" />
+                <h3>Kontaktinformationen</h3>
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Region*</p>
                         <select name="proposal[region_id]" required>
@@ -287,6 +299,13 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+            </form>
+            
+            <form class="temp-form-steps" action="#" style="display: none;">
+                <h3>Kontaktinformationen</h3>
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">PLZ*</p>
                         <input type="text" placeholder="PLZ*" name="additional_info[zip]" value="{{$zip}}" required>
@@ -302,8 +321,16 @@
                     <div class="form-field">
                         <p class="form-field__name">Nr*</p>
                         <input type="text" placeholder="Nr" name="additional_info[number]">
-                    </div>
+                    </div> 
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" action="#" style="display: none;">
+                <h3>Kontaktinformationen</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Ich wünsche Anfragen für folgende Arbeiten:</h3>
                     <div class="row steps-form__checkboxes">
@@ -338,6 +365,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" action="#" style="display: none;">
+                <h3>Kontaktinformationen</h3>
                 <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field form-field_date">
                         <p class="form-field__name">Auftragsdatum *</p>
@@ -348,9 +383,14 @@
                         </svg>
                     </div>
                 </div>
-                <input class="btn formBtnMarginTop" type="submit" value="Ausgefüllt">
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                </div>
             </form>
-            <form class="temp-form-steps" action="#" style="display: none;" data-url="{{ $action  }}">
+
+            <form class="temp-form-steps" action="#" style="display: none;">
+                <h3>Auftragsinformationen</h3>
                 <div class="steps-forms__block">
                     <div class="row steps-form__checkboxes">
                         <div class="col-lg-10 col-xl-9">
@@ -401,6 +441,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" action="#" data-url="{{ $action  }}" style="display: none;">
+                <h3>Auftragsinformationen</h3>
                 <div class="steps-forms__block">
                     <div class="form-field form-field_full">
                         <p class="form-field__name">Bemerkungen</p>
@@ -409,7 +457,7 @@
                 </div>
                 <div class="formflex form-field form-field_full">
                     <a class="prev-step" href="#">Zurück</a>
-                    <input class="btn formBtnMarginTop" type="submit" value="Offerte anforden">
+                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
                 </div>
             </form>
         </div>
