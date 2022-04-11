@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\PartnerRegions;
 use App\Models\PartnerWantJobs;
+use App\Models\Subscriptions;
 
 class PartnerController extends Controller
 {
@@ -82,14 +83,16 @@ class PartnerController extends Controller
     {
         $requestsChangeInfo = $partner->requestChangeInfo()->get();
 		$proposals = $partner->getProposalsByStatus(1)->get();
-		
+
         $regions = app()->make(PartnerRegions::class);
         $regions = $regions->getCheckedRegionByUser($partner->id);
 
         $typesofjobs = app()->make(PartnerWantJobs::class);
-        $typesofjobs = $typesofjobs->getCheckedTypesJobByUser($partner->id);		
-		
-        return view('admin.partners.partners-edit',compact(['partner','proposals','regions','typesofjobs','requestsChangeInfo']));
+        $typesofjobs = $typesofjobs->getCheckedTypesJobByUser($partner->id);
+
+        $subscriptions = Subscriptions::all();
+
+        return view('admin.partners.partners-edit',compact(['partner','proposals','regions','typesofjobs','requestsChangeInfo','subscriptions']));
     }
 
     /**
@@ -121,6 +124,7 @@ class PartnerController extends Controller
             }
         }
 
+        $partner->subscription_id = $request->subscription_id;
         $partner->house = $request->house;
         $partner->coins = $request->coins;
         $partner->city = $request->city;
@@ -137,7 +141,7 @@ class PartnerController extends Controller
         $partner->save();
         return back();
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *

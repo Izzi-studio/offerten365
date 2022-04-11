@@ -39,6 +39,7 @@ class User extends Authenticatable
         'city',
         'street',
         'house',
+        'subscription_id'
     ];
 
     /**
@@ -120,9 +121,9 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposalsByStatus($status){
-		
+
 		$startDate = Carbon::now()->format('Y/m/d');
-		
+
         return $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')
             ->where('proposals_to_partner.status',$status)
@@ -159,7 +160,7 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposals(){
-		
+
         return $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id');
     }
@@ -169,9 +170,9 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposalsToPartner(){
-		
+
         return $this->hasMany( 'App\Models\ProposalToPartner', 'user_id','id');
-    } 
+    }
 
 	/**
      * Get Proposals to Partner
@@ -189,15 +190,15 @@ class User extends Authenticatable
      * @return $query
      */
     public function getCountProposalsCabinet(){
-		
+
 		$startDate = Carbon::now()->format('Y/m/d');
-		
+
 		$new = $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')->whereStatus('<>',0)->where('date_start','>=',$startDate)->count();
 
 		$accepted = $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')->whereStatus(1)->count();
-		
+
         return $new + $accepted;
     }
 
@@ -252,5 +253,5 @@ class User extends Authenticatable
 	public function sendPasswordResetNotification($token)
 	{
 		$this->notify(new ResetPasswordNotification($token));
-	} 
+	}
 }
