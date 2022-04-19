@@ -1,9 +1,9 @@
-
-
 @component('mail::message')
+# Einführung
 
- 
-Hallo, {{$name}}<br> Ihre Anfrage wurde von einem Unternehmen angenommen. Sie erhalten demnächst eine Offerte.
+Hi, {{$user->name}}<br>
+Ihr Konto wurde gesperrt.<br>
+Bitte bezahlen Sie die Rechnung. 
 
 @component('mail::button', ['url' => 'https://offerten-365.ch'])
 Zur Website

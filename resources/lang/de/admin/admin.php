@@ -29,7 +29,7 @@ return [
 	'system.setting.cost_cleaning' =>'Kosten pro Reinigung',
 	'system.setting.cost_transfer' =>'Kosten pro Umzug',
 	'system.setting.cost_transfer_cleaning' =>'Kosten pro Umzug + Reinigung',
-	'system.setting.cost_malar' =>'Kosten pro Maler',
+	'system.setting.cost_paint_work' =>'Kosten pro Maler',
 
 //Menu
     'menu.partners' => 'Partners',
@@ -43,6 +43,7 @@ return [
     'menu.seo-meta' => 'Seo Meta',
     'menu.proposals' => 'Anfragen',
     'menu.settings' => 'die Einstellungen',
+    'menu.subscriptions' => 'Abonnements',
     'menu.logout' => 'Ausloggen',
 //Forms
     'form.city' => 'Stadt',
@@ -72,6 +73,7 @@ return [
     'form.add-blog-item' => 'Blog-Element hinzufügen',
     'form.add-blog-category' => 'Blog-Kategorie hinzufügen',
     'form.add-question-answer' => 'Frage / Antwort hinzufügen',
+    'form.add-subscriptions' => 'Frage / Abonnements',
     'form.question' => 'Frage',
     'form.answer' => 'Antworten',
     'form.add-review' => 'Bewertung hinzufügen',
@@ -91,6 +93,8 @@ return [
     'form.no' => 'Nein',
     'form.jobtype' => 'Dienste',
     'form.regions' => 'Kantonen',
+    'form.subscriptions' => 'Abonnements',
+    'form.text-btn' => 'Schaltflächentext',
 //Alerts
     'category_updated' => 'Kategorie aktualisiert',
     'category_added' => 'Kategorie hinzugefügt',
@@ -163,4 +167,8 @@ return [
 	
 	'no'=>'Nein',
 	'yes'=>'Ja',
+
+    'subscriptions_deleted' => 'Abonnement erfolgreich gelöscht',
+    'subscriptions_added' => 'Abonnement erfolgreich hinzugefügt',
+    'subscriptions_update' => 'Abonnement erfolgreich verlängert'
 ];

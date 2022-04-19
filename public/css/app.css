@@ -993,24 +993,10 @@ html.mfp-helper body {
     display: flex;
     position: absolute;
     right: 0;
-    bottom: -10px;
-}
-
-@media only screen and (max-width: 1439px) {
-    .footer__contact-soc {
-        bottom: 50%;
-        -webkit-transform: translateY(50%);
-        -ms-transform: translateY(50%);
-        transform: translateY(50%);
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .footer__contact-soc {
-        bottom: 0;
-        position: static;
-        margin-top: 5px;
-    }
+    bottom: 50%;
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
 }
 
 .footer__contact-soc-item {
@@ -1020,12 +1006,9 @@ html.mfp-helper body {
 }
 
 @media only screen and (max-width: 992px) {
-    .footer__row_third {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .footer__contact-soc {
+        transform: none;
+        margin-top: 19px;
         position: static;
     }
 
@@ -1053,14 +1036,9 @@ html.mfp-helper body {
     position: relative;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
     .footer__row_third {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
-        -webkit-box-align: start;
-        -ms-flex-align: start;
         align-items: flex-start;
         margin-top: 30px;
     }
@@ -1094,10 +1072,9 @@ html.mfp-helper body {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 992px) {
     .footer__links {
         margin-left: 0;
-        margin-top: 6px;
     }
 }
 
@@ -1156,6 +1133,11 @@ html.mfp-helper body {
 @media only screen and (max-width: 992px) {
     .footer__l-txt {
         margin-top: 10px;
+    }
+
+    .footer__copy {
+        order: 1;
+        margin-top: 19px;
     }
 }
 
@@ -2246,7 +2228,7 @@ p.review__title {
     justify-content: space-between;
     padding-top: 40px;
     padding-bottom: 40px;
-    background: #efefef;
+    background: #f6f6f6;
     border-radius: 40px;
     counter-reset: i;
     position: relative;
@@ -2308,7 +2290,7 @@ p.review__title {
     content: '';
     height: 4px;
     width: 100%;
-    background-color: #efefef;
+    background-color: #f6f6f6;
     position: absolute;
     top: 22px;
     right: 50%;
@@ -2324,7 +2306,7 @@ p.review__title {
     content: '';
     height: 4px;
     width: 100%;
-    background-color: #efefef;
+    background-color: #f6f6f6;
     position: absolute;
     top: 22px;
     left: 50%;
@@ -2397,7 +2379,8 @@ p.review__title {
 }
 
 .steps-indicators__wrap_3-steps {
-    max-width: 820px;
+    /* max-width: 820px; */
+    max-width: 100%;
 }
 
 .steps-indicators__item_active .steps-indicators__counter {
@@ -2405,9 +2388,10 @@ p.review__title {
 }
 
 .temp-form-steps {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 15px;
+    background-color: #f6f6f6;
+    padding: 30px;
+    border-radius: 30px;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
 }
 
 .temp-form-steps .steps-forms__block {
@@ -2441,7 +2425,7 @@ p.review__title {
 }
 
 .temp-form-steps .form-field {
-    width: calc(50% - 40px);
+    width: calc(50% - 20px);
     margin-top: 40px;
 }
 
@@ -2541,6 +2525,11 @@ p.review__title {
 @media only screen and (max-width: 768px) {
     .acc-bank-card .acc-bank-card__form-field {
         margin-top: 20px;
+    }
+
+    .temp-form-steps {
+        padding: 15px;
+        border-radius: 15px;
     }
 }
 
