@@ -100,7 +100,7 @@
     </section>
     <section class="reviews">
         <div class="js-temporary-wrap">
-            @foreach($reviews->take(3) as $review)
+            @foreach($reviews as $review)
             <div class="review reviews__review">
                 <p class="review__date">{{$review->date}}</p>
                 <p class="review__title mt-2">{{$review->company}}</p>
