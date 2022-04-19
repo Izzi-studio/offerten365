@@ -95,8 +95,12 @@ class SubscriptionsController extends Controller
     {
         $isset = User::whereSubscriptionId($subscription->id)->first();
 
+        if($subscription->id == 1){
+            return redirect(route('subscriptions.index'))->with('error', __('admin/admin.subscriptions_default_not_delete'));
+        }
+
         if($isset){
-            return redirect(route('subscriptions.index'))->with('error', 'Some users has this subscription');
+            return redirect(route('subscriptions.index'))->with('error', __('admin/admin.subscriptions_have_some_users'));
         }
 
         $subscription->delete();

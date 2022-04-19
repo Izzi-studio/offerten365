@@ -9,12 +9,11 @@ class BlogDescription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['locale','name','content','blog_id'];
+    protected $fillable = ['locale','name','content','blog_id','link_text'];
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'blog_description';
-    public $timestamps = false;
 }

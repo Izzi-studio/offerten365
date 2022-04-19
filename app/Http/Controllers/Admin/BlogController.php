@@ -70,6 +70,7 @@ class BlogController extends Controller
                 'locale'=>$locale,
                 'name'=> $data['main']['name'],
                 'content'=> $data['main']['content'],
+                'link_text'=> $data['main']['link_text'],
                 'blog_id'=>$blog->id
             ]);
 
@@ -147,6 +148,7 @@ class BlogController extends Controller
                 'locale'=>$locale,
                 'name'=> $data['main']['name'],
                 'content'=> $data['main']['content'],
+                'link_text'=> $data['main']['link_text'],
                 'blog_id'=>$blog->id
             ]);
 

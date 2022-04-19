@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotifyEmailPartnerActivate;
+use App\Mail\NotifyEmailPartnerBlocked;
 use App\Models\RequestCahngePartnerInfo;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\PartnerRegions;
 use App\Models\PartnerWantJobs;
 use App\Models\Subscriptions;
+//use App\Models\Setting;
+//use App\Models\Proposal;
+use Carbon\Carbon;
+use Mail;
 
 class PartnerController extends Controller
 {
@@ -17,42 +23,12 @@ class PartnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
         $partners = User::getPartners();
         return view('admin.partners.partners-list',compact(['partners']));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
     }
 
     public function showUpdateRequest(User $partner, RequestCahngePartnerInfo $requestCahngePartnerInfo)
@@ -99,11 +75,23 @@ class PartnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $partner
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $partner)
     {
+
+        if ($request->active == 1 && $partner->active == 0) {
+            $mailable = new NotifyEmailPartnerActivate();
+            Mail::to($partner->email)->queue($mailable);
+        }
+
+        if ($request->status == 2 && $partner->status != 2) {
+            $mailable = new NotifyEmailPartnerBlocked();
+            Mail::to($partner->email)->queue($mailable);
+        }
+
+
         if(isset($request->types_of_jobs)){
             $partner->typesJobs()->delete();
             foreach($request->types_of_jobs as $job){
@@ -139,6 +127,34 @@ class PartnerController extends Controller
         $partner->status_pay = $request->status_pay;
         $partner->active = $request->active;
         $partner->save();
+
+
+       /* if ($request->active == 1) {
+
+            if (Setting::getByKey('system.setting.autosearch_proposal') == 1) {
+                $startDate = Carbon::now()->addDays(1)->format('Y/m/d');
+
+                $proposals = Proposal::whereIn('region_id',  $request->region_ids)
+                    ->where('date_start', '>=', $startDate)
+                    ->whereIn('type_job_id', $request->types_of_jobs)
+                    ->inRandomOrder()
+                    ->limit(Setting::getByKey('system.setting.limit_proposal_to_partner_after_register'))
+                    ->pluck('id');
+
+
+
+                foreach ($proposals as $proposal_id) {
+                    ProposalToPartner::insert([
+                        'proposal_id' => $proposal_id,
+                        'user_id' => $partner->id
+                    ]);
+                }
+                Log::info('Searched for condition...IDS: ' . json_encode($proposals));
+            }
+
+
+        } */
+
         return back();
     }
 
