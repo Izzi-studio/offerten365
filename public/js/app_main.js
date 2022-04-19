@@ -139,15 +139,16 @@ function sortColumn() {
     const col_1 = document.querySelector('.reviews__l');
     const col_2 = document.querySelector('.reviews__c');
     const col_3 = document.querySelector('.reviews__r');
+    const countShowReviews = window.innerWidth < 768 ? 3 : 9
 
     function sort() {
         let i = 1;
 
-        if (wrap.querySelectorAll('.review').length <= 9) {
+        if (wrap.querySelectorAll('.review').length <= countShowReviews) {
             document.querySelector('.reviews__btn-more').style.display = 'none';
         }
 
-        [...wrap.querySelectorAll('.review')].slice(0, 9).forEach(current=>{
+        [...wrap.querySelectorAll('.review')].slice(0, countShowReviews).forEach(current=>{
             if(i === 1) {
                 col_1.append(current);
             } else if(i === 2) {
