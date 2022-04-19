@@ -42,6 +42,7 @@ trait RegisterClientTrait {
             'gender' => $data['gender'],
             'email' => $data['email'],
             'role_id' => env('ROLE_ID_CLIENT'),
+            'active' => 1,
             'phone' => $data['phone'],
             'availability' => $data['availability'],
             'password' => Hash::make($data['password']),

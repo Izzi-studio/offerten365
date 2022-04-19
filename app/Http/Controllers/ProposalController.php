@@ -23,24 +23,6 @@ class ProposalController extends Controller
 
         $proposal = $request->only('proposal')['proposal'];
 
-        /*switch ($proposal['type_job_id']) {
-            case 1:
-                $route = route('client.getTRequests');
-                break;
-            case 2:
-                $route = route('client.getCRequests');
-                break;
-            case 3:
-                $route = route('client.getTCRequests');
-                break;
-            case 4:
-                $route = route('client.getPWRequests');
-                break;
-            default:
-                Log::info('Add Request. Wrong Job Type: '.$proposal['type_job_id']);
-                return response()->json(['url'=> route('client.myInfo')]);
-        } */
-
         $proposal['user_id'] = auth()->user()->id;
         $proposal['additional_info'] = $request->only('additional_info')['additional_info'];
 
@@ -66,16 +48,16 @@ class ProposalController extends Controller
         $price = 0;
         switch ($proposal['type_job_id']) {
             case 1:
-                $price = Setting::getByKey('system.setting.cost_transfer');
+                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer');
                 break;
             case 2:
-                $price = Setting::getByKey('system.setting.cost_cleaning');
+                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_cleaning');
                 break;
             case 3:
-                $price = Setting::getByKey('system.setting.cost_transfer_cleaning');
+                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer_cleaning');
                 break;
             case 4:
-                $price = Setting::getByKey('system.setting.cost_malar');
+                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_malar');
                 break;
             default:
                 Log::info('Wrong Job Type on pay: '.$proposal['type_job_id']);
@@ -137,22 +119,25 @@ class ProposalController extends Controller
 
     public function downloadProposals(Proposal $proposal){
 
+
+        $cost = 0;
         switch ($proposal->type_job_id) {
             case 1:
-                $cost = Setting::getByKey('system.setting.cost_transfer');
+                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer');
                 break;
             case 2:
-                $cost = Setting::getByKey('system.setting.cost_cleaning');
+                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_cleaning');
                 break;
             case 3:
-                $cost = Setting::getByKey('system.setting.cost_transfer_cleaning');
+                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer_cleaning');
                 break;
             case 4:
-                $cost = Setting::getByKey('system.setting.cost_malar');
+                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_malar');
                 break;
             default:
-                $cost = 0;
+                Log::info('Wrong Job Type on pay: '.$proposal->type_job_id);
         }
+
 
         $pdf = PDF::loadView('front.partner.proposalPDF',compact(['proposal','cost']));
 
@@ -171,10 +156,10 @@ class ProposalController extends Controller
 		 if($proposal->user_id != $authUser->id ){
 			 abort(404);
 		 }
-		//dd($proposal);
+
 		$regions = Regions::all();
 
-		 switch ($proposal['type_job_id']) {
+		 switch ($proposal->type_job_id) {
             case 1:
                 $view = 'transfer-form';
                 break;
@@ -188,7 +173,7 @@ class ProposalController extends Controller
                 $view = 'painting-form';
                 break;
             default:
-                Log::info('Edit Request. Wrong Job Type: '.$proposal['type_job_id']);
+                Log::info('Edit Request. Wrong Job Type: '.$proposal->type_job_id);
         }
 
 		return view('front.client.edit.'.$view,compact(['proposal','regions']));
@@ -202,7 +187,7 @@ class ProposalController extends Controller
 
 		$proposal->update($proposalData);
 
-        switch ($proposal['type_job_id']) {
+        switch ($proposal->type_job_id) {
             case 1:
                 $route = route('client.getTRequests');
                 break;
@@ -216,7 +201,7 @@ class ProposalController extends Controller
                 $route = route('client.getPWRequests');
                 break;
             default:
-                Log::info('Add Request. Wrong Job Type: '.$proposal['type_job_id']);
+                Log::info('Add Request. Wrong Job Type: '.$proposal->type_job_id);
                 return response()->json(['url'=> route('client.myInfo')]);
         }
 

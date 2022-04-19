@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Str;
 use Carbon\Carbon;
 use App\Notifications\ResetPasswordNotification;
+use Hash;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -39,6 +40,7 @@ class User extends Authenticatable
         'city',
         'street',
         'house',
+        'subscription_id'
     ];
 
     /**
@@ -84,6 +86,7 @@ class User extends Authenticatable
             ->join('partner_regions as pr','pr.user_id','users.id')
             ->where('pwj.type_job_id',$typeJobId)
             ->where('pr.region_id',$regionId)
+            ->where('users.active',1)
             ->select('users.id as user_id','users.name','users.email','users.company');
 
     }
@@ -97,19 +100,23 @@ class User extends Authenticatable
      */
     public function scopegetPartners($query)
     {
-      /*  return $query->where('role_id',2)->with('requestb')->get()->sortBy(function($hackathon)
-        {
-            return $hackathon->requestb->count();
-        });
-        */
 
-        return $query->where('role_id',2)->
-        leftJoin('request_change_partner_info','users.id','=','request_change_partner_info.user_id')->
-        selectRaw('users.*, (select  count(request_change_partner_info.id) AS `count` from request_change_partner_info where request_change_partner_info.status = 1 and users.id = request_change_partner_info.user_id) AS `count`')->
-        groupBy('users.id')->
-        orderBy('count','DESC')->
-        orderBy('id','DESC')->
-        paginate(200);
+        $result = $query
+            ->where('role_id',2)
+            ->leftJoin('request_change_partner_info','users.id','=','request_change_partner_info.user_id')
+            ->selectRaw('users.*, (select  count(request_change_partner_info.id) AS `count` from request_change_partner_info where request_change_partner_info.status = 1 and users.id = request_change_partner_info.user_id) AS `count`')
+            ->groupBy('users.id')
+            ->orderBy('count','DESC')
+            ->orderBy('id','DESC');
+
+        $queryStr = request()->get('search',null);
+
+        if ($queryStr){
+            $result = $result->where('company','LIKE','%'.$queryStr.'%')->orWhere('name','LIKE','%'.$queryStr.'%');
+        }
+
+
+        return   $result->paginate(200);
 
     }
 
@@ -120,9 +127,9 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposalsByStatus($status){
-		
+
 		$startDate = Carbon::now()->format('Y/m/d');
-		
+
         return $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')
             ->where('proposals_to_partner.status',$status)
@@ -159,7 +166,7 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposals(){
-		
+
         return $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id');
     }
@@ -169,9 +176,9 @@ class User extends Authenticatable
      * @return $query
      */
     public function getProposalsToPartner(){
-		
+
         return $this->hasMany( 'App\Models\ProposalToPartner', 'user_id','id');
-    } 
+    }
 
 	/**
      * Get Proposals to Partner
@@ -189,15 +196,15 @@ class User extends Authenticatable
      * @return $query
      */
     public function getCountProposalsCabinet(){
-		
+
 		$startDate = Carbon::now()->format('Y/m/d');
-		
+
 		$new = $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')->whereStatus('<>',0)->where('date_start','>=',$startDate)->count();
 
 		$accepted = $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
             'user_id','id','id','proposal_id')->whereStatus(1)->count();
-		
+
         return $new + $accepted;
     }
 
@@ -252,5 +259,5 @@ class User extends Authenticatable
 	public function sendPasswordResetNotification($token)
 	{
 		$this->notify(new ResetPasswordNotification($token));
-	} 
+	}
 }

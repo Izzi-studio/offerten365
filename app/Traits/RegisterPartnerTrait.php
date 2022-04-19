@@ -50,7 +50,7 @@ trait RegisterPartnerTrait {
      * @return \App\Models\User
      */
     protected function createPartner($request)
-    { 
+    {
 
 		$data = $request->all();
 
@@ -73,20 +73,20 @@ trait RegisterPartnerTrait {
             'password' => Hash::make($data['password']),
             'profile_slug' => Str::ascii(Str::slug($data['company'])),
         ]);
-		
-		
+
+
 		if ($request->hasFile('upload_file')) {
-		
+
 			$file = $request->file('upload_file');
-			
+
 			$extension =  strtolower($file->getClientOriginalExtension());
 
 			$full_name = $file->getClientOriginalName();
-			
-			
+
+
 			$file->move(storage_path(env('LOCAL_PATH_PARNTERFILE').$user->id), $full_name);
         }
- 
+
         foreach($data['types_of_jobs'] as $jobId){
             PartnerWantJobs::create(['user_id'=>$user->id, 'type_job_id'=>$jobId]);
         }
@@ -94,8 +94,10 @@ trait RegisterPartnerTrait {
         foreach($data['regions_ids'] as $regionId){
             PartnerRegions::create(['user_id'=>$user->id, 'region_id'=>$regionId]);
         }
+        /*
         if(Setting::getByKey('system.setting.autosearch_proposal') == 1) {
 			$startDate = Carbon::now()->addDays(1)->format('Y/m/d');
+
             $proposals = Proposal::whereIn('region_id', $data['regions_ids'])
 				->where('date_start','>=',$startDate)
                 ->whereIn('type_job_id', $data['types_of_jobs'])
@@ -111,6 +113,7 @@ trait RegisterPartnerTrait {
             }
             Log::info('Searched for condition...IDS: ' . json_encode($proposals));
         }
+        */
 
         return $user;
     }

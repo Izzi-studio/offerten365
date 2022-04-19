@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSomeFieldToUsers extends Migration
+class AddSubscriptionToUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,7 @@ class AddSomeFieldToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-           $table->string('postcode')->nullable();
-           $table->string('city')->nullable();
-           $table->string('street')->nullable();
-           $table->string('house')->nullable();
+            $table->integer('subscription_id')->after('id')->default(1);
         });
     }
 
@@ -29,10 +26,7 @@ class AddSomeFieldToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('postcode');
-            $table->dropColumn('city');
-            $table->dropColumn('street');
-            $table->dropColumn('house');
+            $table->dropColumn('subscription_id');
         });
     }
 }
