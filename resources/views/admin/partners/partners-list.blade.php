@@ -7,6 +7,27 @@
             <div class="alert alert-custom alert-white alert-shadow fade show gutter-b">
                 <h1>{{__('admin/admin.menu.partners')}}</h1>
             </div>
+            <form method="GET" class="alert alert-custom alert-white alert-shadow fade show gutter-b">
+                <div class="row w-100">
+                    <div class="col-lg-3">
+                        <input 
+                            class="form-control" 
+                            placeholder="Name des Unternehmens / Partners" 
+                            required
+                            name="search"
+                            type="text"
+                            value="{{request()->search ?? ''}}"
+                        />
+                    </div>
+                    <div class="col-lg-3">
+                        <input 
+                            class="btn btn-success font-weight-bold" 
+                            type="submit"
+                            value="Suche"
+                        />
+                    </div>
+                </div>
+            </form>
             <div class="card card-custom card-stretch gutter-b">
                 <div class="card-body pt-2 pb-0 mt-n3">
                     <p></p>

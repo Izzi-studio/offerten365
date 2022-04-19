@@ -24,7 +24,7 @@ $(document).ready(function () {
         inputPhoto();
         sortColumn();
         sectionNavigation();
-        $("input[name='additional_info[square]'],input[name='additional_info[rooms]'],input[name='additional_info[floor]'],input[name='additional_info[number]'],input[name='additional_info[zip]'],input[name='additional_info[to][square]'],input[name='additional_info[to][floor]'],input[name='additional_info[to][zip]'],input[name='additional_info[to][number]'],input[name='additional_info[from][square]'],input[name='additional_info[from][rooms]'],input[name='additional_info[from][zip]'],input[name='additional_info[from][number]'],input[name='additional_info[from][floor]']").inputFilter(function(value) {
+        $("input[name='additional_info[square]'],input[name='additional_info[floor]'],input[name='additional_info[zip]'],input[name='additional_info[to][square]'],input[name='additional_info[to][floor]'],input[name='additional_info[to][zip]'],input[name='additional_info[from][square]'],input[name='additional_info[from][zip]'],input[name='additional_info[from][floor]']").inputFilter(function(value) {
             return /^\d*$/.test(value);    // Allow digits only, using a RegExp
         });
     }
@@ -489,10 +489,10 @@ function stepsForms() {
             }
         }
 
-        if (e.target.dataset.name === 'general-data' || "mailcheck" === e.target.dataset.name) {
+        if (e.target.dataset.name === 'general-data' || e.target.dataset.emailCheck) {
             let inputEmail = e.target.querySelector('input[type="email"]');
             let email = $(inputEmail).val();
-            let url = $(e.target).attr('email-check');
+            let url = $(e.target).attr('data-email-check');
             let mailcheck = true;
             jQuery.ajax({
                 type:"POST",
@@ -571,7 +571,7 @@ function stepsForms() {
         if (!indexStepReturned) {
             indexStepReturned = $(activeForm).index()
         }
-
+        
         if(!activeForm.previousElementSibling) return;
 
         let prevActiveForm = activeForm.previousElementSibling;
@@ -615,7 +615,10 @@ function stepsForms() {
     function progressBarSteps() {
         if (document.querySelector('.steps-indicators')) {
             let activeForm = document.querySelector('.temp-form-steps_active');
-            let countStepsActive = $(activeForm).index()+1;
+            let countStepsActive = $(activeForm).index() + 1;
+            if (document.querySelector('.steps-indicators_global-steps')) {
+                countStepsActive = +$(activeForm).attr('data-global-step')
+            }
     
             for(let i = 0; i < stepsItemElem.length; i++) {
                 stepsItemElem[i].classList.remove('steps-indicators__item_active')
@@ -640,6 +643,17 @@ function stepsForms() {
     btnPrevForms.forEach(btn => {
         btn.addEventListener('click', btnPrevHandler)
     });
+
+    if (document.querySelector('#work-inside')) {
+        document.querySelector('#input-work-inside').addEventListener('change', (e) => {
+            if (e.target.checked) {
+                $('#work-inside').fadeIn()
+            } else {
+                $('#work-inside').fadeOut()
+                document.querySelectorAll('#work-inside input[type="checkbox"]').forEach(c => c.checked = false)
+            }
+        })
+    }
 
     document.addEventListener('click', function(e){
         if(e.target.closest('.is-invalid')) {

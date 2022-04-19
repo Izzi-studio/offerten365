@@ -129,8 +129,17 @@
                             </div>
 
                             <div class="form-group">
-                                    <label>Gutschrift</label>
-                                    <input type="text" class="form-control" name="coins" value="{{$partner->coins}}" />
+                                <label>{{__('admin/admin.form.subscriptions')}}</label>
+                                <select class="form-control" name="subscription_id">
+                                    @foreach($subscriptions as $subscription)
+                                    <option 
+                                        value="{{$subscription->id}}" 
+                                        @if($subscription->id == $partner->subscription_id) selected @endif
+                                    >
+                                        {{$subscription->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
                         <div class="form-group">
                             <label>{{__('admin/admin.form.jobtype')}}</label>
@@ -287,7 +296,7 @@
                                     </td>
 
                                     <td class="text-right">
-                                        <a href="/storage/users/invoices/invoice-№{{$invoice->invoice_number}}-user-{{$invoice->user_id}}-{{$invoice->created_at->format('Y')}}-{{$invoice->period}}.pdf" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                        <a href="/storage/users/invoices/invoice-№{{$invoice->invoice_number}}-user-{{$invoice->user_id}}-{{$invoice->created_at->format('Y')}}-{{$invoice->period}}.pdf" target="_blank" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                         <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo1/dist/../src/media/svg/icons/General/Save.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <polygon points="0 0 24 0 24 24 0 24"/>

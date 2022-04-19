@@ -24,12 +24,6 @@
                         <p class="steps-indicators__counter"></p>
                         <p class="steps-indicators__txt">Nach</p>
                     </div>
-                    @guest
-                        <div class="steps-indicators__item">
-                            <p class="steps-indicators__counter"></p>
-                            <p class="steps-indicators__txt">Kontakt</p>
-                        </div>
-                    @endguest
                 </div>
             </div>
         </section>

@@ -49,47 +49,7 @@
                         </select>
                         </div>
                         <div class="form-group add_info">
-                        @if($proposal->type_job_id == 1)
-                            @include('front.includes.transfer',[
-                                'proposal_id'=> $proposal->id,
-                                'date_start'=> $proposal->date_start,
-                                'additional_info'=> $proposal->additional_info,
-                                'from'=>__('front.'.$proposal->getRegion->name),
-                                'client'=> $proposal->getUser,
-                                'add_info'=>true
-                            ])
-                        @endif
-                        @if($proposal->type_job_id == 2)
-                            @include('front.includes.cleaning',[
-                            'proposal_id'=> $proposal->id,
-                            'additional_info'=> $proposal->additional_info,
-                            'region'=>__('front.'.$proposal->getRegion->name),
-                            'date_start'=> $proposal->date_start,
-                            'comments'=>$proposal->description,
-                            'add_info'=>true,
-                                'client'=> $proposal->getUser])
-                        @endif
-                        @if($proposal->type_job_id == 3)
-                            @include('front.includes.transfer-cleaning',[
-                                'proposal_id'=> $proposal->id,
-                                'date_start'=> $proposal->date_start,
-                                'additional_info'=> $proposal->additional_info,
-                                'from'=>__('front.'.$proposal->getRegion->name),
-                                'comments'=>$proposal->description,
-                                'add_info'=>true,
-                                'client'=> $proposal->getUser
-                            ])
-                        @endif
-                        @if($proposal->type_job_id == 4)
-                            @include('front.includes.painting-work',[
-                            'proposal_id'=> $proposal->id,
-                            'additional_info'=> $proposal->additional_info,
-                            'region'=>__('front.'.$proposal->getRegion->name),
-                            'date_start'=> $proposal->date_start,
-                            'comments'=>$proposal->description,
-                            'add_info'=>true,
-                                'client'=> $proposal->getUser])
-                        @endif
+                        
                             <br />
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.name')}}</label>
