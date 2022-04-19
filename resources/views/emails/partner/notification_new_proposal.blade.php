@@ -1,7 +1,7 @@
 @component('mail::message')
 # {{$type}}
 
-Hallo {{$name}}. Sie haben neue Anfrage erhalten.
+Hallo {{$name}}. Sie haben eine neue Vorschläge erhalten.
 
 @if($proposal->type_job_id == 1)
 <strong>Von</strong> {{__('front.'.$proposal->getRegion->name)}} {{$proposal->additional_info->from->city}}<br />
