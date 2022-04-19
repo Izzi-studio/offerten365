@@ -12,11 +12,11 @@
 <div class="acc-billing-item__characteristic">
     <p class="acc-billing-item__characteristic-txt">{{$additional_info->from->rooms}} Zimmer, {{$additional_info->from->floor}} Stock</p>
     @if(auth()->user()->isPartner())
-						
+
         @if($showactionbuttons)
             <div class="acc-billing-item__actions">
-                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{$price}} Chf)</a>
-				
+                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{ Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer') }} Chf)</a>
+
                 <a class="acc-billing-item__btn-cancel" href="{{route('partner.processProposal',[$proposal_id,'rejected'])}}">Absagen</a>
             </div>
         @endif
@@ -36,7 +36,7 @@
 </div>
 @endif
 
-@if(isset($add_info)) 
+@if(isset($add_info))
 <div class="acc-billing-item__slide-content">
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Adressen	</p>

@@ -23,7 +23,7 @@
                                     @if(auth()->user()->avatar)
                                         <img class="acc-company-profile__photo-img js-photo-result"  src="{{env('FRONT_PATH_AVATAR')}}{{auth()->user()->avatar}}" alt="">
                                     @else
-                                        <img class="acc-company-profile__photo-img js-photo-result" src="/images/no-avatar.jpeg" alt="">
+                                        <img class="acc-company-profile__photo-img js-photo-result" src="/images/no-avatar.webp" alt="">
                                     @endif
                                     <label class="acc-company-profile__change-photo">
                                         <input class="js-input-photo" type="file" name="avatar" accept="image/jpeg, image/png">

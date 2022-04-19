@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-xl-7">
                     <h1 style="text-transform: none" class="main-banner__title">Umziehen war noch nie so einfach </h1>
-                    <p class="main-banner__subtitle" style="text-transform: none">
+                    <p class="main-banner__subtitle d-none d-md-block" style="text-transform: none">
                         Sparen Sie mit Offerten 365:
-                        <ul class="main-banner__list">
+                        <ul class="main-banner__list d-none d-md-block">
                             <li class="main-banner__item">Zeit</li>
                             <li class="main-banner__item">Geld</li>
                             <li class="main-banner__item">Nerven</li>
@@ -52,7 +52,7 @@
     </section>
     <section class="how-it-work">
         <div class="container">
-            <div class="row">
+            <div class="row d-none d-md-flex">
                 <div class="col-lg-8 ml-auto mr-auto">
                     <h2 class="section-title" style="text-transform: none">So funktioniert der Umzug mit Offerten 365
                     </h2>
@@ -137,62 +137,47 @@
             <h2 class="section-title advantages__section-title" style="text-transform: none">Ihre Vorteile mit Offerten
                 365</h2>
             <div class="row advantages__inner">
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/deal.svg" alt="">
                     <p class="advantages__item-title">Wir nehmen Ihnen jede Arbeit ab</p>
                     <p class="advantages__item-txt">Nur wenige Angaben von Ihnen genügen, und wir haben Ihre Bedürfnisse
                         ausgemacht. Nach wenigen Sekunden sucht der Vergleichsrechner bis zu 6 Umzugsfirmen für Sie
                         heraus. Die Kontaktaufnahme ist kostenlos; die Beratung individuell.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/skills.svg" alt="">
                     <p class="advantages__item-title">Einzigartiges Preis-Leistungs-Verhältnis</p>
                     <p class="advantages__item-txt">Ziel unserer Plattform ist es, den Wettbewerb in der Umzugsbranche
                         zu fördern. Die bisherigen Ergebnisse sind eindeutig: Registrierte Kunden sparen durch die
                         Vergleiche bis zu 40 % an Kosten! Transparenz macht’s möglich.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/promotion.svg" alt="">
                     <p class="advantages__item-title">Geprüfte Anbieter, hohe Qualität</p>
                     <p class="advantages__item-txt">Offerten 365 versucht, möglichst viele Anbieter zu vereinen und
                         somit den Wettbewerb zu steigern. Dennoch achten wir neben der Quantität auch auf die Qualität
                         und überprüfen die Anbieter. So gelingt Ihr Umzug günstig und problemlos zugleich.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/resume.svg" alt="">
                     <p class="advantages__item-title">Umzugsfirmen prüfen und bewerten</p>
                     <p class="advantages__item-txt">Nachdem sich ein Anbieter auf Ihre Offerte gemeldet hat, steht Ihnen
                         dessen Profil zur Verfügung. Erfahren Sie, wie andere Kunden die Umzugsfirma bewerten und
                         vergeben Sie nach der Auftragsüberstellung eine eigene Bewertung.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/conversation.svg" alt="">
                     <p class="advantages__item-title">Kommunikation leicht gemacht</p>
                     <p class="advantages__item-txt">Bei Offerten 365 wird Einfachheit grossgeschrieben. Eine
                         reibungslose und ungezwungene Kommunikation stellt deshalb einen festen Bestandteil unserer
                         Arbeitsweise dar. Ob per Mail, telefonisch oder postalisch: Wir sind immer für Sie da.</p>
                 </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
+                <div class="col-sm-6 col-lg-4 advantages__item"><img class="advantages__item-img"
                         src="/images/candidates.svg" alt="">
                     <p class="advantages__item-title">Kostenlos, unverbindlich, freundlich</p>
                     <p class="advantages__item-txt">Sämtliche Angebote, die Ihnen Offerten 365 zuschickt, sind kostenlos
                         und unverbindlich! Sie können die Angebote ausgiebig überprüfen und sich völlig frei für oder
                         gegen einen Anbieter entscheiden.</p>
-                </div>
-
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
-                        src="/images/deal.svg" alt="">
-                    <p class="advantages__item-title">Wir nehmen Ihnen jede Arbeit ab</p>
-                    <p class="advantages__item-txt">Nur wenige Angaben von Ihnen genügen, und wir haben Ihre Bedürfnisse
-                        ausgemacht. Nach wenigen Sekunden sucht der Vergleichsrechner bis zu 6 Umzugsfirmen für Sie
-                        heraus. Die Kontaktaufnahme ist kostenlos; die Beratung individuell.</p>
-                </div>
-                <div class="col-sm-6 col-lg-4 col-xl-3 advantages__item"><img class="advantages__item-img"
-                        src="/images/skills.svg" alt="">
-                    <p class="advantages__item-title">Einzigartiges Preis-Leistungs-Verhältnis</p>
-                    <p class="advantages__item-txt">Ziel unserer Plattform ist es, den Wettbewerb in der Umzugsbranche
-                        zu fördern. Die bisherigen Ergebnisse sind eindeutig: Registrierte Kunden sparen durch die
-                        Vergleiche bis zu 40 % an Kosten! Transparenz macht’s möglich.</p>
                 </div>
             </div>
         </div>

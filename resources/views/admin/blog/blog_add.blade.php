@@ -86,6 +86,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label>
+                                            {{__('admin/admin.form.text-btn')}}:
+                                        </label>
+                                        <input 
+                                            required 
+                                            class="form-control" 
+                                            type="text" 
+                                            name="blog[{{ $localeCode }}][main][link_text]"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
                                             {{__('admin/admin.form.meta-title')}}:
                                         </label>
                                         <input class="form-control" type="text" name="blog[{{ $localeCode }}][seo][title]" value=""/>
