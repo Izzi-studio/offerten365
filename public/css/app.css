@@ -597,7 +597,7 @@ select {
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    align-items: center;
+    align-items: start;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -622,7 +622,7 @@ select {
     border: 1px solid #212121;
     border-radius: 50%;
     margin-right: 12px;
-}
+margin-top: 4px;}
 
 .custom-checkbox .custom-checkbox__txt:after,
 .custom-checkbox .custom-radio__txt:after,
@@ -631,7 +631,8 @@ select {
     content: url(/images/check.svg);
     width: 12px;
     position: absolute;
-    top: 0;
+    /* top: 50%; */
+    transform: translateY(-50%);
     left: 4px;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
