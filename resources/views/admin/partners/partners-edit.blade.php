@@ -129,6 +129,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Gutschrift</label>
+                                <input type="text" class="form-control" name="coins" value="{{$partner->coins}}" />
+                            </div>
+
+                            <div class="form-group">
                                 <label>{{__('admin/admin.form.subscriptions')}}</label>
                                 <select class="form-control" name="subscription_id">
                                     @foreach($subscriptions as $subscription)
