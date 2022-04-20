@@ -36,6 +36,53 @@
                     <form name="proposal-update" method="POST" action="{{route('proposals.update',$proposal->id)}}">
                         @csrf
                         <input type="hidden" name="_method" value="PUT"/>
+                        
+                        @if(count($proposal->getResponded()->get()))
+                        <div class="form-group">
+                            <h4 class="mb-4">Angenommen:</h4>
+                            <div class="table-responsive">
+                                <table class="table table-vertical-center table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Company
+                                            </th>
+                                            <th>
+                                                Email
+                                            </th>
+                                            <th class="text-right">
+                                                {{__('admin/admin.form.actions')}}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @foreach($proposal->getResponded()->get() as $responded)
+                                        <tr>
+                                            <td>
+                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                    {{$responded->getPartner->company}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                    {{$responded->getPartner->email}}
+                                                </span>
+                                            </td>
+                                            <td class="text-right">
+                                                <a href="{{route('partners.edit',$responded->getPartner->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                                    <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                        <i class="far fa-eye"></i>
+                                                        <!--end::Svg Icon-->
+                                                    </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @endif
+                        
                         <div class="form-group">
                         <select multiple name="invitations[]" id="custom-headers">
                             @foreach($suitableUsers as $invited)
