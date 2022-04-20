@@ -33,7 +33,7 @@
         </section>
         <section class="steps-forms steps-forms_margin_top steps-forms_margin_bottom">
             <div class="container">
-                <form email-check="{{route('checkEmail')}}" class="temp-form-steps temp-form-steps_active steps-forms__become-partner_1" action="#" style="display: block;" data-name="general-data">
+                <form data-email-check="{{route('checkEmail')}}" class="temp-form-steps temp-form-steps_active steps-forms__become-partner_1" action="#" style="display: block;" data-name="general-data">
                     @csrf
                     <div class="steps-forms__wrap">
                         <div class="form-field">
