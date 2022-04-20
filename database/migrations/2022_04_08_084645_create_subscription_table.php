@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTypeJobFaqToFaq extends Migration
+class CreateSubscriptionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddTypeJobFaqToFaq extends Migration
      */
     public function up()
     {
-        Schema::table('faq', function (Blueprint $table) {
-           $table->integer('type_job_id')->default(0);
+        Schema::create('subscriptions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddTypeJobFaqToFaq extends Migration
      */
     public function down()
     {
-        Schema::table('faq', function (Blueprint $table) {
-             $table->dropColumn('type_job_id');
-        });
+        Schema::dropIfExists('subscriptions');
     }
 }

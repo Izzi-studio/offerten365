@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotifyEmailPartnerWaitActivate;
 use App\Models\Proposal;
 use Illuminate\Http\Request;
 use App\Traits\Registers;
@@ -15,6 +16,7 @@ use App\Events\RegisterPartner;
 use App\Events\NewProposal;
 use Log;
 use Auth;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -58,9 +60,12 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
 
-
         if ($user->isPartner() ) {
             event(new RegisterPartner($user,$this->password));
+
+            $mailable = new NotifyEmailPartnerWaitActivate();
+            Mail::to($user->email)->queue($mailable);
+
             Log::info('Registered Partner Login: '.$user->email.' PWD: '.$this->password);
             Log::info('----DONE----');
             Log::info('');
@@ -88,7 +93,7 @@ class RegisterController extends Controller
 				'4'=>'Maleranfrage'
 			];
 
- 
+
 			$subject = $arraySubjects[$proposal['type_job_id']];
 
 			event(new RegisterClient($user,$this->password,$subject));

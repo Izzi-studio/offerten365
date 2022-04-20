@@ -31,22 +31,23 @@ class GenerateInvoices {
 
         $results = [];
         foreach ($invoices as $invoice) {
+            $user = User::find($invoice->user_id);
             if (!isset($returnData[$invoice->user_id][$invoice->type_job_id])) {
                 $results[$invoice->user_id][$invoice->type_job_id] = 0;
                 $results[$invoice->user_id]['total'] = 0;
             }
             switch ($invoice->type_job_id) {
                 case 1:
-                    $price = Setting::getByKey('system.setting.cost_transfer');
+                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_transfer');
                     break;
                 case 2:
-                    $price = Setting::getByKey('system.setting.cost_cleaning');
+                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_cleaning');
                     break;
                 case 3:
-                    $price = Setting::getByKey('system.setting.cost_transfer_cleaning');
+                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_transfer_cleaning');
                     break;
                 case 4:
-                    $price = Setting::getByKey('system.setting.cost_malar');
+                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_malar');
                     break;
                 default:
                     Log::info('Wrong Job Type in generate invoice: ' . $invoice->type_job_id);
@@ -103,14 +104,14 @@ class GenerateInvoices {
                 'total'=>$totals['total'],
                 'period'=>$monthBill,
             ]);
-			
- 
+
+
             //$count = $invoice->count;
             $nameFile = 'invoice-№'.$invoiceNumber.'-user-'.$invoice->user_id.'-'.$year.'-'.$month.'.pdf';
             $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals' ]));
             Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
             event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile));
- 
+
             $invoiceNumber++;
 			}
 

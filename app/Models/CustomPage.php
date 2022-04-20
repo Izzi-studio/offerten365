@@ -16,7 +16,7 @@ class CustomPage extends Model
      * @var string
      */
     protected $table = 'custom_pages';
-    public $timestamps = false;
+
 	    protected $dates = [
         'created_at'
     ];
@@ -25,7 +25,7 @@ class CustomPage extends Model
             ->where('seo_meta_tags.locale',LaravelLocalization::getCurrentLocale())
             ->where('seo_meta_tags.type','custom_page')->withDefault(['*'=>null]);
     }
-	
+
 	public function getCustomPageDescription(){
 
         return $this->hasOne('App\Models\CustomPageDescription', 'custom_page_id', 'id')
@@ -39,19 +39,19 @@ class CustomPage extends Model
 			3=>'umzug-und-reinigung',
 			4=>'maler'
 		];
-		
+
         return $types[$this->type_job_id];
     }
 
 	public function getCustomPageDescriptionAll(){
         return $this->hasOne('App\Models\CustomPageDescription', 'custom_page_id', 'id');
     }
-	
+
 	public function getSeoMetaTagsAll(){
         return $this->hasOne('App\Models\SeoMetaTags', 'item_id', 'id')
             ->where('seo_meta_tags.type','custom_page')->withDefault(['*'=>null]);
     }
-	
+
     // admin
 
     public function getCustomPageDescriptionByLocale($locale){
@@ -72,5 +72,5 @@ class CustomPage extends Model
     public function seoMetaTagsDestroy(){
         return $this->hasOne('App\Models\SeoMetaTags', 'item_id', 'id')
             ->where('seo_meta_tags.type','custom_page');
-    }	
+    }
 }

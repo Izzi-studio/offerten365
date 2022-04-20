@@ -21,6 +21,9 @@ use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\Admin\CustomPageController as AdminCustomPageController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
 use App\Http\Controllers\Admin\InvoiceToUserController;
+
+use App\Http\Controllers\Admin\SubscriptionsController;
+
 use App\Helper\GenerateInvoices;
 use App\Mail\SendInvoicePartner;
 use App\Models\User;
@@ -146,6 +149,8 @@ Route::group([
     Route::post('partners/request-update-delete/{requestCahngePartnerInfo}', [AdminPartnerController::class,'updateRequestDelete'])->name('request-update.destroy');
     Route::resource('partners', AdminPartnerController::class);
     Route::resource('invoice', InvoiceToUserController::class);
+
+    Route::resource('subscriptions', SubscriptionsController::class);
 
 
 });

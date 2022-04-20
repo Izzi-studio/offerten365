@@ -19,6 +19,10 @@ class Setting extends Model
         return $query->where('key', 'LIKE', 'system.setting.%');
     }
 
+    public function scopePriceSubscription($query){
+        return $query->where('key', 'LIKE', 'system.prices.%');
+    }
+
     public function scopegetByKey($query,$key){
         return $query->where('key', $key)->value('value');
     }
