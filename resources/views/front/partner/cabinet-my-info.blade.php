@@ -19,6 +19,7 @@
                             <form enctype="multipart/form-data" class="account-content__inner acc-company-profile" action="{{route('partner.updateMyInfo')}}" method="post" id="partner-info-form">
                                 @csrf
                                 <input type="hidden" name="new_request_update" value="false">
+                                <h4>Firmen-ID: {{auth()->user()->id}}</h4>
                                 <div class="acc-company-profile__block acc-company-profile__photo">
                                     @if(auth()->user()->avatar)
                                         <img class="acc-company-profile__photo-img js-photo-result"  src="{{env('FRONT_PATH_AVATAR')}}{{auth()->user()->avatar}}" alt="">

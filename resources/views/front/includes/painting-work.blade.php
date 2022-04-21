@@ -4,19 +4,17 @@
     @else
         <h4 class="acc-billing-item__title">{{$region}}</h4>
     @endif
-    <p class="acc-billing-item__date">{{$date_start->format('d-m-Y - h:m')}}</p>
+    <p class="acc-billing-item__date">{{$date_start->format('d-m-Y')}}</p>
 </div>
 @if(auth()->user()->isPartner())
     <p class="acc-billing-item__path">{{$region}}</p>
 @endif
 <div class="acc-billing-item__characteristic">
-
-
-    @if(isset($additional_info->worktype))
     <p class="acc-billing-item__characteristic-txt">
-        {{ implode(', ', json_decode($additional_info->worktype)) }}
+        @if(isset($additional_info->worktype))
+            {{ implode(', ', json_decode($additional_info->worktype)) }}
+        @endif
     </p>
-    @endif
     @if(auth()->user()->isPartner())
         @if($showactionbuttons)
             <div class="acc-billing-item__actions">
@@ -41,7 +39,7 @@
 </div>
 @endif
 
-@if(isset($add_info))
+@if(isset($add_info) && $add_info)
 <div class="acc-billing-item__slide-content">
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Adresse	</p>

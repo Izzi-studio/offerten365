@@ -4,7 +4,7 @@
     @else
         <h4 class="acc-billing-item__title">{{$from}} > {{__('front.'.$additional_info->to->region_name)}}</h4>
     @endif
-    <p class="acc-billing-item__date">{{$date_start->format('d-m-Y - h:m')}}</p>
+    <p class="acc-billing-item__date">{{$date_start->format('d-m-Y')}}</p>
 </div>
 @if(auth()->user()->isPartner())
     <p class="acc-billing-item__path">{{$from}} > {{__('front.'.$additional_info->to->region_name)}}</p>
@@ -34,7 +34,7 @@
 </div>
 @endif
 
-@if(isset($add_info))
+@if(isset($add_info) && $add_info)
 <div class="acc-billing-item__slide-content">
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Adressen	</p>
