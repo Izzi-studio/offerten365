@@ -1060,6 +1060,7 @@ html.mfp-helper body {
 
 .footer__link {
     margin-right: 48px;
+    text-decoration: underline;
 }
 
 @media only screen and (max-width: 1200px) {
