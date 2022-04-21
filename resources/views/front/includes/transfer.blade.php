@@ -36,7 +36,7 @@
 </div>
 @endif
 
-@if(isset($add_info))
+@if(isset($add_info) && $add_info)
 <div class="acc-billing-item__slide-content">
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Adressen	</p>
