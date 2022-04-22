@@ -1,9 +1,9 @@
-
-
 @component('mail::message')
+# Einführung
 
- 
-Hallo, {{$name}}<br> Ihre Anfrage wurde von einem Unternehmen angenommen. Sie erhalten demnächst eine Offerte.
+Hi, {{$user->name}}<br>
+Ihre Registrierung wurde erfolgreich bestätigt!<br>
+Jetzt haben Sie Zugriff auf alle Funktionen. 
 
 @component('mail::button', ['url' => 'https://offerten-365.ch'])
 Zur Website

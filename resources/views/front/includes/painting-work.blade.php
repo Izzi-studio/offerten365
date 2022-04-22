@@ -12,11 +12,15 @@
 <div class="acc-billing-item__characteristic">
 
 
-    @if(isset($additional_info->worktype))<p class="acc-billing-item__characteristic-txt">@foreach(explode(',',str_replace(array('[',']'),array('',''),$additional_info->worktype)) as $worktype) {{$worktype}}, @endforeach </p>@endif
+    @if(isset($additional_info->worktype))
+    <p class="acc-billing-item__characteristic-txt">
+        {{ implode(', ', json_decode($additional_info->worktype)) }}
+    </p>
+    @endif
     @if(auth()->user()->isPartner())
         @if($showactionbuttons)
             <div class="acc-billing-item__actions">
-                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{ Setting::getByKey('system.setting.cost_malar') }} Chf)</a>
+                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{ Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_malar') }} Chf)</a>
                 <a class="acc-billing-item__btn-cancel" href="{{route('partner.processProposal',[$proposal_id,'rejected'])}}">Absagen</a>
             </div>
         @endif
@@ -37,7 +41,7 @@
 </div>
 @endif
 
-@if(isset($add_info)) 
+@if(isset($add_info))
 <div class="acc-billing-item__slide-content">
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Adresse	</p>
@@ -51,6 +55,22 @@
         <p class="acc-billing-item__slide-content-l"><span></span>Flexibel 	</p>
         <p class="acc-billing-item__slide-content-r">{{$additional_info->dayrange}}</p>
     </div>
+    <div class="acc-billing-item__slide-content-row">
+        <p class="acc-billing-item__slide-content-l"><span></span>Flexibel 	</p>
+        <p class="acc-billing-item__slide-content-r">{{$additional_info->dayrange}}</p>
+    </div>
+    @if(isset($additional_info->painting_work_inside))
+    <div class="acc-billing-item__slide-content-row">
+        <p class="acc-billing-item__slide-content-l"><span></span>Malerarbeiten innen</p>
+        <p class="acc-billing-item__slide-content-r">{{ implode(', ', json_decode($additional_info->painting_work_inside)) }}</p>
+    </div>
+    @endif
+    @if(isset($additional_info->painting_work_outside))
+    <div class="acc-billing-item__slide-content-row">
+        <p class="acc-billing-item__slide-content-l"><span></span>Malerarbeiten außen</p>
+        <p class="acc-billing-item__slide-content-r">{{ implode(', ', json_decode($additional_info->painting_work_outside)) }}</p>
+    </div>
+    @endif
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Bemerkungen 	</p>
         <p class="acc-billing-item__slide-content-r">{{$proposal->description}}</p>

@@ -11,7 +11,9 @@
                         <div class="blog-card">
                             <img class="blog-card__img" src="{{env('FRONT_PATH_BLOG_IMAGE')}}{{$blog->image}}" alt="">
                             <h2 class="blog-card__title">{{$blog->getBlogDescription->name}}</h2>
-                            <a class="blog-card__read-more" href="{{route('showPost',[$blogCategory->slug,$blog->slug])}}">MEHR LESEN</a>
+                            <a class="blog-card__read-more" href="{{route('showPost',[$blogCategory->slug,$blog->slug])}}">
+                                {{$blog->getBlogDescription->link_text}}
+                            </a>
                         </div>
                     </div>
                     @endforeach

@@ -14,7 +14,7 @@
     @if(auth()->user()->isPartner())
         @if($showactionbuttons)
             <div class="acc-billing-item__actions">
-                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{ Setting::getByKey('system.setting.cost_transfer_cleaning') }} Chf)</a>
+                <a class="acc-billing-item__btn-accept" href="{{route('partner.processProposal',[$proposal_id,'accepted'])}}">Annehmen<br> (Für {{ Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer_cleaning') }} Chf)</a>
                 <a class="acc-billing-item__btn-cancel" href="{{route('partner.processProposal',[$proposal_id,'rejected'])}}">Absagen</a>
             </div>
         @endif

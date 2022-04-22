@@ -14,7 +14,8 @@
             </div>
         </div>
     </section>
-    <section class="steps-indicators steps-indicators_margin_top">
+    
+    <section class="steps-indicators steps-indicators_global-steps steps-indicators_margin_top">
         <div class="container">
             <div class="steps-indicators__wrap steps-indicators__wrap_3-steps">
                 <div class="steps-indicators__item steps-indicators__item_active">
@@ -36,7 +37,9 @@
     </section>
     <section class="steps-forms steps-forms_margin_top steps-forms_margin_bottom">
         <div class="container">
-            <form class="temp-form-steps temp-form-steps temp-form-steps_active" action="#" style="display: block;">
+            <!--  -->
+            <form class="temp-form-steps temp-form-steps temp-form-steps_active" data-global-step="1" action="#" style="display: block;">
+                <h3>Von</h3>
                 <input type="hidden" name="proposal[type_job_id]" value="1" />
                 @csrf
                 <div class="steps-forms__block steps-forms__wrap">
@@ -49,6 +52,13 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">PLZ*</p>
                         <input type="text" placeholder="PLZ*" name="additional_info[from][zip]" value="{{$zip}}"
@@ -65,7 +75,17 @@
                     <div class="form-field">
                         <p class="form-field__name">Nr*</p>
                         <input type="text" placeholder="Nr" name="additional_info[from][number]">
-                    </div>
+                    </div>    
+                </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field form-field_date">
                         <p class="form-field__name">Auftragsdatum *</p>
                         <input type="text" placeholder="Auftragsdatum *" name="proposal[date_start]"
@@ -73,8 +93,16 @@
                         <svg class="ico calendar">
                             <use xlink:href="/images/sprite.svg#calendar"></use>
                         </svg>
-                    </div>
+                    </div>    
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Ich wünsche Anfragen für folgende Arbeiten:</h3>
                     <div class="row steps-form__checkboxes">
@@ -109,6 +137,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+            
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Haustyp</h3>
                     <div class="row steps-form__checkboxes">
@@ -132,6 +168,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Lift</h3>
                     <div class="row steps-form__checkboxes">
@@ -153,6 +197,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Stock*</p>
@@ -163,11 +215,32 @@
                         <input type="text" placeholder="z.B. “1 - 1,5 - 2 - 2,5 - 3 - 3,5 - 4 - 4,5 - mehr’’"
                             name="additional_info[from][rooms]" required>
                     </div>
-                    <div class="form-field">
-                        <p class="form-field__name">Fläche in m<sup>2</sup>*</p>
-                        <input type="text" placeholder="Stock" name="additional_info[from][square]" required>
+                    <div 
+                        class="form-field" 
+                        oninput="this.querySelector('.range-value').textContent = event.target.value"
+                    >
+                        <p class="form-field__name">Fläche in <span class="range-value">5</span> m<sup>2</sup>*</p>
+                        <div class="wrap-range">
+                            <input 
+                                type="range" 
+                                name="additional_info[from][square]"
+                                step="1"
+                                value="5"
+                                min="5" 
+                                max="500"
+                                required
+                            >
+                        </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Andere Info</h3>
                     <div class="row steps-form__checkboxes">
@@ -220,15 +293,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="1" action="#" style="display: none;">
+                <h3>Von</h3>
                 <div class="steps-forms__block">
                     <div class="form-field form-field_full">
                         <p class="form-field__name">Bemerkungen</p>
                         <textarea placeholder="Bemerkungen" name="proposal[description]"></textarea>
                     </div>
                 </div>
-                <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
             </form>
-            <form class="temp-form-steps" action="#" style="display: none;" data-url="{{ $action }}">
+            <!--  -->
+            <form class="temp-form-steps" data-global-step="2" action="#" style="display: none;">
+                <h3>Nach</h3>
                 <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Region*</p>
@@ -238,7 +324,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-field">
+                </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="2" action="#" style="display: none;">
+                <h3>Nach</h3>
+                <div class="steps-forms__block steps-forms__wrap">
+                   <div class="form-field">
                         <p class="form-field__name">PLZ*</p>
                         <input type="text" placeholder="PLZ*" name="additional_info[to][zip]" required>
                     </div>
@@ -253,8 +349,16 @@
                     <div class="form-field">
                         <p class="form-field__name">Nr*</p>
                         <input type="text" placeholder="Nr" name="additional_info[to][number]" required>
-                    </div>
+                    </div> 
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="2" action="#" style="display: none;">
+                <h3>Nach</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Haustyp</h3>
                     <div class="row steps-form__checkboxes">
@@ -278,6 +382,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="2" action="#" style="display: none;">
+                <h3>Nach</h3>
                 <div class="steps-forms__block">
                     <h3 class="steps-form__title">Lift</h3>
                     <div class="row steps-form__checkboxes">
@@ -299,24 +411,46 @@
                         </div>
                     </div>
                 </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+
+            <form class="temp-form-steps" data-global-step="2" action="#" style="display: none;" data-url="{{ $action }}">
+                <h3>Nach</h3>
                 <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Stock*</p>
                         <input type="text" placeholder="Stock*" name="additional_info[to][floor]" required>
                     </div>
-                    <div class="form-field">
-                        <p class="form-field__name">Fläche in m<sup>2</sup>*</p>
-                        <input type="text" placeholder="Stock" name="additional_info[to][square]" required>
+                    <div 
+                        class="form-field" 
+                        oninput="this.querySelector('.range-value').textContent = event.target.value"
+                    >
+                        <p class="form-field__name">Fläche in <span class="range-value">5</span> m<sup>2</sup>*</p>
+                        <div class="wrap-range">
+                            <input 
+                                type="range" 
+                                name="additional_info[to][square]"
+                                step="1"
+                                value="5"
+                                min="5" 
+                                max="500"
+                                required
+                            >
+                        </div>
                     </div>
                 </div>
                 <div class="formflex form-field form-field_full">
                     <a class="prev-step" href="#">Zurück</a>
-                    <input class="btn formBtnMarginTop" type="submit" value="Weiter">
+                    <input class="btn" type="submit" value="Weiter">
                 </div>
             </form>
+            <!--  -->
             @guest
-            <form email-check="{{route('checkEmail')}}" class="temp-form-steps" action="#" style="display: none;"
-                data-url="{{ $action }}" data-name="mailcheck">
+            <form class="temp-form-steps" data-global-step="3" action="#" style="display: none;">
+                <h3>Kontakt</h3>
                 <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Anrede*</p>
@@ -333,6 +467,15 @@
                         <p class="form-field__name">Nachname*</p>
                         <input type="text" placeholder="Nachname*" name="client[lastname]" required>
                     </div>
+                </div>
+                <div class="formflex form-field form-field_full">
+                    <a class="prev-step" href="#">Zurück</a>
+                    <input class="btn" type="submit" value="Weiter">
+                </div>
+            </form>
+            <form class="temp-form-steps" data-global-step="3" data-email-check="{{route('checkEmail')}}" data-url="{{ $action }}" style="display: none;">
+                <h3>Kontakt</h3>
+                <div class="steps-forms__block steps-forms__wrap">
                     <div class="form-field">
                         <p class="form-field__name">Telefon*</p>
                         <input type="number" placeholder="Telefon*" name="client[phone]" required>
@@ -351,12 +494,14 @@
                 </div>
                 <div class="formflex form-field form-field_full">
                     <a class="prev-step" href="#">Zurück</a>
-                    <input class="btn formBtnMarginTop" type="submit" value="Offerte anforden">
+                    <input class="btn" type="submit" value="Weiter">
                 </div>
             </form>
             @endguest
+            <!--  -->
         </div>
     </section>
+
 </div>
 
 @endsection

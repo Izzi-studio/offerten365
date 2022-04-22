@@ -97,40 +97,251 @@
                     </div>
                     <input class="btn formBtnMarginTop" type="submit" value="Weiter">
                 </form>
-				@php if(isset($proposal->additional_info->other))  {$flag = true;} else {$flag = false;} @endphp
                 <form class="temp-form-steps" action="#" style="display: none;" data-url="{{route('client.updateProposals',$proposal->id)}}">
                     <div class="steps-forms__block">
+                        <h3 class="steps-form__title">Malerarbeiten innen:</h3>
                         <div class="row steps-form__checkboxes">
                             <div class="col-lg-10 col-xl-9">
+                                @php if(isset($proposal->additional_info->painting_work_inside)) {$flag = true;} else {$flag = false;} @endphp
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Malerarbeiten innen',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Malerarbeiten innen"><span class="custom-checkbox__txt">Malerarbeiten innen</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Wand / Decke tapezieren"
+                                                @if($flag && in_array('Wand / Decke tapezieren',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Wand / Decke tapezieren</span>
                                         </label>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Malerarbeiten aussen',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Malerarbeiten aussen"><span class="custom-checkbox__txt">Malerarbeiten aussen</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Wand / Decke streichen"
+                                                @if($flag && in_array('Wand / Decke streichen',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Wand / Decke streichen</span>
                                         </label>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Stuckarbeiten',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Stuckarbeiten"><span class="custom-checkbox__txt">Stuckarbeiten</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Fenster / Türen streichen / lackieren"
+                                                @if($flag && in_array('Fenster / Türen streichen / lackieren',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Fenster / Türen streichen / lackieren</span>
                                         </label>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Gipserarbeiten',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Gipserarbeiten"><span class="custom-checkbox__txt">Gipserarbeiten</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Heizkörper streichen / lackieren"
+                                                @if($flag && in_array('Heizkörper streichen / lackieren',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Heizkörper streichen / lackieren</span>
                                         </label>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Isolierarbeiten',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Isolierarbeiten"><span class="custom-checkbox__txt">Isolierarbeiten</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Alte Tapete entfernen"
+                                                @if($flag && in_array('Alte Tapete entfernen',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Alte Tapete entfernen</span>
                                         </label>
                                     </div>
-                                    <div class="col-sm-6 col-md-4">
+                                    <div class="col-sm-6">
                                         <label class="custom-checkbox">
-                                            <input @if($flag && in_array('Fensterrahmen',$proposal->additional_info->worktype)) checked @endif type="checkbox" name="additional_info[worktype][]" value="Fensterrahmen"><span class="custom-checkbox__txt">Fensterrahmen</span>
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Entsorgung erforderlich (z.B. von alter Tapete)"
+                                                @if($flag && in_array('Entsorgung erforderlich (z.B. von alter Tapete)',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Entsorgung erforderlich (z.B. von alter Tapete)</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Farbberatung und -gestaltung erwünscht"
+                                                @if($flag && in_array('Farbberatung und -gestaltung erwünscht',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Farbberatung und -gestaltung erwünscht</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_inside][]"
+                                                value="Nichts aus der Liste. Zu anderen Arbeiten"
+                                                @if($flag && in_array('Nichts aus der Liste. Zu anderen Arbeiten',json_decode($proposal->additional_info->painting_work_inside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Nichts aus der Liste. Zu anderen Arbeiten</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="steps-forms__block">
+                        <h3 class="steps-form__title">Malerarbeiten außen:</h3>
+                        <div class="row steps-form__checkboxes">
+                            <div class="col-lg-10 col-xl-9">
+                                @php if(isset($proposal->additional_info->painting_work_outside)) {$flag = true;} else {$flag = false;} @endphp
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Fassadenreinigung Privathaus"
+                                                @if($flag && in_array('Fassadenreinigung Privathaus',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Fassadenreinigung Privathaus</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Fassadenreinigung Firmengebäude"
+                                                @if($flag && in_array('Fassadenreinigung Firmengebäude',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Fassadenreinigung Firmengebäude</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Sonstige Fassadenreinigung"
+                                                @if($flag && in_array('Sonstige Fassadenreinigung',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Sonstige Fassadenreinigung</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Fassade streichen"
+                                                @if($flag && in_array('Fassade streichen',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Fassade streichen</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Giebel streichen"
+                                                @if($flag && in_array('Giebel streichen',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Giebel streichen</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Dachkästen streichen"
+                                                @if($flag && in_array('Dachkästen streichen',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Dachkästen streichen</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Fassade dämmen"
+                                                @if($flag && in_array('Fassade dämmen',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Fassade dämmen</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Untergrund vorbereiten"
+                                                @if($flag && in_array('Untergrund vorbereiten',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Untergrund vorbereiten</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Farbberatung und -gestaltung erwünscht"
+                                                @if($flag && in_array('Farbberatung und -gestaltung erwünscht',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Farbberatung und -gestaltung erwünscht</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input 
+                                                type="checkbox" 
+                                                name="additional_info[painting_work_outside][]"
+                                                value="Nichts aus der Liste. Zu anderen Arbeiten"
+                                                @if($flag && in_array('Nichts aus der Liste. Zu anderen Arbeiten',json_decode($proposal->additional_info->painting_work_outside))) checked @endif
+                                            />
+                                            <span class="custom-checkbox__txt">Nichts aus der Liste. Zu anderen Arbeiten</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="steps-forms__block">
+                        <h3 class="steps-form__title">Arbeitstyp:</h3>
+                        <div class="row steps-form__checkboxes">
+                            <div class="col-lg-10 col-xl-9">
+                                @php if(isset($proposal->additional_info->worktype)) {$flag = true;} else {$flag = false;} @endphp
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input @if($flag && in_array('Stuckarbeiten',json_decode($proposal->additional_info->worktype))) checked @endif type="checkbox" name="additional_info[worktype][]" value="Stuckarbeiten"><span class="custom-checkbox__txt">Stuckarbeiten</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input @if($flag && in_array('Gipserarbeiten',json_decode($proposal->additional_info->worktype))) checked @endif type="checkbox" name="additional_info[worktype][]" value="Gipserarbeiten"><span class="custom-checkbox__txt">Gipserarbeiten</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input @if($flag && in_array('Isolierarbeiten',json_decode($proposal->additional_info->worktype))) checked @endif type="checkbox" name="additional_info[worktype][]" value="Isolierarbeiten"><span class="custom-checkbox__txt">Isolierarbeiten</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="custom-checkbox">
+                                            <input @if($flag && in_array('Fensterrahmen',json_decode($proposal->additional_info->worktype))) checked @endif type="checkbox" name="additional_info[worktype][]" value="Fensterrahmen"><span class="custom-checkbox__txt">Fensterrahmen</span>
                                         </label>
                                     </div>
                                 </div>
