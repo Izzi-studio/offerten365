@@ -47,7 +47,7 @@ class GenerateInvoices {
                     $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_transfer_cleaning');
                     break;
                 case 4:
-                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_malar');
+                    $price = Setting::getByKey('system.price.'.$user->subscription_id.'.cost_paint_work');
                     break;
                 default:
                     Log::info('Wrong Job Type in generate invoice: ' . $invoice->type_job_id);

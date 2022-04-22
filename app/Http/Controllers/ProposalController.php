@@ -57,7 +57,7 @@ class ProposalController extends Controller
                 $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer_cleaning');
                 break;
             case 4:
-                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_malar');
+                $price = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_paint_work');
                 break;
             default:
                 Log::info('Wrong Job Type on pay: '.$proposal['type_job_id']);
@@ -132,7 +132,7 @@ class ProposalController extends Controller
                 $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_transfer_cleaning');
                 break;
             case 4:
-                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_malar');
+                $cost = Setting::getByKey('system.price.'.auth()->user()->subscription_id.'.cost_paint_work');
                 break;
             default:
                 Log::info('Wrong Job Type on pay: '.$proposal->type_job_id);
