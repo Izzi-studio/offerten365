@@ -105,10 +105,10 @@ class GenerateInvoices {
                 'period'=>$monthBill,
             ]);
 
-
+            $userSubsId = $invoice->subscription_id;
             //$count = $invoice->count;
             $nameFile = 'invoice-№'.$invoiceNumber.'-user-'.$invoice->user_id.'-'.$year.'-'.$month.'.pdf';
-            $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals' ]));
+            $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals','userSubsId' ]));
             Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
             event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile));
 
