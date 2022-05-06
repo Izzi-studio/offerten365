@@ -231,7 +231,7 @@
 
                 @if($type_job_id == 4)
 					@php
-						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.paint_work');
+						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.cost_paint_work');
 						 $tax = round(($costTypeJob/100) * 7.7, 2);
 						 $nonTaxPrice = round($costTypeJob + $tax, 2);
    				         $taxTotal = $taxTotal + ($tax * ($total / $costTypeJob));
