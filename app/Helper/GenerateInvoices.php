@@ -96,14 +96,14 @@ class GenerateInvoices {
 			if(isset($totalsAll[$invoice->user_id])){
             $totals = $totalsAll[$invoice->user_id];
 
-            /*InvoiceToUser::create([
+            InvoiceToUser::create([
                 'user_id'=>$invoice->user_id,
                 'status'=>0,
                 'invoice_number'=>$invoiceNumber,
                 //'total'=>$invoice->count * $cost,
                 'total'=>$totals['total'],
                 'period'=>$monthBill,
-            ]);*/
+            ]);
 
             $user = User::find($invoice->user_id);
             $userSubsId = $user->subscription_id;
