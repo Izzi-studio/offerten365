@@ -70,8 +70,8 @@ class GenerateInvoices {
 
 
 
-        //$invoices = ProposalToPartner::whereRaw("date_format(updated_at, '%Y-%m') = '2022-01'")
-		    $invoices = ProposalToPartner::whereRaw("date_format(updated_at, '%Y-%m') = date_format(now() - INTERVAL 1 DAY, '%Y-%m')")
+        //$invoices = ProposalToPartner::whereRaw("date_format(updated_at, '%Y-%m') = '2022-04'")
+		$invoices = ProposalToPartner::whereRaw("date_format(updated_at, '%Y-%m') = date_format(now() - INTERVAL 1 DAY, '%Y-%m')")
             ->whereStatus(1)
             ->groupBy('user_id')
             ->select(DB::raw('count(id) as count'),'user_id')
@@ -96,16 +96,17 @@ class GenerateInvoices {
 			if(isset($totalsAll[$invoice->user_id])){
             $totals = $totalsAll[$invoice->user_id];
 
-            InvoiceToUser::create([
+            /*InvoiceToUser::create([
                 'user_id'=>$invoice->user_id,
                 'status'=>0,
                 'invoice_number'=>$invoiceNumber,
                 //'total'=>$invoice->count * $cost,
                 'total'=>$totals['total'],
                 'period'=>$monthBill,
-            ]);
+            ]);*/
 
-            $userSubsId = $invoice->subscription_id;
+            $user = User::find($invoice->user_id);
+            $userSubsId = $user->subscription_id;
             //$count = $invoice->count;
             $nameFile = 'invoice-№'.$invoiceNumber.'-user-'.$invoice->user_id.'-'.$year.'-'.$month.'.pdf';
             $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals','userSubsId' ]));
