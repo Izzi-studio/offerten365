@@ -82,12 +82,12 @@ class PartnerController extends Controller
     {
 
         if ($request->active == 1 && $partner->active == 0) {
-            $mailable = new NotifyEmailPartnerActivate();
+            $mailable = new NotifyEmailPartnerActivate($partner);
             Mail::to($partner->email)->queue($mailable);
         }
 
         if ($request->status == 2 && $partner->status != 2) {
-            $mailable = new NotifyEmailPartnerBlocked();
+            $mailable = new NotifyEmailPartnerBlocked($partner);
             Mail::to($partner->email)->queue($mailable);
         }
 

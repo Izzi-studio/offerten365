@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,8 +17,10 @@ class NotifyEmailPartnerActivate extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $user;
+    public function __construct(User $user)
     {
+        $this->user = $user;
     }
 
     /**
