@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 use App\Events\EmailChangeInfoPartner;
+use App\Models\InvoiceToUser;
 use App\Models\PartnerRegions;
 use App\Models\PartnerWantJobs;
 use App\Models\SeoMetaTags;
@@ -24,7 +25,7 @@ trait PartnerInfoTrait{
 		if(!$this->active()){
 			 return view('front.partner.noactive');
 		}
-		
+
         app()->make(SeoMetaTags::class)->setMeta('system.partner.my_info');
         $regions = app()->make(PartnerRegions::class);
         $regions = $regions->getCheckedRegionByUser(auth()->user()->id);
@@ -122,5 +123,23 @@ trait PartnerInfoTrait{
             return redirect()->back()->with('success', true);
         }
         return back()->withErrors(['old_password'=>__('old_password')]);
+    }
+
+    /**
+     * abrechnung
+     * @param  Request $request
+     * @return Illuminate\Http\RedirectRespons
+     */
+    public function abrechnung(Request $request)
+    {
+        $year = request()->get('year',null);
+
+        if($year){
+            $invoices = auth()->user()->getInvoices()->orderBy('invoice_to_user.id','DESC')->where('invoice_to_user.year',$year)->get();
+            return view('front.partner.invoices',compact(['invoices']));
+        }
+
+        $invoices = auth()->user()->getInvoices()->orderBy('invoice_to_user.id','DESC')->get();
+        return view('front.partner.invoices',compact(['invoices']));
     }
 }

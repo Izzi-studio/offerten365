@@ -112,7 +112,10 @@ class User extends Authenticatable
         $queryStr = request()->get('search',null);
 
         if ($queryStr){
-            $result = $result->where('company','LIKE','%'.$queryStr.'%')->orWhere('name','LIKE','%'.$queryStr.'%');
+            $result = $result->where('company','LIKE','%'.$queryStr.'%')
+                ->orWhere('name','LIKE','%'.$queryStr.'%')
+                ->orWhere('users.id',$queryStr)
+                ->orWhere('email','LIKE','%'.$queryStr.'%');
         }
 
 
@@ -134,6 +137,21 @@ class User extends Authenticatable
             'user_id','id','id','proposal_id')
             ->where('proposals_to_partner.status',$status)
 			->where('date_start','>=',$startDate)
+            ->orderBy('id','DESC');
+    }
+
+    /**
+     * Get Proposals to Partner  by status
+     *
+     * @param  int $status 0,1,2
+     * @return $query
+     */
+    public function getProposalsByStatusAdmin($status){
+
+
+        return $this->hasManyThrough('App\Models\Proposal', 'App\Models\ProposalToPartner',
+            'user_id','id','id','proposal_id')
+            ->where('proposals_to_partner.status',$status)
             ->orderBy('id','DESC');
     }
 
