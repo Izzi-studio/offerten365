@@ -127,10 +127,9 @@ trait PartnerInfoTrait{
 
     /**
      * abrechnung
-     * @param  Request $request
      * @return Illuminate\Http\RedirectRespons
      */
-    public function abrechnung(Request $request)
+    public function abrechnung()
     {
         $year = request()->get('year',null);
 
@@ -141,5 +140,23 @@ trait PartnerInfoTrait{
 
         $invoices = auth()->user()->getInvoices()->orderBy('invoice_to_user.id','DESC')->get();
         return view('front.partner.invoices',compact(['invoices']));
+    }
+
+    /**
+     * vorgange
+     * @return Illuminate\Http\RedirectRespons
+     */
+    public function vorgange()
+    {
+        $year = request()->get('year',null);
+
+        if($year){
+            $transactions = auth()->user()->getTransaction()->orderBy('id','DESC')->whereRaw("date_format(created_at, '%Y') = $year")->get();
+            return view('front.partner.vorgange',compact(['transactions']));
+        }
+
+        $transactions = auth()->user()->getTransaction()->orderBy('id','DESC')->get();
+
+        return view('front.partner.vorgange',compact(['transactions']));
     }
 }

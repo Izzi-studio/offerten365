@@ -108,6 +108,8 @@ Route::group([
 
     Route::get('abrechnung', [PartnerController::class, 'abrechnung'])->name('partner.abrechnung');
 
+    Route::get('vorgange', [PartnerController::class, 'vorgange'])->name('partner.vorgange');
+
     Route::get('proposal/{proposal}/{action}', [ProposalController::class, 'processProposals'])
         ->where('action', 'accepted|rejected')
         ->name('partner.processProposal');

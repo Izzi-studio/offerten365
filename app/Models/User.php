@@ -254,6 +254,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\InvoiceToUser', 'user_id', 'id');
     }
 
+    public function getTransaction()
+    {
+        return $this->hasMany('App\Models\PaymentIdeaPay');
+    }
+
     public function regions()
     {
         return $this->hasMany('App\Models\PartnerRegions');
