@@ -44,6 +44,8 @@ return [
     'menu.proposals' => 'Anfragen',
     'menu.settings' => 'die Einstellungen',
     'menu.subscriptions' => 'Abonnements',
+    'menu.invoice-detail' => 'Invoice detail',
+    'menu.email-templates' => 'E-Mail-Vorlagen',
     'menu.logout' => 'Ausloggen',
 //Forms
     'form.city' => 'Stadt',
@@ -95,6 +97,7 @@ return [
     'form.regions' => 'Kantonen',
     'form.subscriptions' => 'Abonnements',
     'form.text-btn' => 'Schaltflächentext',
+    'form.subject' => 'Gegenstand',
 //Alerts
     'category_updated' => 'Kategorie aktualisiert',
     'category_added' => 'Kategorie hinzugefügt',
@@ -113,6 +116,10 @@ return [
     'review_deleted' => 'Bewertung gelöscht',
     'review_updated' => 'Bewertung aktualisiert',
     'review_added' => 'Bewertung hinzugefügt',
+
+    'template_added' => 'E-Mail-Vorlage aktualisiert',
+    'template_update' => 'E-Mail-Vorlage hinzugefügt',
+    'template_deleted' => 'E-Mail-Vorlage entfernt',
 
     'seo_deleted' => 'SEO Meta gelöscht',
     'seo_updated' => 'SEO Meta aktualisiert',

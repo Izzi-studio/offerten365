@@ -12,7 +12,7 @@
                     <div class="col-lg-3">
                         <input 
                             class="form-control" 
-                            placeholder="Name des Unternehmens / Partners" 
+                            placeholder="ID / Unternehmens / Partners" 
                             required
                             name="search"
                             type="text"

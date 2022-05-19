@@ -18,7 +18,7 @@
             font-weight: 300;
             margin-bottom: 0px;
             padding-bottom: 0px;
-            color: #000;
+            color: #000;    
         }
 
         body h3 {
@@ -125,7 +125,7 @@
                         <td class="title">
                             <img src="./images/logo-red-1.svg" alt="Company logo" style="width: 100%; max-width: 200px" />
                         </td>
- 
+
                         <td>
                             Rechnung #: {{$invoiceNumber}}<br />
                             Erstellt am: {{$fullDate}}<br />
@@ -140,7 +140,7 @@
         <tr class="information">
             <td colspan="3">
                 <table>
-                    <tr> 
+                    <tr>
                         <td>
                             Rahal Gmbh<br />
                             St. Urbanstrasse 79<br />
@@ -196,42 +196,42 @@
                 <td>
                 @if($type_job_id == 1)
 					@php
-						 $costTypeJob = Setting::getByKey('system.setting.cost_transfer');
+						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.cost_transfer');
 						 $tax = round(($costTypeJob/100) * 7.7, 2);
 						 $nonTaxPrice = round($costTypeJob + $tax, 2);
    				         $taxTotal = $taxTotal + ($tax * ($total / $costTypeJob));
 						 $nonTaxTotal = $nonTaxTotal + (($total / $costTypeJob) * $nonTaxPrice);
 					@endphp
-                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF				 				
-				
+                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF
+
                 @endif
 
                 @if($type_job_id == 2)
-                    				 
+
 					@php
-						 $costTypeJob = Setting::getByKey('system.setting.cost_cleaning');
+						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.cost_cleaning');
 						 $tax = round(($costTypeJob/100) * 7.7, 2);
 						 $nonTaxPrice = round($costTypeJob + $tax, 2);
    				         $taxTotal = $taxTotal + ($tax * ($total / $costTypeJob));
 						 $nonTaxTotal = $nonTaxTotal + (($total / $costTypeJob) * $nonTaxPrice);
 					@endphp
-                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF				 
+                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF
                 @endif
 
-                @if($type_job_id == 3)				 
+                @if($type_job_id == 3)
 					@php
-						 $costTypeJob = Setting::getByKey('system.setting.cost_transfer_cleaning');
+						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.cost_transfer_cleaning');
 						 $tax = round(($costTypeJob/100) * 7.7, 2);
 						 $nonTaxPrice = round($costTypeJob + $tax, 2);
    				         $taxTotal = $taxTotal + ($tax * ($total / $costTypeJob));
 						 $nonTaxTotal = $nonTaxTotal + (($total / $costTypeJob) * $nonTaxPrice);
 					@endphp
-                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF				 
+                    {{$total / $costTypeJob}} * {{$costTypeJob}} CHF
                 @endif
 
                 @if($type_job_id == 4)
 					@php
-						 $costTypeJob = Setting::getByKey('system.setting.cost_malar');
+						 $costTypeJob = Setting::getByKey('system.price.'.$userSubsId.'.cost_paint_work');
 						 $tax = round(($costTypeJob/100) * 7.7, 2);
 						 $nonTaxPrice = round($costTypeJob + $tax, 2);
    				         $taxTotal = $taxTotal + ($tax * ($total / $costTypeJob));
@@ -251,12 +251,22 @@
             <td></td>
             <td colspan="2" style="text-align: right;">Umsatzsteuer 7.7%  {{ $taxTotal }} CHF</td>
         </tr>
-
+        @if($bonus != 0)
+            <tr class="total">
+                <td></td>
+                <td colspan="2" style="text-align: right;">Gutschrift - {{$bonus }} CHF</td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] - $bonus + $taxTotal }} CHF</td>
+            </tr>
+        @else
         <tr class="total">
             <td></td>
-            <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] + $taxTotal }} CHF</td> 
+            <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] + $taxTotal }} CHF</td>
         </tr>
+        @endif
     </table>
 </div>
 </body>
-</html> 
+</html>

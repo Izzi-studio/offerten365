@@ -5946,3 +5946,58 @@ select.form-contact-us__field {
     background-color: #D32F2F;
     transition: 0.3s;
 }
+
+.ac-table {
+    width: 100%;
+    background: #F9F9F9;
+    border-radius: 20px;
+    padding: 20px;
+    border-spacing: 0;
+}
+
+.ac-table th {
+    text-align: left;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.ac-table td {
+    height: 54px;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.btn-save {
+    width: 48px;
+    height: 40px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-save svg {
+    filter: invert(1);
+    transition: 0.3s;
+}
+
+.btn-save:hover svg {
+    filter: invert(0);
+}
+
+@media only screen and (max-width: 768px) {
+    .ac-table {
+        padding: 10px;
+    }
+}
+
+.w-ac-table {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.w-ac-table .ac-table {
+    width: 100%;
+}
