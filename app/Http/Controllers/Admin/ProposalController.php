@@ -19,7 +19,25 @@ class ProposalController extends Controller
      */
     public function index()
     {
-        $proposals = Proposal::orderBy('id','DESC')->get();
+
+        $queryStr = request()->get('search',null);
+
+        if ($queryStr){
+            $proposals = Proposal::find($queryStr);
+            if (is_null($proposals)){
+                $userIds = User::where('company','LIKE','%'.$queryStr.'%')
+                    ->orWhere('name','LIKE','%'.$queryStr.'%')
+                    ->orWhere('lastname','LIKE','%'.$queryStr.'%')
+                    ->orWhere('email','LIKE','%'.$queryStr.'%')->pluck('id')->toArray();
+
+                $proposals = Proposal::orderBy('id','DESC')->whereIn('user_id',$userIds)->get();
+            }else{
+                $proposals = Proposal::whereId($queryStr)->get();
+            }
+
+        }else{
+            $proposals = Proposal::orderBy('id','DESC')->get();
+        }
 
         return view('admin.proposal.list',compact(['proposals']));
     }
@@ -103,7 +121,7 @@ class ProposalController extends Controller
 
             foreach ($request->invitations as $invitation) {
                 if (!in_array($invitation, $proposalToPartner)) {
-				
+
                     $user = User::find($invitation);
                     $emailsNotifyList[] = [
                         'email' => $user->email,
@@ -125,9 +143,9 @@ class ProposalController extends Controller
 
             }
             ProposalToPartner::insert($insertData);
-			
+
 			if(!empty($emailsNotifyList)){
-				
+
 				event(new NotifyPartner($emailsNotifyList,$proposal));
 			}
         }
@@ -146,8 +164,8 @@ class ProposalController extends Controller
         $proposal->getReviews()->delete();
         $proposal->getReceivedInvitation()->delete();
         $proposal->delete();
-		
-		
+
+
         return back();
     }
 }

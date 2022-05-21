@@ -21,7 +21,8 @@ use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\Admin\CustomPageController as AdminCustomPageController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
 use App\Http\Controllers\Admin\InvoiceToUserController;
-
+use App\Http\Controllers\Admin\NotificationsController;
+use App\Http\Controllers\Admin\EmailTemplatesController;
 use App\Http\Controllers\Admin\SubscriptionsController;
 
 use App\Helper\GenerateInvoices;
@@ -106,6 +107,10 @@ Route::group([
     Route::get('abgesagte', [PartnerController::class, 'rejectedProposals'])->name('partner.getRejectedRequests');
     Route::get('reviews', [PartnerController::class, 'reviews'])->name('partner.getReviews');
 
+    Route::get('abrechnung', [PartnerController::class, 'abrechnung'])->name('partner.abrechnung');
+
+    Route::get('vorgange', [PartnerController::class, 'vorgange'])->name('partner.vorgange');
+
     Route::get('proposal/{proposal}/{action}', [ProposalController::class, 'processProposals'])
         ->where('action', 'accepted|rejected')
         ->name('partner.processProposal');
@@ -128,6 +133,8 @@ Route::group([
     Route::get('/',function (){
         return redirect()->route('blog.index');
     });
+    Route::post('notification-invoice', [NotificationsController::class,'notificationInvoice']);
+    Route::resource('email-templates', EmailTemplatesController::class);
     Route::resource('blog', AdminBlogController::class);
     Route::resource('blog-categories', AdminBlogCategoriesController::class);
     Route::resource('faq', FaqController::class);
@@ -148,6 +155,13 @@ Route::group([
     Route::post('partners/request-update/{partner}/{requestCahngePartnerInfo}', [AdminPartnerController::class,'updateRequest']);
     Route::post('partners/request-update-delete/{requestCahngePartnerInfo}', [AdminPartnerController::class,'updateRequestDelete'])->name('request-update.destroy');
     Route::resource('partners', AdminPartnerController::class);
+
+    Route::get('invoice/regenerate/{invoice}', [InvoiceToUserController::class,'regenerateInvoice'])->name('invoice-partner.regenerate');
+    Route::delete('invoice/proposal-remove/{proposalToPartner}', [InvoiceToUserController::class,'deleteProposalToPartner'])->name('invoice-proposal-remove');
+    Route::get('invoice/{partner}/{invoice}', [InvoiceToUserController::class,'show'])->name('invoice-partner.show');
+
+
+
     Route::resource('invoice', InvoiceToUserController::class);
 
     Route::resource('subscriptions', SubscriptionsController::class);
@@ -167,6 +181,12 @@ Route::group([
 	Route::get('ss',function(){
 		$generator = app()->make(GenerateInvoices::class);
         $generator->generateAndSendInvoices();
+
+	});
+
+	Route::get('ss/{invoiceToUser}',function(\App\Models\InvoiceToUser $invoiceToUser){
+		$generator = app()->make(GenerateInvoices::class);
+        $generator->regenerateInvoices($invoiceToUser);
 
 	});
 

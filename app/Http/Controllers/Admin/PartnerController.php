@@ -58,7 +58,7 @@ class PartnerController extends Controller
     public function edit(User $partner)
     {
         $requestsChangeInfo = $partner->requestChangeInfo()->get();
-		$proposals = $partner->getProposalsByStatus(1)->get();
+		$proposals = $partner->getProposalsByStatusAdmin(1)->get();
 
         $regions = app()->make(PartnerRegions::class);
         $regions = $regions->getCheckedRegionByUser($partner->id);
@@ -67,6 +67,8 @@ class PartnerController extends Controller
         $typesofjobs = $typesofjobs->getCheckedTypesJobByUser($partner->id);
 
         $subscriptions = Subscriptions::all();
+
+
 
         return view('admin.partners.partners-edit',compact(['partner','proposals','regions','typesofjobs','requestsChangeInfo','subscriptions']));
     }
