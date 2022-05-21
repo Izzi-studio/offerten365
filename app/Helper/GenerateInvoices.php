@@ -117,8 +117,7 @@ class GenerateInvoices {
             Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
 
 
-
-           // event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile));
+            event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile));
 
             $invoiceNumber++;
 			}

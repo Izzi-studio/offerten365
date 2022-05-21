@@ -68,6 +68,8 @@ class PartnerController extends Controller
 
         $subscriptions = Subscriptions::all();
 
+
+
         return view('admin.partners.partners-edit',compact(['partner','proposals','regions','typesofjobs','requestsChangeInfo','subscriptions']));
     }
 

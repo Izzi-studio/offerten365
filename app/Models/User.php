@@ -259,6 +259,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\PaymentIdeaPay');
     }
 
+    public function getUserNotifications($invoiceId)
+    {
+        return $this->hasOne('App\Models\UserNotifications')->whereId($invoiceId)->withDefault(['*' => null]);
+    }
+
     public function regions()
     {
         return $this->hasMany('App\Models\PartnerRegions');

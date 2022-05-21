@@ -21,7 +21,8 @@ use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\Admin\CustomPageController as AdminCustomPageController;
 use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
 use App\Http\Controllers\Admin\InvoiceToUserController;
-
+use App\Http\Controllers\Admin\NotificationsController;
+use App\Http\Controllers\Admin\EmailTemplatesController;
 use App\Http\Controllers\Admin\SubscriptionsController;
 
 use App\Helper\GenerateInvoices;
@@ -132,6 +133,8 @@ Route::group([
     Route::get('/',function (){
         return redirect()->route('blog.index');
     });
+    Route::post('notification-invoice', [NotificationsController::class,'notificationInvoice']);
+    Route::resource('email-templates', EmailTemplatesController::class);
     Route::resource('blog', AdminBlogController::class);
     Route::resource('blog-categories', AdminBlogCategoriesController::class);
     Route::resource('faq', FaqController::class);
