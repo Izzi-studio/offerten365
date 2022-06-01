@@ -76,12 +76,17 @@
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$proposal->created_at->format('Y-m-d')}}</span>
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{route('proposals.edit',$proposal->proposal_id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                        @if(isset($proposal->proposal_id))
+                                        <a
+                                            href="{{route('proposals.edit',$proposal->proposal_id)}}" 
+                                            class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3"
+                                        >
                                             <span class="svg-icon svg-icon-md svg-icon-primary">
                                                 <i class="far fa-eye"></i>
                                                 <!--end::Svg Icon-->
 											</span>
                                         </a>
+                                        @endif
                                         <a  data-toggle="modal" data-target="#exampleModalLong" data-form="#delete-form{{$proposal->id}}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
                                             <span class="svg-icon svg-icon-md svg-icon-primary">
 												<!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
