@@ -43,4 +43,9 @@ class PartnerWantJobs extends Model
         return $typesofjobs;
     }
 
+    public function getPartner()
+    {
+        return $this->hasOne('App\Models\User','id','user_id');
+    }
+
 }

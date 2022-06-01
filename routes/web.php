@@ -134,6 +134,8 @@ Route::group([
         return redirect()->route('blog.index');
     });
     Route::post('notification-invoice', [NotificationsController::class,'notificationInvoice']);
+    Route::post('notification-send-partners-email', [NotificationsController::class,'notificationSendPartnersEmail'])->name('notification.partner-email-send');
+
     Route::resource('email-templates', EmailTemplatesController::class);
     Route::resource('blog', AdminBlogController::class);
     Route::resource('blog-categories', AdminBlogCategoriesController::class);
@@ -163,6 +165,8 @@ Route::group([
 
 
     Route::resource('invoice', InvoiceToUserController::class);
+
+    Route::get('invoices', [InvoiceToUserController::class,'listInvoices'])->name('invoices.list');
 
     Route::resource('subscriptions', SubscriptionsController::class);
 

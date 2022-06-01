@@ -106,7 +106,7 @@ class CustomPageController extends Controller
         }*/
 
 		$customPage->name = $request->name;
-		$customPage->slug = Str::slug($request->slug);
+		$customPage->slug = $request->slug;
 		$customPage->type_job_id = $request->type_job_id;
 		$customPage->show_front = $request->show_front;
 		$customPage->save();

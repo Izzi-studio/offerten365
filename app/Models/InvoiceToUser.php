@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceToUser extends Model
 {
     use HasFactory;
-    protected $fillable = ['status','user_id','invoice_number','total','period','num_month','year','bonus','full_date'];
+    protected $fillable = ['status','user_id','invoice_number','total','period','num_month','year','bonus','full_date','pay_type_generated'];
     /**
      * The table associated with the model.
      *
