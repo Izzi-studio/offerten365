@@ -40,7 +40,10 @@ class User extends Authenticatable
         'city',
         'street',
         'house',
-        'subscription_id'
+        'subscription_id',
+        'pause',
+        'pay_type_generated',
+        'notify'
     ];
 
     /**
@@ -87,6 +90,7 @@ class User extends Authenticatable
             ->where('pwj.type_job_id',$typeJobId)
             ->where('pr.region_id',$regionId)
             ->where('users.active',1)
+            ->where('users.pause',0)
             ->select('users.id as user_id','users.name','users.email','users.company');
 
     }
@@ -261,7 +265,7 @@ class User extends Authenticatable
 
     public function getUserNotifications($invoiceId)
     {
-        return $this->hasOne('App\Models\UserNotifications')->whereId($invoiceId)->withDefault(['*' => null]);
+        return $this->hasOne('App\Models\UserNotifications')->whereInvoiceId($invoiceId)->orderBy('id','DESC')->withDefault(['*' => null]);
     }
 
     public function regions()

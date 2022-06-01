@@ -6,6 +6,7 @@ use App\Events\SendInvoicePartner;
 use App\Events\EmailChangeInfoPartner;
 use App\Models\ProposalToPartner;
 use App\Models\Setting;
+use App\Models\UserNotifications;
 use PDF;
 use DB;
 use Carbon\Carbon;
@@ -18,7 +19,7 @@ class GenerateInvoices {
     public function totals()
     {
         //$invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.updated_at, '%Y-%m') = '2022-04'")
-        $invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.created_at, '%Y-%m') = date_format(now() - INTERVAL 1 DAY, '%Y-%m')")
+        $invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.created_at, '%Y-%m') = date_format(now() - INTERVAL 1 MONTH, '%Y-%m')")
             ->leftjoin('proposals as p', 'p.id', '=', 'proposals_to_partner.proposal_id')
             ->where('proposals_to_partner.status',1)
             //->orderBy('proposals_to_partner.user_id')
@@ -69,15 +70,15 @@ class GenerateInvoices {
 
     public function generateAndSendInvoices(){
 
-        $subdate = Carbon::now()->subDays(1);
+        $subdate = Carbon::now()->subMonth(1);
         $nowdate = Carbon::now();
 
 
         //$invoices = ProposalToPartner::whereRaw("date_format(updated_at, '%Y-%m') = '2022-04'")
-		$invoices = ProposalToPartner::whereRaw("date_format(created_at, '%Y-%m') = date_format(now() - INTERVAL 1 DAY, '%Y-%m')")
+        $invoices = ProposalToPartner::whereRaw("date_format(created_at, '%Y-%m') = date_format(now() - INTERVAL 1 MONTH, '%Y-%m')")
             ->whereStatus(1)
             ->groupBy('user_id')
-            ->select(DB::raw('count(id) as count'),'user_id')
+            ->select(DB::raw('count(id) as count'),'user_id','id')
             ->get();
 
         $month = __('admin/admin.'.Carbon::now()->format('F'));
@@ -94,33 +95,36 @@ class GenerateInvoices {
         $totalsAll = $this->totals();
 
         foreach($invoices as $invoice){
-			if(isset($totalsAll[$invoice->user_id])){
-            $user = User::find($invoice->user_id);
-            $totals = $totalsAll[$invoice->user_id];
 
-            InvoiceToUser::create([
-                'user_id'=>$invoice->user_id,
-                'status'=>$user->status_pay == 1 ? 1 : 0,
-                'invoice_number'=>$invoiceNumber,
+            if(isset($totalsAll[$invoice->user_id])){
+                $user = User::find($invoice->user_id);
+                $totals = $totalsAll[$invoice->user_id];
 
-                'total'=>$totals['total'],
-                'num_month'=>$subdate->format('m'),
-                'year'=>$subdate->format('Y'),
-                'full_date'=>$subdate->format('Y-m'),
-                'period'=>$monthBill,
-            ]);
-            $bonus = 0;
+                $inv = InvoiceToUser::create([
+                    'user_id'=>$invoice->user_id,
+                    'status'=>$user->status_pay == 1 ? 1 : 0,
+                    'invoice_number'=>$invoiceNumber,
+                    'pay_type_generated'=>$invoice->getPartner->status_pay,
 
-            $userSubsId = $user->subscription_id;
-            $nameFile = 'invoice-№'.$invoiceNumber.'-user-'.$invoice->user_id.'-'.$year.'-'.$monthBill.'.pdf';
-            $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals','userSubsId','bonus' ]));
-            Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
+                    'total'=>$totals['total'],
+                    'num_month'=>$subdate->format('m'),
+                    'year'=>$subdate->format('Y'),
+                    'full_date'=>$subdate->format('Y-m'),
+                    'period'=>$monthBill,
+                ]);
+                $bonus = 0;
 
+                $userSubsId = $user->subscription_id;
+                $nameFile = 'invoice-№'.$invoiceNumber.'-user-'.$invoice->user_id.'-'.$year.'-'.$monthBill.'.pdf';
+                $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals','userSubsId','bonus' ]));
+                Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
 
-            event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile));
+                if ($invoice->getPartner->status_pay == 0) {
+                    event(new SendInvoicePartner($invoice->getPartner->email, storage_path() . '/app/public/users/invoices/' . $nameFile, $inv));
+                }
 
-            $invoiceNumber++;
-			}
+                $invoiceNumber++;
+            }
 
         }
         $setting = Setting::where('key','system.invoice_number')->firstOrFail();
@@ -134,7 +138,7 @@ class GenerateInvoices {
     public function totalsRegenerate($partner_id)
     {
         //$invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.updated_at, '%Y-%m') = '2022-04'")
-        $invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.created_at, '%Y-%m') = date_format(now() - INTERVAL 1 DAY, '%Y-%m')")
+        $invoices = ProposalToPartner::whereRaw("date_format(proposals_to_partner.created_at, '%Y-%m') = date_format(now() - INTERVAL 1 MONTH, '%Y-%m')")
             ->leftjoin('proposals as p', 'p.id', '=', 'proposals_to_partner.proposal_id')
             ->where('proposals_to_partner.status',1)
             ->where('proposals_to_partner.user_id',$partner_id)
@@ -216,6 +220,25 @@ class GenerateInvoices {
         $invoiceNumber = $invoiceToUser->invoice_number;
         $pdf = PDF::loadView('front.partner.invoice-month',compact(['fullDate','monthBill','year','invoiceNumber','invoice','dueDate','totals','userSubsId','bonus']));
         Storage::put('public/users/invoices/'.$nameFile, $pdf->output());
+
+    }
+
+    public function updateStatusInvoices(){
+        $subdate = Carbon::now()->subMonth(1);
+
+        $invoices = InvoiceToUser::where('year',$subdate->format('Y'))
+            ->wherePeriod( __('admin/admin.'.$subdate->format('F')))
+            ->whereStatus(0)
+            ->get();
+
+        foreach($invoices as $invoice){
+            $year = $invoice->year;
+            $monthBill = $invoice->period;
+            $nameFile = 'invoice-№'.$invoice->invoice_number.'-user-'.$invoice->user_id.'-'.$year.'-'.$monthBill.'.pdf';
+            event(new SendInvoicePartner($invoice->getPartner->email,storage_path().'/app/public/users/invoices/'.$nameFile, $invoice));
+
+            $invoice->update(['status'=>2]);
+        }
 
     }
 }

@@ -55,9 +55,10 @@ trait PartnerInfoTrait{
             'street' => ['required'],
             'house' => ['required'],
             'postcode' => ['required'],
+            'pause' => ['required'],
         ]);
 
-        //auth()->user()->update($request->only('name','lastname','company','phone'));
+        auth()->user()->update($request->only('pause'));
         if ($request->new_request_update === 'true') {
             RequestCahngePartnerInfo::create([
                 'user_id' => auth()->user()->id,

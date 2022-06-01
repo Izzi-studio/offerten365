@@ -45,6 +45,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SendNotificationPartner' => [
             'App\Listeners\SendNotificationPartner',
         ],
+        'App\Events\SendMailingPartner' => [
+            'App\Listeners\SendMailingPartner',
+        ],
     ];
 
     /**

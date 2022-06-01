@@ -5,9 +5,9 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendInvoicePartner;
+use App\Mail\SendMailingPartner as SendMailing;
 
-class SendInvoicePartnerListener
+class SendMailingPartner
 {
     /**
      * Create the event listener.
@@ -27,8 +27,7 @@ class SendInvoicePartnerListener
      */
     public function handle($event)
     {
-        $mailable = new SendInvoicePartner($event->email,$event->filePath, $event->invoice);
-
-        Mail::to($event->email)->queue($mailable);
+        $mailable = new SendMailing( $event->content, $event->partner);
+        Mail::to($event->partner->email)->queue($mailable);
     }
 }

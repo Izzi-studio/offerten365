@@ -29,10 +29,10 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function () {
 
-            $generator = app()->make(GenerateInvoices::class);
-            $generator->generateAndSendInvoices();
+           // $generator = app()->make(GenerateInvoices::class);
+           // $generator->generateAndSendInvoices();
 
-            Log::info('Generate Invoices');
+           // Log::info('Generate Invoices');
         })->everyMinute();
     }
 
