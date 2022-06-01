@@ -18,7 +18,7 @@
             font-weight: 300;
             margin-bottom: 0px;
             padding-bottom: 0px;
-            color: #000;
+            color: #000;    
         }
 
         body h3 {
@@ -251,11 +251,21 @@
             <td></td>
             <td colspan="2" style="text-align: right;">Umsatzsteuer 7.7%  {{ $taxTotal }} CHF</td>
         </tr>
-
+        @if($bonus != 0)
+            <tr class="total">
+                <td></td>
+                <td colspan="2" style="text-align: right;">Gutschrift - {{$bonus }} CHF</td>
+            </tr>
+            <tr class="total">
+                <td></td>
+                <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] - $bonus + $taxTotal }} CHF</td>
+            </tr>
+        @else
         <tr class="total">
             <td></td>
             <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] + $taxTotal }} CHF</td>
         </tr>
+        @endif
     </table>
 </div>
 </body>

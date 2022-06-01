@@ -129,7 +129,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Gutschrift</label>
+                                <label>Kontostand</label>
                                 <input type="text" class="form-control" name="coins" value="{{$partner->coins}}" />
                             </div>
 
@@ -137,8 +137,8 @@
                                 <label>{{__('admin/admin.form.subscriptions')}}</label>
                                 <select class="form-control" name="subscription_id">
                                     @foreach($subscriptions as $subscription)
-                                    <option 
-                                        value="{{$subscription->id}}" 
+                                    <option
+                                        value="{{$subscription->id}}"
                                         @if($subscription->id == $partner->subscription_id) selected @endif
                                     >
                                         {{$subscription->name}}
@@ -192,7 +192,7 @@
                                            name="status" value="2"
                                            @if ($partner->status == 2) checked @endif/>
                                     <span></span>
-                                    {{__('admin/admin.blocked')}} 
+                                    {{__('admin/admin.blocked')}}
                                 </label>
                             </div>
                         </div>
@@ -225,18 +225,21 @@
                                            name="active" value="0"
                                            @if ($partner->active == 0) checked @endif/>
                                     <span></span>
-                                    {{__('admin/admin.no')}} 
+                                    {{__('admin/admin.no')}}
                                 </label>
                                 <label class="radio">
                                     <input type="radio"
                                            name="active" value="1"
                                            @if ($partner->active == 1) checked @endif/>
                                     <span></span>
-                                    {{__('admin/admin.yes')}} 
+                                    {{__('admin/admin.yes')}}
                                 </label>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label>{{__('admin/admin.form.notify')}}</label>
+                            <textarea class="form-control" name="notify">{{$partner->notify}}</textarea>
+                        </div>
                         <input type="submit" value="{{__('admin/admin.form.submit')}}" class="btn btn-success font-weight-bold btn-lg mr-2" />
                     </form>
                     </div>
@@ -254,7 +257,13 @@
                                     Total
                                 </th>
                                 <th>
+                                    Gutschrift
+                                </th>
+                                <th>
                                     Period
+                                </th>
+                                <th>
+                                    Zahlungsmethode
                                 </th>
                                 <th>
                                     Status
@@ -266,7 +275,11 @@
                             </thead>
                             <tbody>
                             @foreach($partner->getInvoices()->get() as $invoice)
-                                <tr>
+                                <tr
+                                    @if ($invoice->status == 0) style="background-color: rgb(219 219 58 / 90%);" @endif
+                                    @if ($invoice->status == 1) style="background-color: rgb(0 128 0 / 70%);" @endif
+                                    @if ($invoice->status == 2) style="background-color: rgb(255 0 0 / 80%);" @endif
+                                >
                                     <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->id}}</span>
                                     </td>
@@ -277,9 +290,17 @@
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->total}}</span>
                                     </td>
                                     <td>
+                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->bonus}}</span>
+                                    </td>
+                                    <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->period}}</span>
                                     </td>
-
+                                    <td>
+                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                            @if ($invoice->pay_type_generated == 0) Invoice @endif
+                                            @if ($invoice->pay_type_generated == 1) Stripe @endif
+                                        </span>
+                                    </td>
                                     <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                             <form action="{{route('invoice.update',$invoice->id)}}" name="update-invoice-status-{{$invoice->id}}" method="POST">
@@ -309,6 +330,37 @@
                                                 <rect fill="#000000" opacity="0.3" x="12" y="4" width="3" height="5" rx="0.5"/>
                                             </g>
                                         </svg><!--end::Svg Icon--></span>
+                                        </a>
+                                        <a href="{{route('invoice-partner.show',[$partner->id,$invoice->id])}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                            <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                <i class="far fa-eye"></i>
+                                                <!--end::Svg Icon-->
+											</span>
+                                        </a>
+
+                                        @if(null != $invoice->getPartner->getUserNotifications($invoice->id)->value('created_at'))
+                                        <span data-toggle="tooltip" data-placement="top" data-offset="0 -10px" title="Erinnert am {{$invoice->getPartner->getUserNotifications($invoice->id)->value('created_at')->format('Y-m-d H:i')}}">
+                                            <a data-toggle="modal" data-target="#email-templates" data-invoice-id="{{$invoice->id}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                                <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                    <i class="far fa-bell"></i>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                            </a>
+                                        </span>
+                                        @else
+                                            <a data-toggle="modal" data-target="#email-templates" data-invoice-id="{{$invoice->id}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                                <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                    <i class="far fa-bell"></i>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                            </a>
+                                        @endif
+
+                                        <a href="{{route('invoice-partner.regenerate',$invoice->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                            <span class="svg-icon svg-icon-md svg-icon-primary">
+                                                <i class="far flaticon-refresh"></i>
+                                                <!--end::Svg Icon-->
+											</span>
                                         </a>
                                     </td>
                                 </tr>

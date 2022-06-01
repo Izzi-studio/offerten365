@@ -7,6 +7,27 @@
             <div class="alert alert-custom alert-white alert-shadow fade show gutter-b">
                 <h1>{{__('admin/admin.menu.proposals')}}</h1>
             </div>
+            <form method="GET" class="alert alert-custom alert-white alert-shadow fade show gutter-b">
+                <div class="row w-100">
+                    <div class="col-lg-3">
+                        <input 
+                            class="form-control" 
+                            placeholder="ID / Name / Nachname / E-Mail" 
+                            required
+                            name="search"
+                            type="text"
+                            value="{{request()->search ?? ''}}"
+                        />
+                    </div>
+                    <div class="col-lg-3">
+                        <input 
+                            class="btn btn-success font-weight-bold" 
+                            type="submit"
+                            value="Suche"
+                        />
+                    </div>
+                </div>
+            </form>
             <div class="card card-custom card-stretch gutter-b">
                 <div class="card-body pt-2 pb-0 mt-n3">
                     <p></p>
@@ -55,7 +76,7 @@
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$proposal->created_at->format('Y-m-d')}}</span>
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{route('proposals.edit',$proposal->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
+                                        <a href="{{route('proposals.edit',$proposal->proposal_id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                             <span class="svg-icon svg-icon-md svg-icon-primary">
                                                 <i class="far fa-eye"></i>
                                                 <!--end::Svg Icon-->

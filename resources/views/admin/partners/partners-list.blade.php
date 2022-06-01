@@ -12,7 +12,7 @@
                     <div class="col-lg-3">
                         <input 
                             class="form-control" 
-                            placeholder="Name des Unternehmens / Partners" 
+                            placeholder="ID / Unternehmens / Partners" 
                             required
                             name="search"
                             type="text"
@@ -25,6 +25,12 @@
                             type="submit"
                             value="Suche"
                         />
+                    </div>
+
+                    <div class="ml-auto col-auto">
+                        <a data-toggle="modal" data-target="#mailing-emails" class="btn btn-success font-weight-bold">
+                            E-Mail an alle Partner
+                        </a>
                     </div>
                 </div>
             </form>
