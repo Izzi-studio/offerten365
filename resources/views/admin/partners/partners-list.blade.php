@@ -26,6 +26,12 @@
                             value="Suche"
                         />
                     </div>
+
+                    <div class="ml-auto col-auto">
+                        <a data-toggle="modal" data-target="#mailing-emails" class="btn btn-success font-weight-bold">
+                            E-Mail an alle Partner
+                        </a>
+                    </div>
                 </div>
             </form>
             <div class="card card-custom card-stretch gutter-b">

@@ -39,12 +39,13 @@
                                     <input required="required" class="form-control" type="text" name="template[{{ $localeCode }}][main][subject]"
                                                 value="@if(isset($emailTemplate->getEmailTemplateDescriptionByLocale($localeCode)->subject)){{$emailTemplate->getEmailTemplateDescriptionByLocale($localeCode)->subject}}@endif"/>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <label>
                                         {{__('admin/admin.form.message')}}:
                                     </label>
                                     <textarea class="form-control" name="template[{{ $localeCode }}][main][content]">@if(isset($emailTemplate->getEmailTemplateDescriptionByLocale($localeCode)->content)){{$emailTemplate->getEmailTemplateDescriptionByLocale($localeCode)->content}}@endif</textarea>
                                 </div>
+                                <p>Sie können Variablen wie verwenden: {name}, {lastname}</p>
                             </div>
                         @endforeach
                     </div>

@@ -236,7 +236,10 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label>{{__('admin/admin.form.notify')}}</label>
+                            <textarea class="form-control" name="notify">{{$partner->notify}}</textarea>
+                        </div>
                         <input type="submit" value="{{__('admin/admin.form.submit')}}" class="btn btn-success font-weight-bold btn-lg mr-2" />
                     </form>
                     </div>
@@ -260,6 +263,9 @@
                                     Period
                                 </th>
                                 <th>
+                                    Zahlungsmethode
+                                </th>
+                                <th>
                                     Status
                                 </th>
                                 <th class="text-right">
@@ -269,7 +275,11 @@
                             </thead>
                             <tbody>
                             @foreach($partner->getInvoices()->get() as $invoice)
-                                <tr>
+                                <tr
+                                    @if ($invoice->status == 0) style="background-color: rgb(219 219 58 / 90%);" @endif
+                                    @if ($invoice->status == 1) style="background-color: rgb(0 128 0 / 70%);" @endif
+                                    @if ($invoice->status == 2) style="background-color: rgb(255 0 0 / 80%);" @endif
+                                >
                                     <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->id}}</span>
                                     </td>
@@ -285,7 +295,12 @@
                                     <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->period}}</span>
                                     </td>
-
+                                    <td>
+                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                            @if ($invoice->pay_type_generated == 0) Invoice @endif
+                                            @if ($invoice->pay_type_generated == 1) Stripe @endif
+                                        </span>
+                                    </td>
                                     <td>
                                         <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                                             <form action="{{route('invoice.update',$invoice->id)}}" name="update-invoice-status-{{$invoice->id}}" method="POST">
@@ -324,7 +339,7 @@
                                         </a>
 
                                         @if(null != $invoice->getPartner->getUserNotifications($invoice->id)->value('created_at'))
-                                        <span data-toggle="tooltip" data-placement="top" data-offset="0 -10px" title="Erinnert um {{$invoice->getPartner->getUserNotifications($invoice->id)->value('created_at')->format('Y-m-d H:i')}}">
+                                        <span data-toggle="tooltip" data-placement="top" data-offset="0 -10px" title="Erinnert am {{$invoice->getPartner->getUserNotifications($invoice->id)->value('created_at')->format('Y-m-d H:i')}}">
                                             <a data-toggle="modal" data-target="#email-templates" data-invoice-id="{{$invoice->id}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                                 <span class="svg-icon svg-icon-md svg-icon-primary">
                                                     <i class="far fa-bell"></i>

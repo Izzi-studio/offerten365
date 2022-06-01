@@ -91,6 +91,10 @@ $('#partner-info-form').submit(e => {
             } else {
                 alert('Daten aktualisiert');
             }
+
+            $("body, html").animate({
+                scrollTop: 0
+            }, 900)
         })
 });
 

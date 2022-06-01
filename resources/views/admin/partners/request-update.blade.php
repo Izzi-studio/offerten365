@@ -24,42 +24,90 @@
                             @php $class = '';@endphp
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.name')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->name != $partner->name) {{ $class='border-color-red'}} @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->name != $partner->name) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="name" value="{{$requestCahngePartnerInfo->json_info->name}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.lastname')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->lastname != $partner->lastname) {{ $class='border-color-red'}}  @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->lastname != $partner->lastname) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="lastname" value="{{$requestCahngePartnerInfo->json_info->lastname}}" />
                             </div>
                             <div class="form-group">
-                                @if ($requestCahngePartnerInfo->json_info->company != $partner->company) {{ $class='border-color-red'}} @else  {{ $class=''}}  @endif
                                 <label>{{__('admin/admin.form.company')}}</label>
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->company != $partner->company) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="company" value="{{$requestCahngePartnerInfo->json_info->company}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.phone')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->phone != $partner->phone) {{ $class='border-color-red'}}  @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->phone != $partner->phone) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="phone" value="{{$requestCahngePartnerInfo->json_info->phone}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.city')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->city != $partner->city) {{ $class='border-color-red'}} @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->city != $partner->city) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="city" value="{{$requestCahngePartnerInfo->json_info->city}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.street')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->street != $partner->street) {{ $class='border-color-red'}}  @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->street != $partner->street) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="street" value="{{$requestCahngePartnerInfo->json_info->street}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.house')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->house != $partner->house) {{ $class='border-color-red'}} @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->house != $partner->house) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="house" value="{{$requestCahngePartnerInfo->json_info->house}}" />
                             </div>
                             <div class="form-group">
                                 <label>{{__('admin/admin.form.postcode')}}</label>
-                                @if ($requestCahngePartnerInfo->json_info->postcode != $partner->postcode) {{ $class='border-color-red'}} @else  {{ $class=''}}  @endif
+                                @php 
+                                    if($requestCahngePartnerInfo->json_info->postcode != $partner->postcode) {
+                                        $class= 'border-color-red';
+                                    } else {
+                                        $class='';
+                                    } 
+                                @endphp
                                 <input type="text" class="form-control {{$class}}" name="postcode" value="{{$requestCahngePartnerInfo->json_info->postcode}}" />
                             </div>
                             <input type="hidden" name="action">

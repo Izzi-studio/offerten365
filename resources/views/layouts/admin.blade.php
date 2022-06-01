@@ -261,6 +261,20 @@
                             </a>
                         </li>
 
+                        <li class="menu-item @if(strpos($actual_link,route('invoices.list').'/')!==false) menu-item-active @endif" aria-haspopup="true">
+                            <a href="{{route('invoices.list')}}" class="menu-link">
+                                <span class="svg-icon menu-icon"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo1/dist/../src/media/svg/icons/General/User.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <polygon points="0 0 24 0 24 24 0 24"/>
+                                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                    </g>
+                                </svg><!--end::Svg Icon-->
+                                </span>
+                                <span class="menu-text">{{__('admin/admin.menu.invoices')}}</span>
+                            </a>
+                        </li>
+
                         <li class="menu-item" aria-haspopup="true">
                             <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="menu-link">
@@ -335,7 +349,7 @@
     <form id="form-email-template" class="modal-dialog" action="/administrator/notification-invoice" method="POST">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Briefvorlage auswählen</h5>
+                <h5 class="modal-title">E-Mail Einstellungen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
@@ -347,7 +361,7 @@
                     <label>
                         {{__('admin/admin.menu.email-templates')}}:
                     </label>
-                    <select id="select-email-templates" class="form-control">
+                    <select class="select-email-templates form-control">
                         <option value="">--Select--</option>
                     </select>
                 </div>
@@ -362,7 +376,91 @@
                 <p>Sie können Variablen wie verwenden: {name}, {lastname}</p>
             </div>
             <div class="modal-footer">
-                <button type="submit" id="btn-form-email-temlates" class="btn btn-primary font-weight-bold btn-ok">Suche</button>
+                <button type="submit" id="btn-form-email-temlates" class="btn btn-primary font-weight-bold btn-ok">Senden</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="mailing-emails" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <form id="form-mailing-emails" class="modal-dialog" action="{{route('notification.partner-email-send')}}" method="POST">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">E-Mail an alle Partner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                @csrf
+                <!-- <input type="hidden" name="invoice_id" value=""> -->
+                <div class="form-group">
+                    <label>
+                        {{__('admin/admin.menu.email-templates')}}:
+                    </label>
+                    <select class="select-email-templates form-control">
+                        <option value="">--Select--</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>{{__('admin/admin.form.jobtype')}}</label>
+                    <div class="checkbox-inline">
+                        <label class="checkbox">
+                            <input 
+                                type="checkbox" 
+                                name="types_jobs[]" 
+                                value="1" 
+                            />
+                            <span class="custom-checkbox__txt"></span>
+                            {{__('front.umzug')}}
+                        </label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label class="checkbox">
+                            <input 
+                                type="checkbox" 
+                                name="types_jobs[]" 
+                                value="2" 
+                            />
+                            <span class="custom-checkbox__txt"></span>
+                            {{__('front.reinigung')}}
+                        </label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label class="checkbox">
+                            <input 
+                                type="checkbox" 
+                                name="types_jobs[]" 
+                                value="3" 
+                            />
+                            <span class="custom-checkbox__txt"></span>
+                            {{__('front.umzug-und-reinigung')}}
+                        </label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <label class="checkbox">
+                            <input 
+                                type="checkbox" 
+                                name="types_jobs[]" 
+                                value="4" 
+                            />
+                            <span class="custom-checkbox__txt"></span>
+                            {{__('front.maler')}}
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{__('admin/admin.form.subject')}}</label>
+                    <input class="form-control" type="text" name="subject" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label>{{__('admin/admin.form.message')}}:</label>
+                    <textarea class="form-control" name="content" required></textarea>
+                </div>
+                <p>Sie können Variablen wie verwenden: {name}, {lastname}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btn-form-mailing-emails" class="btn btn-primary font-weight-bold btn-ok">Senden</button>
             </div>
         </div>
     </form>
@@ -440,20 +538,20 @@
             dataType : "json",                     
             success: function ({data}) { 
                 $.each(data, function(i, val) {
-                    $('#select-email-templates').append(`<option value="${val.id}">${val.name}</option>`)
+                    $('.select-email-templates').append(`<option value="${val.id}">${val.name}</option>`)
                 });
             }
         });
 
-        $('#select-email-templates').change(function(e) {
+        $('.select-email-templates').change(function(e) {
             if(!e.target.value) return
 
             $.ajax({
                 url: '/api/administrator/email-templates/' + e.target.value,             
                 dataType : "json",                     
                 success: function ({data}) { 
-                    $('#form-email-template')[0].subject.value = data.subject
-                    $('#form-email-template')[0].content.value = data.content
+                    $(e.target.closest('form'))[0].subject.value = data.subject
+                    $(e.target.closest('form'))[0].content.value = data.content
                 }
             });
         })
@@ -479,6 +577,28 @@
                     toastr.success("{!! 'Erinnerung gesendet' !!}");
                     $('#email-templates .close').click()
                     $('#btn-form-email-temlates').removeAttr("disabled")
+                }
+            });
+
+        })
+
+        $('#form-mailing-emails').submit(function(e) {
+            e.preventDefault()
+            $('#btn-form-mailing-emails').attr("disabled", true)
+
+            const formData = new FormData(e.target);    
+
+            $.ajax({
+                url: $('#form-mailing-emails').attr('action'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function(data){
+                    e.target.reset()
+                    toastr.success("{!! 'Erinnerung gesendet' !!}");
+                    $('#mailing-emails .close').click()
+                    $('#btn-form-mailing-emails').removeAttr("disabled")
                 }
             });
 

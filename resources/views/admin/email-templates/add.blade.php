@@ -36,12 +36,13 @@
                                     </label>
                                     <input required="required" class="form-control" type="text" name="template[{{ $localeCode }}][main][subject]"/>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <label>
                                         {{__('admin/admin.form.message')}}:
                                     </label>
                                     <textarea class="form-control" name="template[{{ $localeCode }}][main][content]"></textarea>
                                 </div>
+                                <p>Sie können Variablen wie verwenden: {name}, {lastname}</p>
                             </div>
                         @endforeach
                     </div>

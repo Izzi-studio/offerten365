@@ -31,6 +31,27 @@
                                         <p class="acc-company-profile__txt">Foto ändern</p>
                                     </label>
                                 </div>
+                                <div class="acc-company-profile__block">
+                                    <h3 class="acc-company-profile__title">Kontostatus</h3>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row align-items-center">
+                                                <div class="col-sm-auto">
+                                                    <label class="custom-checkbox">
+                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '1') checked @endif value="1">
+                                                        <span class="custom-checkbox__txt">Aktiv</span>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-auto">
+                                                    <label class="custom-checkbox">
+                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '0') checked @endif value="0">
+                                                        <span class="custom-checkbox__txt">Nicht aktiv (keine Anfragen erhalten)</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="acc-company-profile__block acc-company-profile__wrap">
                                     <div class="form-field">
                                         <p class="form-field__name">Firma</p>

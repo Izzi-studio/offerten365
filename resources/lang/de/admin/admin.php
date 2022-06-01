@@ -46,6 +46,7 @@ return [
     'menu.subscriptions' => 'Abonnements',
     'menu.invoice-detail' => 'Invoice detail',
     'menu.email-templates' => 'E-Mail-Vorlagen',
+    'menu.invoices' => 'Rechnung',
     'menu.logout' => 'Ausloggen',
 //Forms
     'form.city' => 'Stadt',
@@ -81,7 +82,7 @@ return [
     'form.add-review' => 'Bewertung hinzufügen',
     'form.rating' => 'Bewertung',
     'form.date' => 'Datum',
-    'form.message' => 'Botschaft',
+    'form.message' => 'Text',
     'form.layout' => 'Layout',
     'form.type' => 'Art',
     'form.add-static-page' => 'Statische Seite hinzufügen',
@@ -97,7 +98,8 @@ return [
     'form.regions' => 'Kantonen',
     'form.subscriptions' => 'Abonnements',
     'form.text-btn' => 'Schaltflächentext',
-    'form.subject' => 'Gegenstand',
+    'form.subject' => 'Betreff',
+    'form.notify' => 'Bemerkungen',
 //Alerts
     'category_updated' => 'Kategorie aktualisiert',
     'category_added' => 'Kategorie hinzugefügt',
