@@ -14,8 +14,8 @@ class AddFileldsToInvoices extends Migration
     public function up()
     {
         Schema::table('invoice_to_user', function (Blueprint $table) {
-            $table->string('full_date')->after('name_file')->nullable();
-            $table->string('num_month')->after('name_file')->nullable();
+            $table->string('full_date')->after('id')->nullable();
+            $table->string('num_month')->after('full_date')->nullable();
             $table->integer('year')->after('num_month')->default(0);
             $table->integer('bonus')->after('year')->default(0);
         });
