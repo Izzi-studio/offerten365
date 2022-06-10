@@ -63,7 +63,7 @@
                                     </td>
                                     <td>
                                         @if($proposal->getUser)
-                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$proposal->getUser->name}}</span>
+                                            <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$proposal->getUser->name}} {{$proposal->getUser->lastname}}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -109,6 +109,7 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {{ $proposals->appends(request()->query())->links('pagination.admin') }}
                     </div>
                 </div>
             </div>

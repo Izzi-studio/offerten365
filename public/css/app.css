@@ -5976,6 +5976,19 @@ select.form-contact-us__field {
     height: 40px;
     padding-left: 0;
     padding-right: 0;
+    box-shadow: none;
+}
+
+.btn-save_state_paid {
+    background-color: #30ab45;
+}
+
+.btn-save_state_nopaid {
+    background-color: #D32F2F;
+}
+
+.btn-save_state_sended {
+    background-color: #e0d24b;
 }
 
 .btn-save svg {
@@ -5983,9 +5996,14 @@ select.form-contact-us__field {
     transition: 0.3s;
 }
 
+.btn-save:hover {
+    box-shadow: none;
+}
+
 .btn-save:hover svg {
     filter: invert(0);
 }
+
 
 @media only screen and (max-width: 768px) {
     .ac-table {
