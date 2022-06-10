@@ -85,17 +85,24 @@
             padding-bottom: 20px;
         }
 
-        .invoice-box table tr.item td {
+        .invoice-box table tr.item td, .invoice-box table tr.total td {
             border-bottom: 1px solid #eee;
         }
 
-        .invoice-box table tr.item.last td {
-            border-bottom: none;
+        .invoice-box table tr:last-child td {
+            border-bottom: none !important;
         }
 
-        .invoice-box table tr.total td:nth-child(2) {
-
+        .invoice-box table tr.total td {
             font-weight: bold;
+        }
+
+        .information table td, .top table td {
+            padding: 0;
+        }
+        
+        .top table td:nth-child(2), .information table td:nth-child(2) {
+            text-align: left !important;
         }
 
         @media only screen and (max-width: 600px) {
@@ -122,7 +129,7 @@
             <td colspan="3">
                 <table>
                     <tr>
-                        <td class="title">
+                        <td class="title" style="width: 70%;">
                             <img src="./images/logo-red-1.svg" alt="Company logo" style="width: 100%; max-width: 200px" />
                         </td>
 
@@ -141,36 +148,29 @@
             <td colspan="3">
                 <table>
                     <tr>
-                        <td>
-                            Rahal Gmbh<br />
-                            St. Urbanstrasse 79<br />
-                            4914 Roggwil<br />
+                        <td style="width: 70%;">
+                            Offerten-365<br>
+                            Zollwegli 2<br> 
+                            4704 Niederbipp<br> 
 
-                            PostFinance Ag<br />
-
-                            IBAN: CH48 0900 0000 1556 1356 9<br />
-                            Konto: 15-561356-9<br />
+                            www.Offerten-365.ch<br> 
+                            Info@offerten-365.ch<br>
                         </td>
-
                         <td>
                             {{$invoice->getPartner->company}}<br />
                             {{$invoice->getPartner->name}} {{$invoice->getPartner->lastname}}<br />
                             {{$invoice->getPartner->email}}<br />
                             {{$invoice->getPartner->street}} {{$invoice->getPartner->house}}<br />
                             {{$invoice->getPartner->postcode}} {{$invoice->getPartner->city}}<br />
-
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
-
-
         <tr class="heading">
             <td>Leistung</td>
             <td>Anzahl</td>
             <td style="text-align: right;">Preis</td>
-
         </tr>
 		@php $nonTaxTotal = 0; $taxTotal = 0; @endphp
         @foreach($totals as $type_job_id=>$total)
@@ -244,29 +244,37 @@
             @endif
         @endforeach
         <tr class="total">
-            <td></td>
-            <td colspan="2" style="text-align: right;">Zwischensumme {{ $totals['total'] }} CHF</td>
+            <td>Zwischensumme</td>
+            <td colspan="2" style="text-align: right;">{{ $totals['total'] }} CHF</td>
         </tr>
         <tr class="total">
-            <td></td>
-            <td colspan="2" style="text-align: right;">Umsatzsteuer 7.7%  {{ $taxTotal }} CHF</td>
+            <td>Umsatzsteuer 7.7%</td>
+            <td colspan="2" style="text-align: right;">{{ $taxTotal }} CHF</td>
         </tr>
         @if($bonus != 0)
             <tr class="total">
-                <td></td>
-                <td colspan="2" style="text-align: right;">Gutschrift - {{$bonus }} CHF</td>
+                <td>Gutschrift</td>
+                <td colspan="2" style="text-align: right;">{{$bonus }} CHF</td>
             </tr>
             <tr class="total">
-                <td></td>
-                <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] - $bonus + $taxTotal }} CHF</td>
+                <td>Gesamtbetrag</td>
+                <td colspan="2" style="text-align: right;">{{ $totals['total'] - $bonus + $taxTotal }} CHF</td>
             </tr>
         @else
         <tr class="total">
-            <td></td>
-            <td colspan="2" style="text-align: right;">Gesamtbetrag {{ $totals['total'] + $taxTotal }} CHF</td>
+            <td>Gesamtbetrag</td>
+            <td colspan="2" style="text-align: right;">{{ $totals['total'] + $taxTotal }} CHF</td>
         </tr>
         @endif
     </table>
+    <div style="text-align: left; padding: 5px;">
+        <h4 style="margin-bottom: 5px;">Bitte Überweisung an die folgende Bankverbindung vornehmen:</h4>
+        PostFinance Ag<br>
+        Rahal GmbH<br>
+        4914 Roggwil<br>
+        IBAN: CH48 0900 0000 1556 1356 9<br>
+        Konto: 15-561356-9<br>
+    </div>
 </div>
 </body>
 </html>

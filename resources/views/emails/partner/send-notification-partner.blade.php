@@ -1,5 +1,4 @@
 @component('mail::message')
-# Einführung
 
 {{$text}}
 

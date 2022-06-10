@@ -71,16 +71,16 @@
                                     @foreach($invoices as $invoice)
                                         <tr>
                                             <td>
-                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->invoice_number}}</span>
+                                                <span>{{$invoice->invoice_number}}</span>
                                             </td>
                                             <td>
-                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->total}} Chf</span>
+                                                <span>{{$invoice->total}} Chf</span>
                                             </td>
                                             <td>
-                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$invoice->period}}</span>
+                                                <span>{{$invoice->period}}</span>
                                             </td>
                                             <td>
-                                                <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
+                                                <span>
                                                     @if ($invoice->status == 0) {{__('admin/admin.sended')}} @endif
                                                     @if ($invoice->status == 1) {{__('admin/admin.paid')}} @endif
                                                     @if ($invoice->status == 2) {{__('admin/admin.nopaid')}} @endif
@@ -90,7 +90,12 @@
                                                 <a 
                                                     href="/storage/users/invoices/invoice-№{{$invoice->invoice_number}}-user-{{$invoice->user_id}}-{{$invoice->created_at->format('Y')}}-{{$invoice->period}}.pdf" 
                                                     target="_blank" 
-                                                    class="btn btn-save ml-auto"
+                                                    class="
+                                                        btn btn-save ml-auto
+                                                        @if ($invoice->status == 0) {{'btn-save_state_sended'}} @endif
+                                                        @if ($invoice->status == 1) {{'btn-save_state_paid'}} @endif
+                                                        @if ($invoice->status == 2) {{'btn-save_state_nopaid'}} @endif
+                                                    "
                                                 >
                                                     <svg 
                                                         xmlns="http://www.w3.org/2000/svg" 
