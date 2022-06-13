@@ -69,9 +69,9 @@ class ProposalController extends Controller
 
 
 				if($authUser->status_pay == 1){
-
-					 if($authUser->coins - $price >= 0) {
-						$authUser->coins = $authUser->coins - $price;
+                        $minusSum = $price + round(($price/100)*7.7,1);
+					 if($authUser->coins - $minusSum >= 0) {
+						$authUser->coins = $authUser->coins - $minusSum;
 						$authUser->save();
 					 }else{
 						return back()->withErrors(['no_coin'=>__('front.no_coin')]);
