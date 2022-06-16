@@ -30,13 +30,13 @@ class ProposalController extends Controller
                     ->orWhere('lastname','LIKE','%'.$queryStr.'%')
                     ->orWhere('email','LIKE','%'.$queryStr.'%')->pluck('id')->toArray();
 
-                $proposals = Proposal::orderBy('id','DESC')->whereIn('user_id',$userIds)->get();
+                $proposals = Proposal::orderBy('id','DESC')->whereIn('user_id',$userIds)->paginate(50);
             }else{
-                $proposals = Proposal::whereId($queryStr)->get();
+                $proposals = Proposal::whereId($queryStr)->paginate(50);
             }
 
         }else{
-            $proposals = Proposal::orderBy('id','DESC')->get();
+            $proposals = Proposal::orderBy('id','DESC')->paginate(50);
         }
 
         return view('admin.proposal.list',compact(['proposals']));
