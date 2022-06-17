@@ -14,6 +14,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'check-email',
         'logout',
-		'processed-payment'
+		'processed-payment',
+        'check-email',
+        'register-client'
     ];
 }
