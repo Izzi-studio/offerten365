@@ -1,23 +1,30 @@
 @component('mail::message')
-# Einführung
+Hallo {{$name}},
 
-Hallo {{$name}}, Vorschlag
+Anfrage
 
 @if($proposal->type_job_id == 1)
-	UMZUG von: {{$proposal->getRegion->name}}  >  {{$proposal->additional_info->to->region_name}}
+{{$proposal->date_start->format('d.m.Y')}}
 
+UMZUG von: {{$proposal->getRegion->name}}, PLZ {{$proposal->additional_info->from->zip}}  >  {{__('front.'.$proposal->additional_info->to->region_name)}}, PLZ {{$proposal->additional_info->to->zip}}
 @endif
 
 @if($proposal->type_job_id == 2)
-	REINIGUNG
+{{$proposal->date_start->format('d.m.Y')}}
+
+REINIGUNG, {{$proposal->getRegion->name}}, PLZ {{$proposal->additional_info->zip}}
 @endif
 
 @if($proposal->type_job_id == 3)
-	UMZUG+REINIGUNG
+{{$proposal->date_start->format('d.m.Y')}}
+
+UMZUG+REINIGUNG von: {{$proposal->getRegion->name}}, PLZ {{$proposal->additional_info->from->zip}}  >  {{__('front.'.$proposal->additional_info->to->region_name)}}, PLZ {{$proposal->additional_info->to->zip}}
 @endif
 
 @if($proposal->type_job_id == 4)
-	MALERARBEITEN 
+{{$proposal->date_start->format('d.m.Y')}}
+
+MALERARBEITEN, {{$proposal->getRegion->name}}, PLZ {{$proposal->additional_info->zip}}
 @endif
 
 wurde geschlossen. 
