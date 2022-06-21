@@ -38,13 +38,13 @@
                                             <div class="row align-items-center">
                                                 <div class="col-sm-auto">
                                                     <label class="custom-checkbox">
-                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '1') checked @endif value="1">
+                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '0') checked @endif value="0">
                                                         <span class="custom-checkbox__txt">Aktiv</span>
                                                     </label>
                                                 </div>
                                                 <div class="col-sm-auto">
                                                     <label class="custom-checkbox">
-                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '0') checked @endif value="0">
+                                                        <input name="pause" type="radio" @if(auth()->user()->pause == '1') checked @endif value="1">
                                                         <span class="custom-checkbox__txt">Nicht aktiv (keine Anfragen erhalten)</span>
                                                     </label>
                                                 </div>
