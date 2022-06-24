@@ -53,10 +53,6 @@
         <p class="acc-billing-item__slide-content-l"><span></span>Flexibel 	</p>
         <p class="acc-billing-item__slide-content-r">{{$additional_info->dayrange}}</p>
     </div>
-    <div class="acc-billing-item__slide-content-row">
-        <p class="acc-billing-item__slide-content-l"><span></span>Flexibel 	</p>
-        <p class="acc-billing-item__slide-content-r">{{$additional_info->dayrange}}</p>
-    </div>
     @if(isset($additional_info->painting_work_inside))
     <div class="acc-billing-item__slide-content-row">
         <p class="acc-billing-item__slide-content-l"><span></span>Malerarbeiten innen</p>

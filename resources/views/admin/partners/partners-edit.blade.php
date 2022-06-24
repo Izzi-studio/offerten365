@@ -171,6 +171,31 @@
                             @endforeach
                         </div>
                         <div class="form-group">
+                            <label>Anfragen automatisch akzeptieren</label>
+                            <div class="radio-inline">
+                                <label class="radio">
+                                    <input 
+                                        type="radio"
+                                        name="auto_submit_proposal" 
+                                        value="1"
+                                        @if ($partner->auto_submit_proposal == 1) checked @endif
+                                    />
+                                    <span></span>
+                                    Ja
+                                </label>
+                                <label class="radio">
+                                    <input 
+                                        type="radio"
+                                        name="auto_submit_proposal" 
+                                        value="0"
+                                        @if ($partner->auto_submit_proposal == 0) checked @endif
+                                    />
+                                    <span></span>
+                                    Nein
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>{{__('admin/admin.form.status')}}</label>
                             <div class="radio-inline">
                                 <label class="radio">

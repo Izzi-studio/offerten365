@@ -60,7 +60,7 @@
         color: #F81A1A;
     }
 </style>
-<img src="{{ env('APP_URL') }}/images/logo-red.svg" width="230px" alt="">
+<img src="{{ env('APP_URL') }}/images/logo-red.webp" width="230px" alt="">
 <hr>
 @if($proposal->type_job_id == 1)
     @include('front.includes.transfer',[
