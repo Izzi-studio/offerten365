@@ -198,7 +198,7 @@
 @endif
 <!-- painting END -->
 
-@component('mail::button', ['url' => 'https://offerten-365.ch/info'])
+@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
 Zur Website
 @endcomponent
 

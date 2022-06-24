@@ -36,7 +36,7 @@ Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
 
 @endif
 
-@component('mail::button', ['url' => 'https://offerten-365.ch/info'])
+@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
 Zur Website
 @endcomponent
 
