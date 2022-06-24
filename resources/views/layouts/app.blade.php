@@ -14,6 +14,7 @@
     {!! SEOMeta::generate() !!}
 
     <!-- Styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" media="all" href="/css/libs.css">
@@ -47,19 +48,28 @@
 <body>
 <div class="page-container">
     <header class="header">
-        <div class="container header__container"><a class="header__logo" href="/"><img
-                    src="/images/logo-red.svg"
+        <div class="header__top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-auto ml-auto d-flex align-items-center">
+                        <a href="{{route('partnerWerden')}}">Firma registrieren</a>
+                        <div class="ml-4 d-flex align-items-center">
+                            <a href="https://www.facebook.com/offerten365">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a class="ml-3" href="https://www.instagram.com/offerten365.ch/">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__bottom">
+            <div class="container header__container"><a class="header__logo" href="/"><img
+                    src="/images/logo-red.webp"
                     alt="Offerten-365-logo"></a>
             <nav class="header__nav">
-			<!--<ul>
-    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-        <li>
-            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                {{ $properties['native'] }}
-            </a>
-        </li>
-    @endforeach
-</ul>-->
                 <ul class="header__menu">
                     @guest
                         <li class="header__item"><a class="header__link" href="#">Offerten<span
@@ -101,9 +111,9 @@
                                 class="header__sub-arrow"></span></a>
                         <div class="header__wrap-sub-menu">
                             <ul class="header__sub-menu">
-							@foreach($categories as $category)
+                            @foreach($categories as $category)
                                 <li class="header__sub-item"><a class="header__sub-link" href="{{route('showCategory',$category->slug)}}">{{$category->getCategoryDescription->name}}</a></li>
-							@endforeach
+                            @endforeach
                             </ul>
                         </div>
                     </li>
@@ -121,128 +131,91 @@
                 <div class="header__links">
                     @guest
                         <div class="header__login">
-                            <a href="{{ route('login') }}" class="header__login-txt">Anmelden<span
-                                    class="header__sub-arrow"></span></a>
-                            <!--<div class="header__wrap-sub-menu">
-                                <ul class="header__sub-menu">
-                                    <li class="header__sub-item"><a class="header__sub-link" href="#">Kunde</a></li>
-                                    <li class="header__sub-item"><a class="header__sub-link" href="#">Auftragnehmer</a></li>
-                                </ul>
-                            </div>-->
+                            <a 
+                                href="{{ route('login') }}" 
+                                class="header__login-txt"
+                            >
+                                Anmelden
+                                <span class="header__sub-arrow"></span>
+                            </a>
                         </div>
-                        <!-- <a class="header__become-partner" href="{{route('partnerWerden')}}">Firma registrieren</a> -->
                     @else
                         @if(auth()->user()->isClient())
                             <a href="{{route('client.myInfo')}}"
-                               class="header__login-txt">{{auth()->user()->name}}</span></a>
+                            class="header__login-txt">{{auth()->user()->name}}</span></a>
                         @elseif(auth()->user()->isPartner())
                             <a href="{{route('partner.myInfo')}}"
-                               class="header__login-txt">{{auth()->user()->name}}</span></a>
+                            class="header__login-txt">{{auth()->user()->name}}</span></a>
                         @else
                             <a href="{{route('blog.index')}}"
-                               class="header__login-txt">{{auth()->user()->name}}</span></a>
+                            class="header__login-txt">{{auth()->user()->name}}</span></a>
                         @endif
                         <a class="header__become-partner" href="{{ route('logout') }}"
-                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Ausloggen</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
                     @endguest
                 </div>
-            </nav>
-            <button class="burger">
-                <div class="icon-bar"></div>
-                <div class="icon-bar"></div>
-                <div class="icon-bar"></div>
-            </button>
+                </nav>
+                <button class="burger">
+                    <div class="icon-bar"></div>
+                    <div class="icon-bar"></div>
+                    <div class="icon-bar"></div>
+                </button>
+            </div>
         </div>
     </header>
     @yield('content')
     <footer class="footer">
-        <div class="container">
-            <div class="footer__row"><img class="footer__logo" src="/images/logo-white.svg" alt="Offerten-365-logo"></div>
-            <div class="footer__row footer__row_second">
-                <div class="footer__wrap footer__wrap_lists">
-                    @guest
-                        <ul class="footer__list">
-                            <li class="footer__list-item footer__list-item_has-sublist"><a>Offerten<span
-                                        class="footer__sub-arrow"></span></a>
-                                <ul class="footer__sublist">
-                                    <li class="footer__sublist-item"><a href="{{route('registerFormTransfer')}}">Umzug</a>
-                                    </li>
-                                    <li class="footer__sublist-item"><a href="{{route('registerFormTransferAndCleaning')}}">Umzug
-                                            + Reinigung</a></li>
-                                    <li class="footer__sublist-item"><a
-                                            href="{{route('registerFormCleaning')}}">Reinigung</a></li>
-                                    <li class="footer__sublist-item"><a href="{{route('registerFormPaintingWork')}}">Malerarbeiten</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    @else
-                        @if(auth()->user()->isClient())
-                    <ul class="footer__list">
-                        <li class="footer__list-item footer__list-item_has-sublist"><a>Offerten<span
-                                    class="footer__sub-arrow"></span></a>
-                            <ul class="footer__sublist">
-                                <li class="footer__sublist-item"><a href="{{route('registerFormTransfer')}}">Umzug</a>
-                                </li>
-                                <li class="footer__sublist-item"><a href="{{route('registerFormTransferAndCleaning')}}">Umzug
-                                        + Reinigung</a></li>
-                                <li class="footer__sublist-item"><a
-                                        href="{{route('registerFormCleaning')}}">Reinigung</a></li>
-                                <li class="footer__sublist-item"><a href="{{route('registerFormPaintingWork')}}">Malerarbeiten</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                        @endif
-                    @endguest
-                    <!--
-                    <ul class="footer__list">
-                        <li class="footer__list-item footer__list-item_has-sublist"><a>Blog / Article<span
-                                    class="footer__sub-arrow"></span></a>
-                            <ul class="footer__sublist">
-                                @foreach($categories as $category)
-                                    <li class="footer__sublist-item">
-                                        <a href="{{route('showCategory',$category->slug)}}">{{$category->getCategoryDescription->name}}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    </ul>-->
-                    <ul class="footer__list">
-                        <li class="footer__list-item footer__list-item_has-sublist"><a>Hilfe<span
-                                    class="footer__sub-arrow"></span></a>
-                            <ul class="footer__sublist">
-                                <li class="footer__sublist-item"><a href="{{route('faq')}}">FAQ</a></li>
-                                <li class="footer__sublist-item"><a href="{{route('staticPage','wie-es-funktioniert')}}">Wie es funktioniert</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer__wrap footer__wrap_contact">
-                    <p class="footer__contact-title">Kontakt</p>
-                    <div class="footer__contact-links"><a class="footer__contact-link footer__contact-link_email"
-                                                          href="mailto:info@offerten-365.ch">info@offerten-365.ch</a><a
-                            class="footer__contact-link footer__contact-link_tel" href="tel:+0800666060">0800 66 60 60</a>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 4 64 4" preserveAspectRatio="none" width="100%" height="100%">
+            <path fill="#d81010" d="M64 6 C32 0 32 12 0 6 L0 8 L64 8 Z"></path>
+        </svg>
+        <div class="footer__inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <br>
+                        <img class="footer__logo" src="/images/logo_white.png" alt="">
+                        <p class="mt-3">Support: <a href="tel:0800666060">0800 66 60 60</a></p>
+                    </div>
+                    <div class="col-lg-3 mt-4 mt-lg-0">
+                        <h4>Meistgesucht</h4>
+                        <p class="mt-3">
+                            <a href="https://offerten-365.ch/umzugsfirmen/zuerich/">Umzugsfirma Zürich</a><br>
+                            <a href="https://offerten-365.ch/reinigungsfirmen/zuerich/">Reinigungsfirma Zürich</a><br>
+                            <a href="https://offerten-365.ch/reinigungsfirmen/bern/">Reinigungsfirma Bern</a><br>
+                            <a href="https://offerten-365.ch/umzugsfirmen/luzern/">Umzug Luzern</a><br>
+                            <a href="https://offerten-365.ch/reinigungsfirmen/aargau/">Reinigungsfirma Aargau</a><br>
+                            <a href="https://offerten-365.ch/reinigungsfirmen/basel/">Reinigungsfirma Basel</a><br>
+                            <a href="https://offerten-365.ch/umzugsreinigung/">Umzugsreinigung</a>
+                        </p>
+                    </div>
+                    <div class="col-lg-3 mt-4 mt-lg-0">
+                        <h4>Wichtige Infos</h4>
+                        <p class="mt-3">
+                            <a href="https://offerten-365.ch/agb/">AGBs</a><br>
+                            <a title="Kontakt zur Reinigungsfirma" href="https://offerten-365.ch/kontakt/">Kontakt</a><br>
+                            <a title="Jetzt Termin buchen" href="https://offerten-365.ch/faq/">FAQ</a><br>
+                            <a title="Impressum" href="https://offerten-365.ch/impressum/">Impressum</a><br>
+                            <a title="Datenschutzerklärung" href="https://offerten-365.ch/datenschutz/">Datenschutz</a><br>
+                            <a title="Seitenübersicht" href="https://offerten-365.ch/seitenuebersicht/">Sitemap</a>
+                        </p>
                     </div>
                 </div>
             </div>
-            <div class="footer__row footer__row_third">
-                <p class="footer__copy">© {{ date('Y') }} Offerten-365.CH </p>
-                <div class="footer__links">
-                    <a class="footer__link" href="/datenschutz">Datenschutz</a>
-                    <a class="footer__link" href="/agb">AGB</a>
-                    <a class="footer__link" href="/impressum">Impressum</a>
-                    <a class="footer__link" href="{{route('sitemap')}}">Sitemap</a>
-                    <a class="footer__link" href="{{route('partnerWerden')}}">Firma&nbsp;registrieren</a>
+        </div>
+        <div class="footer__bottom">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-auto">
+                        <p>© 2022 Offerten 365 | Realisierung von <a href="https://www.ara8.de/">ara8.de</a></p>
+                    </div>
+                    <div class="col-auto">
+                        <p><a href="{{route('partnerWerden')}}">Firma Registrieren</a></p>
+                    </div>
                 </div>
-                <div class="footer__contact-soc"><a class="footer__contact-soc-item" href="#"><img src="/images/fb.svg"></a><a
-                        class="footer__contact-soc-item" href="#"><img src="/images/inst.svg"></a><a
-                        class="footer__contact-soc-item" href="#"><img src="/images/skype.svg"></a><a
-                        class="footer__contact-soc-item" href="#"><img src="/images/google-pl.svg"></a></div>
             </div>
         </div>
     </footer>

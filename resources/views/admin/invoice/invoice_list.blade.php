@@ -182,7 +182,7 @@
                                     <span class="text-white font-weight-bolder d-block font-size-lg">{{$invoice->invoice_number}}</span>
                                 </td>
                                 <td>
-                                    <span class="text-white font-weight-bolder d-block font-size-lg">{{$invoice->getPartner->name}}</span>
+                                    <span class="text-white font-weight-bolder d-block font-size-lg">{{$invoice->getPartner->company}}</span>
                                 </td>
                                 <td>
                                     <span class="text-white font-weight-bolder d-block font-size-lg">{{$invoice->total}}</span>
