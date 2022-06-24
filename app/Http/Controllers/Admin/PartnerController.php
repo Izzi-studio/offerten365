@@ -116,6 +116,7 @@ class PartnerController extends Controller
 
         $partner->subscription_id = $request->subscription_id;
         $partner->notify = $request->notify;
+        $partner->auto_submit_proposal = $request->auto_submit_proposal;
         $partner->house = $request->house;
         $partner->coins = $request->coins;
         $partner->city = $request->city;

@@ -43,7 +43,8 @@ class User extends Authenticatable
         'subscription_id',
         'pause',
         'pay_type_generated',
-        'notify'
+        'notify',
+        'auto_submit_proposal'
     ];
 
     /**
@@ -91,8 +92,27 @@ class User extends Authenticatable
             ->where('pr.region_id',$regionId)
             ->where('users.active',1)
             ->where('users.pause',0)
+            ->where('users.auto_submit_proposal',0)
             ->select('users.id as user_id','users.name','users.email','users.company');
+    }
 
+    /**
+     * Get Matching Users Auto Submit
+     *
+     * @param int $regionId,
+     * @param int $typeJobId
+     * @return $query
+     */
+    public function scopeGetMatchingConditionUsersAutoSubmit($query, $regionId, $typeJobId)
+    {
+        return $query->join('partner_want_jobs as pwj','pwj.user_id','users.id')
+            ->join('partner_regions as pr','pr.user_id','users.id')
+            ->where('pwj.type_job_id',$typeJobId)
+            ->where('pr.region_id',$regionId)
+            ->where('users.active',1)
+            ->where('users.pause',0)
+            ->where('users.auto_submit_proposal',1)
+            ->select('users.id as user_id','users.name','users.email','users.company');
     }
 
     /**

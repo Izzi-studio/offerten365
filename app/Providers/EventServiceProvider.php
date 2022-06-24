@@ -48,6 +48,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SendMailingPartner' => [
             'App\Listeners\SendMailingPartner',
         ],
+        'App\Events\SendNewProposalToAdmin' => [
+            'App\Listeners\NotifyAdminNewProposal',
+        ],
     ];
 
     /**

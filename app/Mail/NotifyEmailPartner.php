@@ -14,15 +14,17 @@ class NotifyEmailPartner extends Mailable
     public $name;
     public $proposal;
     public $type;
+    public $flagFullInfo;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $proposal)
+    public function __construct($name, $proposal,$flagFullInfo)
     {
         $this->name = $name;
         $this->proposal = $proposal;
+        $this->flagFullInfo = $flagFullInfo;
     }
 
     /**
@@ -38,10 +40,12 @@ class NotifyEmailPartner extends Mailable
 				'3'=>'Neue Umzugs - und Reinigungsanfrage',
 				'4'=>'Neue Maleranfrage'
 		];
-		
+
 		$this->type = $arraySubjects[$this->proposal->type_job_id];
-		 
-		 
+
+		if($this->flagFullInfo){
+            return $this->markdown('emails.partner.notification_new_proposal_autosubmit')->subject('Neue Anfrage');
+        }
         return $this->markdown('emails.partner.notification_new_proposal')->subject('Neue Anfrage');
     }
 }
