@@ -113,7 +113,7 @@ class NewProposalListener
                     ->get();
 
                 Log::info('Found Conditions Users: ' . 'Count: ' . count($conditionUsers->toArray()) . ' Data: ' . json_encode($conditionUsers->toArray()));
-                Log::info('Limit other user after process: ' .Setting::getByKey('system.setting.limit_recipient_proposal') - $countAutoSubmitUsers);
+                //Log::info('Limit other user after process: ' . Setting::getByKey('system.setting.limit_recipient_proposal') - $countAutoSubmitUsers);
                 $proposalToPartners = array();
                 $emailsNotifyList = array();
 
