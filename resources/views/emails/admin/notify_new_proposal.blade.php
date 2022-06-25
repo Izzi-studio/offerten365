@@ -173,14 +173,18 @@
     <strong>Flexibel</strong><br>
     {{$proposal->additional_info->dayrange}}
 </p>
+@if(isset($proposal->additional_info->painting_work_inside))
 <p>
     <strong>Malerarbeiten innen</strong><br>
     {{ implode(', ', json_decode($proposal->additional_info->painting_work_inside)) }}
 </p>
+@endif
+@if(isset($proposal->additional_info->painting_work_outside))
 <p>
     <strong>Malerarbeiten außen</strong><br>
     {{ implode(', ', json_decode($proposal->additional_info->painting_work_outside)) }}
 </p>
+@endif
 <p>
     <strong>Bemerkungen</strong><br>
     {{$proposal->description}}

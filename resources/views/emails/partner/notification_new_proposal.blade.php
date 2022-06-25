@@ -27,11 +27,18 @@ Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
 @endif
 
 @if($proposal->type_job_id == 4)
-    @php $types = str_replace(array('[',']','"'),array('','',''),$proposal->additional_info->worktype) @endphp
-
 <strong>Ort</strong> {{__('front.'.$proposal->getRegion->name)}} {{$proposal->additional_info->city}} <br />
 <b>Termine</b> {{$proposal->date_start->format('d.m.Y')}}<br>
+@if(isset($proposal->additional_info->worktype))
+@php $types = str_replace(array('[',']','"'),array('','',''),$proposal->additional_info->worktype) @endphp
 <b>Typ der Arbeit</b> {{$types}}<br>
+@endif
+@if(isset($proposal->additional_info->painting_work_inside))
+    <b>Malerarbeiten innen</b><br> {{ implode(', ', json_decode($proposal->additional_info->painting_work_inside)) }}
+@endif
+@if(isset($proposal->additional_info->painting_work_outside))
+    <b>Malerarbeiten außen</b><br> {{ implode(', ', json_decode($proposal->additional_info->painting_work_outside)) }}
+@endif
 
 
 @endif
