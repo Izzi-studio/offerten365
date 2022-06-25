@@ -31,7 +31,7 @@ class SendNotifyEmailPartner
         foreach($event->recipients as $recipient){
             $mailable = new NotifyEmailPartner($recipient['name'],$event->proposal,$event->flagFullInfo);
             Mail::to($recipient['email'])->queue($mailable);
-            Log::info('Send email notify partner to: '.$recipient['email'].' : '.$recipient['name']);
+            Log::info('Send email notify partner to: '.$recipient['email'].' : '.$recipient['name']. 'Full Info : ' .$event->flagFullInfo == true ? 'true' : 'false');
         }
         Log::info('----DONE----');
 
