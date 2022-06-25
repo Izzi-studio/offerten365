@@ -43,7 +43,7 @@ class NotifyEmailPartner extends Mailable
 
 		$this->type = $arraySubjects[$this->proposal->type_job_id];
 
-		if($this->flagFullInfo){
+		if($this->flagFullInfo == 1){
             return $this->markdown('emails.partner.notification_new_proposal_autosubmit')->subject('Neue Anfrage');
         }
         return $this->markdown('emails.partner.notification_new_proposal')->subject('Neue Anfrage');
