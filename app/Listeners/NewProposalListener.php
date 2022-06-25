@@ -134,8 +134,9 @@ class NewProposalListener
                         'created_at' => $dateTimeNow,
                         'updated_at' => $dateTimeNow,
                     ];
+                    ProposalToPartner::insert($proposalToPartners);
                 }
-                ProposalToPartner::insert($proposalToPartners);
+
                 event(new NotifyPartner($emailsNotifyList, $event->proposal,false));
             }
 
