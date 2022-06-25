@@ -20,7 +20,7 @@ class NotifyEmailPartner extends Mailable
      *
      * @return void
      */
-    public function __construct($name, $proposal,$flagFullInfo)
+    public function __construct($name, $proposal, $flagFullInfo)
     {
         $this->name = $name;
         $this->proposal = $proposal;
