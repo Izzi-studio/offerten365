@@ -46,7 +46,7 @@ class NewProposalListener
 
 
             $countAutoSubmitUsers = $conditionUsersAutosubmit->count();
-            $proposalToPartners = array();
+            //$proposalToPartners = array();
             $emailsNotifyList = array();
 
             foreach ($conditionUsersAutosubmit as $key => $partner) {
@@ -92,7 +92,7 @@ class NewProposalListener
                         'email' => $user->email,
                         'name' => $user->name,
                     ];
-                    $proposalToPartners[] = [
+                    $proposalToPartners = [
                         'proposal_id' => $event->proposal->id,
                         'status' => 1,
                         'user_id' => $user->id,
@@ -118,7 +118,7 @@ class NewProposalListener
                 Log::info('Found Conditions Users: ' . 'Count: ' . count($conditionUsers->toArray()) . ' Data: ' . json_encode($conditionUsers->toArray()));
                 //Log::info('Limit other user after process: ' . Setting::getByKey('system.setting.limit_recipient_proposal') - $countAutoSubmitUsers);
 
-                $proposalToPartners = array();
+                //$proposalToPartners = array();
                 $emailsNotifyList = array();
 
                 foreach ($conditionUsers as $key => $user) {
@@ -128,7 +128,7 @@ class NewProposalListener
                         'email' => $user->email,
                         'name' => $user->name,
                     ];
-                    $proposalToPartners[] = [
+                    $proposalToPartners = [
                         'proposal_id' => $event->proposal->id,
                         'user_id' => $user->user_id,
                         'created_at' => $dateTimeNow,
