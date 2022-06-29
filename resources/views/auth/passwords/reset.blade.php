@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-lg-6 col-xl-5">
             
-                <h1 class="section-title login__section-title">{{ __('Reset Password') }}</h1>
+                <h1 class="section-title login__section-title">{{ __('Passwort zurücksetzen') }}</h1>
             <p class="login__txt"></p>
         </div>
     </div>
@@ -21,7 +21,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-field form-forgot-password__form-field">
-                            <p class="form-field__name">{{ __('E-Mail Address') }}</p>
+                            <p class="form-field__name">{{ __('E-Mail Adresse') }}</p>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
@@ -33,7 +33,7 @@
                         </div>
                         <p class="login__txt"></p>
                         <div class="form-field form-forgot-password__form-field">
-                            <p class="form-field__name">{{ __('Password') }}</p>
+                            <p class="form-field__name">{{ __('Passwort') }}</p>
 
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -45,13 +45,13 @@
                         </div>
                         <p class="login__txt"></p>
                         <div class="form-field form-forgot-password__form-field">
-                            <p class="form-field__name">{{ __('Confirm Password') }}</p>
+                            <p class="form-field__name">{{ __('Passwort bestätigen') }}</p>
 
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
                         </div>
 
-                                <input type="submit" class="btn form-forgot-password__btn" value="{{ __('Reset Password') }}">
+                                <input type="submit" class="btn form-forgot-password__btn" value="{{ __('Passwort zurücksetzen') }}">
 
 
                     </form>

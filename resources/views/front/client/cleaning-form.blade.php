@@ -266,45 +266,20 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
                                     <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Keller"><span
-                                            class="custom-checkbox__txt">Keller</span>
+                                        <input type="checkbox" name="additional_info[other][]" value="Keller reinigen"><span
+                                            class="custom-checkbox__txt">Keller reinigen</span>
                                     </label>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Klavier"><span
-                                            class="custom-checkbox__txt">Klavier</span>
+                                        <input type="checkbox" name="additional_info[other][]" value="Estrich reinigen"><span
+                                            class="custom-checkbox__txt">Estrich reinigen</span>
                                     </label>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Estrich"><span
-                                            class="custom-checkbox__txt">Estrich</span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Garage"><span
-                                            class="custom-checkbox__txt">Garage</span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Flügel"><span
-                                            class="custom-checkbox__txt">Flügel </span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]" value="Lagerung"><span
-                                            class="custom-checkbox__txt">Lagerung</span>
-                                    </label>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <label class="custom-checkbox">
-                                        <input type="checkbox" name="additional_info[other][]"
-                                            value="Demontage / Montage"><span class="custom-checkbox__txt">Demontage /
-                                            Montage</span>
+                                        <input type="checkbox" name="additional_info[other][]" value="Garage reinigen"><span
+                                            class="custom-checkbox__txt">Garage reinigen</span>
                                     </label>
                                 </div>
                             </div>
@@ -465,7 +440,7 @@
                         <p class="form-field__name">E-Mail</p>
                         <input type="email" placeholder="E-Mail" name="client[email]">
                         <div style="display: none" class="invalid-feedback" role="alert">
-                            <strong>E-Mail existiert bereits!</strong>
+                            <strong>E-Mail existiert bereits! Hier geht es zur <a href="{{ route('login') }}">Anmeldung</a></strong>
                         </div>
                     </div>
                     <div class="form-field">

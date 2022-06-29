@@ -484,7 +484,7 @@
                         <p class="form-field__name">E-Mail</p>
                         <input type="email" placeholder="E-Mail" name="client[email]">
                         <div style="display: none" class="invalid-feedback" role="alert">
-                            <strong>E-Mail existiert bereits!</strong>
+                            <strong>E-Mail existiert bereits! Hier geht es zur <a href="{{ route('login') }}">Anmeldung</a></strong>
                         </div>
                     </div>
                     <div class="form-field">

@@ -3364,11 +3364,15 @@ p.review__title {
 }
 
 .acc-offers-company__item {
-    margin-top: 43px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .acc-offers-company__item:first-child {
     margin-top: 0;
+    padding-top: 0;
+    border-top: none;
 }
 
 .acc-offers-company__row {

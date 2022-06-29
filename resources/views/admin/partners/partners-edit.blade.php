@@ -221,7 +221,25 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label>Kontostatus</label>
+                            <div class="radio-inline">
+                                <label class="radio">
+                                    <input type="radio"
+                                           name="pause" value="0"
+                                           @if ($partner->pause == 0) checked @endif/>
+                                    <span></span>
+                                    Aktiv
+                                </label>
+                                <label class="radio">
+                                    <input type="radio"
+                                           name="pause" value="1"
+                                           @if ($partner->pause == 1) checked @endif/>
+                                    <span></span>
+                                    Nicht aktiv (keine Anfragen erhalten)
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label>{{__('admin/admin.form.status_pay')}}</label>
                             <div class="radio-inline">

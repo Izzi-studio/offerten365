@@ -11,15 +11,23 @@
         </ul>
     </div>
     <div class="account-sidebar__wrap-item @if(route('client.getTRequests')==url()->current()) account-sidebar__item_current @endif">
-        <div class="account-sidebar__item"><a class="account-sidebar__link" href="{{route('client.getTRequests')}}">Umzug</a></div>
+        <a class="account-sidebar__item" href="{{route('client.getTRequests')}}">
+            <span class="account-sidebar__link">Umzug</span>
+        </a>
     </div>
     <div class="account-sidebar__wrap-item @if(route('client.getCRequests')==url()->current()) account-sidebar__item_current @endif">
-        <div class="account-sidebar__item"><a class="account-sidebar__link" href="{{route('client.getCRequests')}}">Reinigung</a></div>
+        <a class="account-sidebar__item" href="{{route('client.getCRequests')}}">
+            <span class="account-sidebar__link">Reinigung</span>
+        </a>
     </div>
     <div class="account-sidebar__wrap-item @if(route('client.getTCRequests')==url()->current()) account-sidebar__item_current @endif">
-        <div class="account-sidebar__item"><a class="account-sidebar__link" href="{{route('client.getTCRequests')}}">Umzug + Reinigung</a></div>
+        <a class="account-sidebar__item" href="{{route('client.getTCRequests')}}">
+            <span class="account-sidebar__link">Umzug + Reinigung</span>
+        </a>
     </div>
     <div class="account-sidebar__wrap-item @if(route('client.getPWRequests')==url()->current()) account-sidebar__item_current @endif">
-        <div class="account-sidebar__item"><a class="account-sidebar__link" href="{{route('client.getPWRequests')}}">Malerarbeiten</a></div>
+        <a class="account-sidebar__item" href="{{route('client.getPWRequests')}}">
+            <span class="account-sidebar__link">Malerarbeiten</span>
+        </a>
     </div>
 </div>
