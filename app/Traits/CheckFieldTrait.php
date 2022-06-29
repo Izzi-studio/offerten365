@@ -26,6 +26,10 @@ trait CheckFieldTrait
      */
     public function checkEmail(Request $request)
     {
+        if(request()->headers->get('origin') != env('APP_URL')){
+            return response()->json(['success'=>true]);
+        }
+
         $validator = $this->validateEmail($request->all());
         if($validator->fails()){
             return response()->json(['success'=>false]);
