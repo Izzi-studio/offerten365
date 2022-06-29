@@ -1,5 +1,4 @@
 @component('mail::message')
-# Einführung
 
 Hi, {{$user->name}}<br> 
 Ihre Anmeldung {{$user->email}}<br> 
@@ -9,5 +8,6 @@ Ihr Passwort {{$password}}<br>
 Zur Website
 @endcomponent  
 
+Freundliche Grüße<br>
 Ihr Offerten 365 Team<br>
 @endcomponent

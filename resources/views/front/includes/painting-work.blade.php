@@ -30,12 +30,7 @@
 </div>
 @if(auth()->user()->isClient())
 <div class="acc-billing-item__actions2">
-    <button class="acc-billing-item__btn-offers-company">Angebote von unternehmen</button>
-        <a  href="{{route('deleteRequest',$proposal_id)}}" class="acc-billing-item__btn-cancel2" data-canceled="Abgesagte">ABSAGEN
-            <svg class="ico x_v2">
-                <use xlink:href="/images/sprite.svg#x_v2"></use>
-            </svg>
-        </a>
+    <button class="acc-billing-item__btn-offers-company">Angebote von Unternehmen</button>
 </div>
 @endif
 

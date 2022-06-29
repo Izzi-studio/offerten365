@@ -1,8 +1,9 @@
 @component('mail::message')
 # {{$type}}
 
-Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
-
+Grüezi {{$proposal->getUser->company}},<br>
+<br>
+Sie haben eine neue Anfrage erhalten
 <!-- transfer START -->
 @if($proposal->type_job_id == 1)
 <p>
@@ -208,5 +209,10 @@ Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
 Zur Website
 @endcomponent
 
+Unsere Empfehlung:<br>
+Kontaktieren Sie schnellstmöglich den Kunden. Führen Sie eine kundenorientierte Beratung durch. Beziehen Sie sich im Kundengespräch auf Offerten 365 als Vermittler der Kontaktangaben. Erstellen Sie zeitnah eine passende Offerte für den Kunden.<br>
+Wir wünschen Ihnen viel Erfolg.<br>
+
+Freundliche Grüße<br>
 Ihr Offerten 365 Team<br>
 @endcomponent

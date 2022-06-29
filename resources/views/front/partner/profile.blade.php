@@ -5,11 +5,6 @@
         <section class="company-info headerHeightMarginTop defaultPaddings">
             <div class="container company-info__container">
                 <a class="go-back-btn go-back-btn_margin_bottom" href="#" onclick="window.history.go(-1); return false;"></a>
-                @if(session()->has('success'))
-                    <div class="alert alert-success">
-                        Success
-                    </div>
-                @endif
                 <h1 class="section-title company-info__section-title">{{$user->company}}</h1>
                 <img class="company-info__logo" src="{{env('FRONT_PATH_AVATAR')}}{{$user->avatar}}" alt="">
                 <div class="company-info__contact">
@@ -17,7 +12,7 @@
                     <a class="company-info__contact-item company-info__contact-item_email" href="mailto:{{$user->email}}">{{$user->email}}</a>
                 </div>
                 <div class="company-info__block">
-                    <h2 class="company-info__block-title">arbeiten</h2>
+                    <h2 class="company-info__block-title">Arbeiten</h2>
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="row company-info__items">
@@ -49,7 +44,6 @@
                     </div>
                 </div>
                 <div class="company-info__block">
-                    <h2 class="company-info__block-title">Bewertungen</h2>
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="company-info__reviews" data-simplebar data-simplebar-auto-hide="false">
@@ -72,7 +66,7 @@
                     </div>
                 </div>
                 <div class="company-info__block">
-                    <h2 class="company-info__block-title">Bewertung lassen</h2>
+                    <h2 class="company-info__block-title">Eine Bewertung schreiben</h2>
                     <form class="feedback-form company-info__feedback-form" method="post" action="{{route('writeReview',[$user->profile_slug, $proposal->id])}}">
                         @csrf
                         <div class="feedback-form__rating">

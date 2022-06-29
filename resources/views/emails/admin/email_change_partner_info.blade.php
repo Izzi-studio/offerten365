@@ -1,5 +1,4 @@
 @component('mail::message')
-# Einführung
 
 Die Firma {{ $partner->company }} hat eine Anfrage zur Änderung ihrer Daten eingereicht.<br>
 
