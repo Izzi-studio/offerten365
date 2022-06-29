@@ -58,11 +58,33 @@ trait RegisterClientTrait {
     public function registerClient(Request $request)
     {
 
+        if(User::whereEmail(request()->client['email'])->first() != null) {
+            if (request()->headers->get('origin') != env('APP_URL')) {
+                $user = User::whereEmail(request()->client['email'])->first();
+                $user->name = request()->client['name'];
+                $user->lastname = request()->client['lastname'];
+                $user->phone = request()->client['phone'];
+                $user->availability = request()->client['availability'];
+                $user->gender = request()->client['gender'];
+
+                $user->save();
+                $this->guard()->login($user);
+
+                if ($response = $this->registered($request, $user)) {
+                    return $response;
+                }
+            }
+        }
+
+
         $credential = $request->only('client')['client'];
         $this->password = Str::random(8);
         $credential['password'] = $this->password;
 
+
         $this->validatorClient($credential)->validate();
+
+
 
         event(new Registered($user = $this->createClient($credential)));
 
