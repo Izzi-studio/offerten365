@@ -31,6 +31,6 @@ class NotifyEmailPartnerBlocked extends Mailable
     public function build()
     {
 
-        return $this->markdown('emails.partner.notification_blocked')->subject('Ihr Konto wurde gesperrt.');
+        return $this->markdown('emails.partner.notification_blocked')->subject('Konto gesperrt');
     }
 }

@@ -86,17 +86,18 @@ class RegisterController extends Controller
             Log::info('----DONE----');
             Log::info('');
 
-			$arraySubjects = [
+			/*$arraySubjects = [
 				'1'=>'Umzugsanfrage',
 				'2'=>'Reinigungsanfrage',
 				'3'=>'Umzugs - und Reinigungsanfrage',
 				'4'=>'Maleranfrage'
-			];
+			]; */
 
 
-			$subject = $arraySubjects[$proposal['type_job_id']];
+			//$subject = $arraySubjects[$proposal['type_job_id']];
+			//$subject = 'Vielen Dank für Ihre Anfrage';
 
-			event(new RegisterClient($user,$this->password,$subject));
+			event(new RegisterClient($user,$this->password));
 
             return  response()->json(['url'=>route('client.success.register')], 200);
 

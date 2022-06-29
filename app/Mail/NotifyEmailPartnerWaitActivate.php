@@ -28,6 +28,6 @@ class NotifyEmailPartnerWaitActivate extends Mailable
     public function build()
     {
 
-        return $this->markdown('emails.partner.notification_await_activate')->subject('Vielen Dank für Ihre Registrierung! ');
+        return $this->markdown('emails.partner.notification_await_activate')->subject('Vielen Dank für Ihre Registrierung!');
     }
 }

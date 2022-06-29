@@ -41,7 +41,7 @@ class SendInvoicePartner extends Mailable
         ]);
 
         $this->markdown('emails.partner.send-invoice')
-            ->subject('Monatsrechnung')
+            ->subject('Rechnung Offerten 365')
             ->attach($this->filePath);
 
 

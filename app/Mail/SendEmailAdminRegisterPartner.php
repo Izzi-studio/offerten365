@@ -13,7 +13,7 @@ class SendEmailAdminRegisterPartner extends Mailable
     public $user;
     public $password;
 	public $filePath;
-	
+
     /**
      * Create a new message instance.
      *
@@ -27,7 +27,7 @@ class SendEmailAdminRegisterPartner extends Mailable
 
     }
 
-    /** 
+    /**
      * Build the message.
      *
      * @return $this
@@ -35,8 +35,8 @@ class SendEmailAdminRegisterPartner extends Mailable
     public function build()
     {
 		if($this->filePath){
-			return $this->markdown('emails.admin.notify_register_partner')->attach($this->filePath)->subject('Neue Firma wird registriert');	
+			return $this->markdown('emails.admin.notify_register_partner')->attach($this->filePath)->subject('Neue Firmen Registration');
 		}
-		return $this->markdown('emails.admin.notify_register_partner')->subject('Neue Firma wird registriert');	
+		return $this->markdown('emails.admin.notify_register_partner')->subject('Neue Firmen Registration');
     }
 }

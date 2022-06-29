@@ -33,7 +33,7 @@ class NotifyDeleteProposal extends Mailable
 
     public function build()
     {
-        return $this->markdown('emails.partner.delete_proposal')->subject('Anfrage gelöscht');
+        return $this->markdown('emails.partner.delete_proposal')->subject('Anfrage wurde gelöscht');
     }
 
 }

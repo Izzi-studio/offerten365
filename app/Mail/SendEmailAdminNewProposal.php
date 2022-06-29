@@ -41,6 +41,6 @@ class SendEmailAdminNewProposal extends Mailable
 
         $this->type = $arraySubjects[$this->proposal->type_job_id];
 
-		return $this->markdown('emails.admin.notify_new_proposal')->subject('Neue Anfrage');
+		return $this->markdown('emails.admin.notify_new_proposal')->subject('Neue Anfrage Offerten 365');
     }
 }

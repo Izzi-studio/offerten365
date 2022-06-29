@@ -28,6 +28,6 @@ class SendEmailChangeInfoPartner extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.admin.email_change_partner_info')->subject('Datenänderung');
+        return $this->markdown('emails.admin.email_change_partner_info')->subject('Änderung von Daten');
     }
 }

@@ -12,6 +12,7 @@ class NotifyEmailClient extends Mailable
 {
     use Queueable, SerializesModels;
     public $name;
+    public $lastname;
     /**
      * Create a new message instance.
      *
@@ -19,7 +20,7 @@ class NotifyEmailClient extends Mailable
      */
     public function __construct(Proposal $proposal)
     {
-        $this->name = $proposal->getUser->name;
+        $this->name = $proposal->getUser->name.' '.$proposal->getUser->lastname;
     }
 
     /**
