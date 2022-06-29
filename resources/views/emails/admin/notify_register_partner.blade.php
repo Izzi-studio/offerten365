@@ -1,5 +1,4 @@
 @component('mail::message')
-# Einführung
 
 Neuer Partner, {{$user->name}} <br>
 Unternehmen: {{$user->company}}<br> 

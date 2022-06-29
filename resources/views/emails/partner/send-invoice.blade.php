@@ -1,18 +1,21 @@
 @component('mail::message')
 
-Sehr geehrtes Partnerunternehmen, anbei erhalten Sie die monatliche Kontakt Vermittlungsübersicht von Offerten-365.ch<br>
-Rechnung wird Ihnen separat in Kürze zugestellt.<br>
-Mitglieder, die nicht am Lastschriftverfahren teilnehmen, bitten wir um die Überweisung des offenen Betrages bis zum an:<br>
+Sehr geehrtes Partnerunternehmen,<br>
+im Anhang erhalten Sie Ihre Rechnung.<br> 
+Für manuelle Überweiser:<br>
+Falls Sie nicht am Lastschriftverfahren teilnehmen, bitten wir Sie um die Überweisung des offenen Betrages innerhalb von 7 Tagen nach Rechnungseingang an<br>
 Kontoinhaber:<br>
-Rahal Gmbh<br> 
-St. Urbanstrasse 79<br> 
-4914 Roggwil<br> 
-PostFinance Ag IBAN: CH48 0900 0000 1556 1356 9<br> 
+Rahal Gmbh<br>
+St. Urbanstrasse 79<br>
+4914 Roggwil<br>
+PostFinance AG IBAN: CH48 0900 0000 1556 1356 9<br>
 Konto: 15-561356-9
+
 
 @component('mail::button', ['url' => 'https://offerten-365.ch'])
 Zur Website
 @endcomponent
 
+Freundliche Grüße<br>
 Ihr Offerten 365 Team<br>
 @endcomponent

@@ -1,8 +1,8 @@
 @component('mail::message')
-Hallo {{$name}},
-
-Anfrage
-
+Grüezi {{$proposal->getUser->company}},<br>
+<br>
+Folgende Anfrage wurde aus Ihrem Konto gelöscht. Für diese Anfrage entstehen keine Kosten.<br>
+<br>
 @if($proposal->type_job_id == 1)
 {{$proposal->date_start->format('d.m.Y')}}
 
@@ -26,12 +26,13 @@ UMZUG+REINIGUNG von: {{$proposal->getRegion->name}}, PLZ {{$proposal->additional
 
 MALERARBEITEN, {{$proposal->getRegion->name}}, PLZ {{$proposal->additional_info->zip}}
 @endif
+<br>
+Zur Ihrer Info: Die Löschung der Anfrage ist bereits vollzogen. Sie müssen nichts weiter beachten.
 
-wurde geschlossen. 
-
-@component('mail::button', ['url' => 'https://offerten-365.ch'])
-Zur Website
+@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
+Zum Partnerbereich
 @endcomponent
 
+Freundliche Grüße<br>
 Ihr Offerten 365 Team<br>
 @endcomponent

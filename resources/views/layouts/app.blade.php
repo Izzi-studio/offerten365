@@ -183,24 +183,24 @@
                     <div class="col-lg-3 mt-4 mt-lg-0">
                         <h4>Meistgesucht</h4>
                         <p class="mt-3">
-                            <a href="https://offerten-365.ch/umzugsfirmen/zuerich/">Umzugsfirma Zürich</a><br>
-                            <a href="https://offerten-365.ch/reinigungsfirmen/zuerich/">Reinigungsfirma Zürich</a><br>
-                            <a href="https://offerten-365.ch/reinigungsfirmen/bern/">Reinigungsfirma Bern</a><br>
-                            <a href="https://offerten-365.ch/umzugsfirmen/luzern/">Umzug Luzern</a><br>
-                            <a href="https://offerten-365.ch/reinigungsfirmen/aargau/">Reinigungsfirma Aargau</a><br>
-                            <a href="https://offerten-365.ch/reinigungsfirmen/basel/">Reinigungsfirma Basel</a><br>
-                            <a href="https://offerten-365.ch/umzugsreinigung/">Umzugsreinigung</a>
+                            <a href="https://portal.offerten-365.ch/info/umzugsfirmen/zuerich/">Umzugsfirma Zürich</a><br>
+                            <a href="https://portal.offerten-365.ch/info/reinigungsfirmen/zuerich/">Reinigungsfirma Zürich</a><br>
+                            <a href="https://portal.offerten-365.ch/info/reinigungsfirmen/bern/">Reinigungsfirma Bern</a><br>
+                            <a href="https://portal.offerten-365.ch/info/umzugsfirmen/luzern/">Umzug Luzern</a><br>
+                            <a href="https://portal.offerten-365.ch/info/reinigungsfirmen/aargau/">Reinigungsfirma Aargau</a><br>
+                            <a href="https://portal.offerten-365.ch/info/reinigungsfirmen/basel/">Reinigungsfirma Basel</a><br>
+                            <a href="https://portal.offerten-365.ch/info/umzugsreinigung/">Umzugsreinigung</a>
                         </p>
                     </div>
                     <div class="col-lg-3 mt-4 mt-lg-0">
                         <h4>Wichtige Infos</h4>
                         <p class="mt-3">
-                            <a href="https://offerten-365.ch/agb/">AGBs</a><br>
-                            <a title="Kontakt zur Reinigungsfirma" href="https://offerten-365.ch/kontakt/">Kontakt</a><br>
-                            <a title="Jetzt Termin buchen" href="https://offerten-365.ch/faq/">FAQ</a><br>
-                            <a title="Impressum" href="https://offerten-365.ch/impressum/">Impressum</a><br>
-                            <a title="Datenschutzerklärung" href="https://offerten-365.ch/datenschutz/">Datenschutz</a><br>
-                            <a title="Seitenübersicht" href="https://offerten-365.ch/seitenuebersicht/">Sitemap</a>
+                            <a href="https://portal.offerten-365.ch/info/agb/">AGBs</a><br>
+                            <a title="Kontakt zur Reinigungsfirma" href="https://portal.offerten-365.ch/info/kontakt/">Kontakt</a><br>
+                            <a title="Jetzt Termin buchen" href="https://portal.offerten-365.ch/info/faq/">FAQ</a><br>
+                            <a title="Impressum" href="https://portal.offerten-365.ch/info/impressum/">Impressum</a><br>
+                            <a title="Datenschutzerklärung" href="https://portal.offerten-365.ch/info/datenschutz/">Datenschutz</a><br>
+                            <a title="Seitenübersicht" href="https://portal.offerten-365.ch/info/seitenuebersicht/">Sitemap</a>
                         </p>
                     </div>
                 </div>

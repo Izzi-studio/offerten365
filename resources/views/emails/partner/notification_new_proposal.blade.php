@@ -1,8 +1,9 @@
 @component('mail::message')
 # {{$type}}
 
-Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
-
+Grüezi {{$proposal->getUser->company}},<br>
+<br>
+Sie haben eine neue Anfrage erhalten.<br>
 @if($proposal->type_job_id == 1)
 <strong>Von</strong> {{__('front.'.$proposal->getRegion->name)}} {{$proposal->additional_info->from->city}}<br />
 <strong>Nach</strong> {{__('front.'.$proposal->additional_info->to->region_name)}} {{$proposal->additional_info->to->city}}<br />
@@ -39,13 +40,17 @@ Hallo {{$name}}. Sie haben eine neue Anfrage erhalten.
 @if(isset($proposal->additional_info->painting_work_outside))
     <b>Malerarbeiten außen</b><br> {{ implode(', ', json_decode($proposal->additional_info->painting_work_outside)) }}
 @endif
-
-
 @endif
+<br>
+<strong>Ist die Anfrage Interessant? Loggen Sie sich ein, um die Anfrage annehmen zu können:</strong>
 
 @component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
-Zur Website
+Zum Login
 @endcomponent
 
+Unsere Empfehlung:<br>
+Kontaktieren Sie schnellstmöglich den Kunden. Führen Sie eine kundenorientierte Beratung durch. Beziehen Sie sich im Kundengespräch auf Offerten 365 als Vermittler der Kontaktangaben. Erstellen Sie zeitnah eine passende Offerte für den Kunden.<br>
+
+Freundliche Grüße<br>
 Ihr Offerten 365 Team<br>
 @endcomponent
