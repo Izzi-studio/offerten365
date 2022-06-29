@@ -12,17 +12,15 @@ class SendEmailClientRegister extends Mailable
     use Queueable, SerializesModels;
     public $user;
     public $password;
-    public $subject;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user, $password,$subject)
+    public function __construct($user, $password)
     {
         $this->user = $user;
         $this->password = $password;
-        $this->subject = $subject;
     }
 
     /**
@@ -32,6 +30,6 @@ class SendEmailClientRegister extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.client.register')->subject($this->subject);
+        return $this->markdown('emails.client.register')->subject('Vielen Dank für Ihre Anfrage');
     }
 }

@@ -31,6 +31,6 @@ class NotifyEmailPartnerActivate extends Mailable
     public function build()
     {
 
-        return $this->markdown('emails.partner.notification_activate')->subject('Ihre Registrierung wurde erfolgreich bestätigt!');
+        return $this->markdown('emails.partner.notification_activate')->subject('Freischaltung Partnerbereich');
     }
 }

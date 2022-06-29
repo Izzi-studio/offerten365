@@ -18,10 +18,9 @@ class RegisterClient
      *
      * @return void
      */
-    public function __construct(User $user, $password,$subject)
+    public function __construct(User $user, $password)
     {
         $this->user = $user;
         $this->password = $password;
-        $this->subject = $subject;
     }
 }
