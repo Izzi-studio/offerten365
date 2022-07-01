@@ -3,19 +3,19 @@
 @component('mail::message')
 # Vielen Danke für Ihre Anfrage
 
-Grüezi, {{$user->name}} {{$user->lastname}}<br> 
+Grüezi {{$user->name}} {{$user->lastname}}<br>, 
 <br>
 Hier finden Sie Ihren Anmeldenamen sowie ein automatisch generiertes Passwort. Auf unserer Webseite können Sie Ihre Anfrage verwalten, Ihr Passwort ändern, Aufträge annehmen und vieles mehr.<br>
 <br>
-Bitte speichern Sie sich Ihre Daten auch für zukünftige Anfragen:<br>
+<strong>Bitte speichern Sie sich Ihre Daten auch für zukünftige Anfragen:</strong><br>
 Ihre Anmeldung {{$user->email}}<br> 
 Ihr Passwort {{$password}}<br> 
 <br>
 Ihre Suche hat ein Ende! Sie erhalten innert kürzester Zeit <strong>auf Basis Ihrer Angaben</strong> mehrere Offerten von lokalen Unternehmen. Vergleichen Sie eingehende Offerten und wählen Sie dann Ihren Favoriten aus.<br>
 <br>
-Hier können Sie sich anmelden und Ihre Anfrage verwalten:<br>
+<strong>Hier können Sie sich anmelden und Ihre Anfrage verwalten:</strong><br>
 
-@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info/login'])
+@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
 Zur Anmeldung
 @endcomponent  
 

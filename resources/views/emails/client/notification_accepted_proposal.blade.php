@@ -2,7 +2,7 @@
 
 @component('mail::message')
  
-Grüezi, {{$user->name}} {{$user->lastname}}<br>
+Grüezi {{$user->name}} {{$user->lastname}}<br>,
 <br>
 Ihre Anfrage wurde von einem Unternehmen angenommen. Sie erhalten demnächst eine Kontaktaufnahme.<br>
 <br>

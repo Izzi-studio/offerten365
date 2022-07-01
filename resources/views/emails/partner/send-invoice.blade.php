@@ -12,7 +12,7 @@ PostFinance AG IBAN: CH48 0900 0000 1556 1356 9<br>
 Konto: 15-561356-9
 
 
-@component('mail::button', ['url' => 'https://offerten-365.ch'])
+@component('mail::button', ['url' => 'https://portal.offerten-365.ch/info'])
 Zur Website
 @endcomponent
 
