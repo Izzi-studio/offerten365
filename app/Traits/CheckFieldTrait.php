@@ -26,7 +26,8 @@ trait CheckFieldTrait
      */
     public function checkEmail(Request $request)
     {
-        if(request()->headers->get('origin') != env('APP_URL')){
+        return response()->json(['success'=>true]);
+        /*if(request()->headers->get('origin') != env('APP_URL')){
             return response()->json(['success'=>true]);
         }
 
@@ -35,7 +36,7 @@ trait CheckFieldTrait
             return response()->json(['success'=>false]);
         }
         return response()->json(['success'=>true]);
-
+        */
 
     }
 
