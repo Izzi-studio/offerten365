@@ -59,7 +59,7 @@ trait RegisterClientTrait {
     {
 
         if(User::whereEmail(request()->client['email'])->first() != null) {
-            if (request()->headers->get('origin') != env('APP_URL')) {
+           // if (request()->headers->get('origin') != env('APP_URL')) {
                 $user = User::whereEmail(request()->client['email'])->first();
                 $user->name = request()->client['name'];
                 $user->lastname = request()->client['lastname'];
@@ -67,13 +67,16 @@ trait RegisterClientTrait {
                 $user->availability = request()->client['availability'];
                 $user->gender = request()->client['gender'];
 
+                $this->password = Str::random(8);
+                $user->password =  Hash::make($this->password);
+
                 $user->save();
                 $this->guard()->login($user);
 
                 if ($response = $this->registered($request, $user)) {
                     return $response;
                 }
-            }
+          // }
         }
 
 
