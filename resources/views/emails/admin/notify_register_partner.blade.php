@@ -1,6 +1,6 @@
 @component('mail::message')
 
-Neuer Partner, {{$user->name}} <br>
+Neuer Partner {{$user->name}} <br>
 Unternehmen: {{$user->company}}<br> 
 E-Mail {{$user->email}}<br> 
 

@@ -5008,6 +5008,7 @@ select.form-contact-us__field {
 
 @media only screen and (max-width: 1200px) {
     .congratulations {
+        margin-top: 130px;
         padding-top: 45px;
         padding-bottom: 45px;
         background: none;
