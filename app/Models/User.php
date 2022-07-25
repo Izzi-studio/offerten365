@@ -96,6 +96,17 @@ class User extends Authenticatable
             ->select('users.id as user_id','users.name','users.email','users.company');
     }
 
+    public function scopeGetMatchingConditionUsersAdmin($query, $regionId, $typeJobId)
+    {
+        return $query->join('partner_want_jobs as pwj','pwj.user_id','users.id')
+            ->join('partner_regions as pr','pr.user_id','users.id')
+            ->where('pwj.type_job_id',$typeJobId)
+            ->where('pr.region_id',$regionId)
+            ->where('users.active',1)
+            ->where('users.pause',0)
+            ->select('users.id as user_id','users.name','users.email','users.company');
+    }
+
     /**
      * Get Matching Users Auto Submit
      *
