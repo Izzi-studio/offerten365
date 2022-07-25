@@ -82,7 +82,7 @@ class ProposalController extends Controller
      */
     public function edit(Proposal $proposal)
     {
-        $suitableUsers = User::GetMatchingConditionUsers($proposal->region_id,$proposal->type_job_id)
+        $suitableUsers = User::GetMatchingConditionUsersAdmin($proposal->region_id,$proposal->type_job_id)
             ->get();
 
         $proposalToPartner = ProposalToPartner::whereProposalId($proposal->id)

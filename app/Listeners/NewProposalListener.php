@@ -48,10 +48,12 @@ class NewProposalListener
             $countAutoSubmitUsers = $conditionUsersAutosubmit->count();
             //$proposalToPartners = array();
             $emailsNotifyList = array();
+            $emailsNotifyListHiddenProposal = array();
 
             foreach ($conditionUsersAutosubmit as $key => $partner) {
 
             $skipUser = false;
+            $noCoins = false;
 
                 $user = User::find($partner->user_id);
 
@@ -81,13 +83,14 @@ class NewProposalListener
                             $user->save();
                         }else{
                             $skipUser = true;
+                            $noCoins = true;
                             $countAutoSubmitUsers = $countAutoSubmitUsers - 1;
                         }
                     }
                 }
 
 
-                if(!$skipUser) {
+                if(!$skipUser && !$noCoins) {
                     $emailsNotifyList[] = [
                         'email' => $user->email,
                         'name' => $user->name,
@@ -100,10 +103,25 @@ class NewProposalListener
                         'updated_at' => $dateTimeNow,
                     ];
                     ProposalToPartner::insert($proposalToPartners);
+                }
 
+                if($skipUser && $noCoins) {
+                    $emailsNotifyListHiddenProposal[] = [
+                        'email' => $user->email,
+                        'name' => $user->name,
+                    ];
+                    $proposalToPartners = [
+                        'proposal_id' => $event->proposal->id,
+                        'status' => 0,
+                        'user_id' => $user->id,
+                        'created_at' => $dateTimeNow,
+                        'updated_at' => $dateTimeNow,
+                    ];
+                    ProposalToPartner::insert($proposalToPartners);
                 }
             }
             event(new NotifyPartner($emailsNotifyList, $event->proposal, true));
+            event(new NotifyPartner($emailsNotifyListHiddenProposal, $event->proposal, false));
 
             Log::info('Count autosubmit after process: ' .$countAutoSubmitUsers);
 
