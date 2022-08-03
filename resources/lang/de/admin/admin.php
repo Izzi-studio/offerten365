@@ -46,7 +46,7 @@ return [
     'menu.subscriptions' => 'Abonnements',
     'menu.invoice-detail' => 'Invoice detail',
     'menu.email-templates' => 'E-Mail-Vorlagen',
-    'menu.invoices' => 'Rechnung',
+    'menu.invoices' => 'Abrechnung',
     'menu.logout' => 'Ausloggen',
 //Forms
     'form.city' => 'Stadt',

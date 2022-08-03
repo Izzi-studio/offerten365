@@ -248,14 +248,14 @@
                                            name="status_pay" value="0"
                                            @if ($partner->status_pay == 0) checked @endif/>
                                     <span></span>
-                                    Invoice
+                                    Rechnung
                                 </label>
                                 <label class="radio">
                                     <input type="radio"
                                            name="status_pay" value="1"
                                            @if ($partner->status_pay == 1) checked @endif/>
                                     <span></span>
-                                    Stripe
+                                    Gutschrift
                                 </label>
                             </div>
                         </div>
